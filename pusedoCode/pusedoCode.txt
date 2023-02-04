@@ -75,8 +75,49 @@ function printBoard(): void{
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// (base class) piece.ts
-// needs to know what player possecess the piece (same way as board)
+//(Coordinates) Point2D{ //for use in piece.ts to store both parts of a coordinate in one array spot.
+  private x: number;
+  private y: number;
+
+  setPosition(x: number, y: number){
+    this.x = x;
+    this.y = y;
+  }
+
+  printPos(){
+    console.log(`(${this.x}, ${this.y})`)
+  }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////
+// (base class) piece.ts (Hayden)
+include Point2D;
+class pieceBase{
+  private pieceName: string = "";
+  private pieceColor: string = ""; //decided by players number in determinePieceColor(). if 0{ "White"}, if 1 {"Black" }. Ill make a setPieceColor( color: string ) function in this class but decide should be in board creation.
+  private possibleMoves: Array<Point2D>;
+  private pieceSprite; //Not sure how well do this on the web portion yet. For now I say we represent it with two letters. One for color and one for which piece it is. EX: a white bishop will be "WB" on the board. Black knight "BK"
+  private heirarchy( place: number) //determines whether or not a piece can take another. if (piece1.heirarchy < piece2.herarchy) then invalidate the move.
+  private startPosition: Point2D;
+
+  //accessors and mutators for private data
+
+  //pieces deconstruct automatically when they fall out of scope. We can handle piece deletion by overriding its spot on the board.
+
+
+}
 
 /////////////////////////////////////////////////////////////////////////////
+//derived classes hould be simple. They really only need to hold special rules that are bespoke to a piece. EX: Kings having a deletion win condition and castleing. Other than that I think they only need to set the name of the piece and where it starts on the board.
 // (derivied class) pawn.ts
+
+
+// (derived class) king.ts
+class king{
+  this.setName( "King" )
+  setPossibleMoves()
+  setHeirarchy()
+  setPieceSprite( "`${this.pieceColor}K`)
+  setStartPosition (position: Point2D)
+}
