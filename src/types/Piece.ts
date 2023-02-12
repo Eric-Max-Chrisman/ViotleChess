@@ -1,6 +1,11 @@
 import { Point2D } from './Point2D';
 
 class Piece {
+  constructor(name: string, color: string, start: Point2D){
+    this.pieceName = name;
+    this.pieceColor = color;
+    this.startPosition = start;
+  }
   private pieceName: string = '';
 
   private pieceColor: string = ''; // decided by players number in determinePieceColor(). if 0{ "White"}, if 1 {"Black" }. Ill make a setPieceColor( color: string ) function in this class but decide should be in board creation.
@@ -28,9 +33,9 @@ class Piece {
     this.startPosition = new Point2D(startX, startY);
   }
 
-  // setPossibleMoves(){
-
-  // }
+  setPossibleMoves(newMoveSet: Array<Point2D>){
+    this.possibleMoves = newMoveSet;
+  }
 
   // returns string
   getName(): string {
