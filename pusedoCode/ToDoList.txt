@@ -1,0 +1,6 @@
+// TODO
+Create basic data model of user
+
+Finish Chess logic
+
+Maybe include get post commands?
