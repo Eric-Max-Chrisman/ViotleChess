@@ -1,5 +1,5 @@
-class point2D {
-  point2D(x: number, y: number): void {
+class Point2D {
+  Point2D(x: number, y: number): void {
     this.x = x;
     this.y = y;
     console.log(`(${this.x}, ${this.y})`);
@@ -18,4 +18,4 @@ class point2D {
   private y: number;
 }
 
-export { point2D };
+export { Point2D };
