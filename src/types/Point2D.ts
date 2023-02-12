@@ -1,8 +1,11 @@
 class Point2D {
-  Point2D(x: number, y: number): void {
+  private x: number;
+
+  private y: number;
+
+  constructor(x = 0, y = 0) {
     this.x = x;
     this.y = y;
-    console.log(`(${this.x}, ${this.y})`);
   }
 
   getX(): number {
@@ -12,10 +15,6 @@ class Point2D {
   getY(): number {
     return this.y;
   }
-
-  private x: number;
-
-  private y: number;
 }
 
 export { Point2D };
