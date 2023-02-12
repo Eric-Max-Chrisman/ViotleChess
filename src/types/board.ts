@@ -1,13 +1,13 @@
 // import {pieces} from './pieces'
 export class board{
-  constructor(x: number, y: number){
-    this.x = x;
-    this.y = y;
+  constructor(sizeX: number = 8, sizeY: number = 8){
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
 
     // loop to generate space for pieces
-    for(let i: number = 0; i < x; i++){// x axis
+    for(let i: number = 0; i < this.sizeX; i++){// x axis
       // this.gamePieces.push([piece])
-      for(let j: number = 0; j < y; j++){// y axis
+      for(let j: number = 0; j < this.sizeY; j++){// y axis
         // this.gamePieces[i].push(piece)
       }
     }
@@ -16,9 +16,9 @@ export class board{
 
   // makes empty board with pieces in right place. Changes turn to white. Calls printBoard()
   createBoard(){
-    for(let i: number = 0; i < this.x; i++){// x axis
+    for(let i: number = 0; i < this.sizeX; i++){// x axis
       // this.gamePieces.push([piece])
-      for(let j: number = 0; j < this.y; j++){// y axis
+      for(let j: number = 0; j < this.sizeY; j++){// y axis
         // this.gamePieces[i].push(piece)
       }
     }
@@ -36,16 +36,16 @@ export class board{
 
   // prints board to the screen / may have to be private
   printBoard(){
-    console.log('printBoard');
-    for(let i: number = 0; i < this.x; i++){
-      for(let j: number = 0; j < this.y; j++) {
+    console.log(`printBoard was called. Board is ${this.sizeX} by ${this.sizeY}`);
+    for(let i: number = 0; i < this.sizeX; i++){
+      for(let j: number = 0; j < this.sizeY; j++) {
         //console.log(gamePieces[i].join('[ ]'));
       }
     }
   }
 
-  private x: number;
-  private y: number;
+  private sizeX: number;
+  private sizeY: number;
   // private gamePieces: pieces[][];
   private playerMove: boolean = false; // fasle = white's turn // true = black's trun
 
