@@ -15,7 +15,7 @@ class Point2D {
   getY(): number {
     return this.y;
   }
-
+//test
 }
 
 export { Point2D };
