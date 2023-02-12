@@ -1,4 +1,5 @@
-// import {pieces} from './pieces'
+import { Piece } from './Piece'
+
 export class board{
   constructor(sizeX: number = 8, sizeY: number = 8){
     this.sizeX = sizeX;
@@ -46,8 +47,8 @@ export class board{
 
   private sizeX: number;
   private sizeY: number;
-  // private gamePieces: pieces[][];
-  private playerMove: boolean = false; // fasle = white's turn // true = black's trun
+  //private gamePieces: Piece[][];
+  //private playerMove: boolean = false; // fasle = white's turn // true = black's trun
 
 
 };
