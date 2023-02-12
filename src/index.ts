@@ -1,5 +1,5 @@
 // index.ts (Eric)
-import { board } from './board';
+import { board } from './types/board';
 import express, {Express} from 'express';
 import { Point2D } from './types/Point2D';
 
