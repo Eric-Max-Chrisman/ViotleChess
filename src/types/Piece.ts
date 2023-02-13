@@ -56,6 +56,7 @@ class Piece {
     return this.startPosition;
   }
   // pieces deconstruct automatically when they fall out of scope. We can handle piece deletion by overriding its spot on the board.
+  //test
 }
 
 export { Piece };
