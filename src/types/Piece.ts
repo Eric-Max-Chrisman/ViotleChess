@@ -1,10 +1,9 @@
 import { Point2D } from './Point2D';
 
 class Piece {
-  constructor(name: string, color: string, start: Point2D){
+  constructor(name: string, color: string){
     this.pieceName = name;
     this.pieceColor = color;
-    this.startPosition = start;
   }
   private pieceName: string = '';
 
