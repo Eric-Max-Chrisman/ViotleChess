@@ -1,15 +1,17 @@
 import { Point2D } from './Point2D';
 
 class Piece {
-  constructor(name: string, color: string){
+  constructor(name: string, color: string) {
     this.pieceName = name;
     this.pieceColor = color;
   }
+
   private pieceName: string = '';
 
   private pieceColor: string = ''; // decided by players number in determinePieceColor(). if 0{ "White"}, if 1 {"Black" }. Ill make a setPieceColor( color: string ) function in this class but decide should be in board creation.
 
   private possibleMoves: Array<Point2D> = [];
+
   private pieceSprite: string = ''; // Not sure how well do this on the web portion yet. For now I say we represent it with two letters. One for color and one for which piece it is. EX: a white bishop will be "WB" on the board. Black knight "BK"
 
   // private heirarchy( place: number) //determines whether or not a piece can take another. if (piece1.heirarchy < piece2.herarchy) then invalidate the move.
@@ -32,7 +34,7 @@ class Piece {
     this.startPosition = new Point2D(startX, startY);
   }
 
-  setPossibleMoves(newMoveSet: Array<Point2D>){
+  setPossibleMoves(newMoveSet: Array<Point2D>) {
     this.possibleMoves = newMoveSet;
   }
 
@@ -56,7 +58,7 @@ class Piece {
     return this.startPosition;
   }
   // pieces deconstruct automatically when they fall out of scope. We can handle piece deletion by overriding its spot on the board.
-  //test
+  // test 1
 }
 
 export { Piece };
