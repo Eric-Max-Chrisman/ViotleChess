@@ -94,7 +94,7 @@ export class ChessTemplate {
 
   makePawn(x: number, y: number, playerOwner: number): void {
     const startPos = new Point2D(x, y);
-    const pawn = new Piece('Pawn', 0, startPos); // make piece
+    const pawn = new Piece('Pawn', playerOwner, startPos); // make piece
     pawn.generatePawnMoves(); // define piece's  movement (good luck Hayden)
 
     // place piece on board
