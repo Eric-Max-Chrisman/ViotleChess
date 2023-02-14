@@ -15,6 +15,12 @@ class Point2D {
   getY(): number {
     return this.y;
   }
+
+  // Takes a point2D and returns the point as an index in board. Formula is (index = 8y + x).
+  convertToIndex(): number {
+    const index: number = this.y * 8 + this.x;
+    return index;
+  }
 }
 // test
 export { Point2D };
