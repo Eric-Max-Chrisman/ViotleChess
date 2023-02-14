@@ -17,6 +17,14 @@ class Point2D {
     return this.y;
   }
 
+  setX(newX: number): void {
+    this.x = newX;
+  }
+
+  setY(newY: number): void {
+    this.y = newY;
+  }
+
   // Takes a point2D and returns the point as an index in board. Formula is (index = 8y + x).
   convertToIndex(): number | undefined {
     const index: number = this.y * 8 + this.x;

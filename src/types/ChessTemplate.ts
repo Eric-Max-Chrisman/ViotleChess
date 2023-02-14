@@ -6,6 +6,8 @@
 // 4) Template of Pieces
 
 import { Board } from './board';
+import { Piece } from './Piece';
+import { Point2D } from './Point2D';
 
 // All methods private / The creation of this class will halt process until chess is over
 export class ChessTemplate {
@@ -89,6 +91,14 @@ export class ChessTemplate {
     // define piece's  movement (good luck Hayden)
   }
   */
+
+  makePawn(x: number, y: number, playerOwner: number): void {
+    const startPos = new Point2D(x, y);
+    const pawn = new Piece('Pawn', 0, startPos); // make piece
+    pawn.generatePawnMoves(); // define piece's  movement (good luck Hayden)
+
+    // place piece on board
+  }
 
   // main game logic
   chessLogic(): void {

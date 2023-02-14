@@ -1,14 +1,15 @@
 import { Point2D } from './Point2D';
 
 class Piece {
-  constructor(name: string, color: string) {
+  constructor(name: string, color: number, start: Point2D) {
     this.pieceName = name;
     this.pieceColor = color;
+    this.startPosition = start;
   }
 
   private pieceName: string = '';
 
-  private pieceColor: string = ''; // decided by players number in determinePieceColor(). if 0{ "White"}, if 1 {"Black" }. Ill make a setPieceColor( color: string ) function in this class but decide should be in board creation.
+  private pieceColor: number; // decided by players number in determinePieceColor(). if 0{ "White"}, if 1 {"Black" }. Ill make a setPieceColor( color: string ) function in this class but decide should be in board creation.
 
   private possibleMoves: Array<Point2D> = [];
 
@@ -20,6 +21,7 @@ class Piece {
   private currentPos: Point2D = this.startPosition;
 
   // accessors and mutators for private data
+
   setName(name: string): void {
     this.pieceName = name;
   }
@@ -38,6 +40,10 @@ class Piece {
 
   setPossibleMoves(newMoveSet: Array<Point2D>) {
     this.possibleMoves = newMoveSet;
+  }
+
+  getCurrent(): Point2D {
+    return this.currentPos;
   }
 
   // returns string
@@ -62,6 +68,15 @@ class Piece {
 
   movePiece(newPoint: Point2D): void {
     this.currentPos = newPoint;
+  }
+
+  generatePawnMoves(): void {
+    const moveSet: Array<Point2D> = [];
+    console.log(`Point before move: (${this.getCurrent().getX()}, ${this.getCurrent().getY()})`);
+    this.getCurrent().setY(this.getCurrent().getY() + 1);
+    console.log(`Point before move: (${this.getCurrent().getX()}, ${this.getCurrent().getY()})`);
+    moveSet.push(this.getCurrent());
+    this.possibleMoves = moveSet;
   }
   // pieces deconstruct automatically when they fall out of scope. We can handle piece deletion by overriding its spot on the board.
 }
