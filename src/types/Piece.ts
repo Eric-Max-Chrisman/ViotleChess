@@ -17,6 +17,8 @@ class Piece {
   // private heirarchy( place: number) //determines whether or not a piece can take another. if (piece1.heirarchy < piece2.herarchy) then invalidate the move.
   private startPosition = new Point2D();
 
+  private currentPos: Point2D = this.startPosition;
+
   // accessors and mutators for private data
   setName(name: string): void {
     this.pieceName = name;
@@ -56,6 +58,10 @@ class Piece {
   // returns Point2D
   getStart(): Point2D {
     return this.startPosition;
+  }
+
+  movePiece(newPoint: Point2D): void {
+    this.currentPos = newPoint;
   }
   // pieces deconstruct automatically when they fall out of scope. We can handle piece deletion by overriding its spot on the board.
 }

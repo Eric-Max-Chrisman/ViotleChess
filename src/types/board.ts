@@ -4,7 +4,7 @@ export class Board {
   constructor(sizeX: number = 8, sizeY: number = 8) {
     this.sizeX = sizeX;
     this.sizeY = sizeY;
-    
+
     this.gamePieces = [];
 
     // loop to generate space for pieces
@@ -13,7 +13,7 @@ export class Board {
       const tempArray: Piece[] = [];
       for (let j: number = 0; j < this.sizeX; j += 1) {
         // x axis
-        let tempPiece = new Piece("null", "null");
+        const tempPiece = new Piece('null', 'null');
         tempArray.push(tempPiece);
       }
       this.gamePieces.push(tempArray);
@@ -51,19 +51,19 @@ export class Board {
     } */
   }
 
-   // left and right board size
+  // left and right board size
   private sizeX: number;
 
   // up and down board size
-  private sizeY: number; 
+  private sizeY: number;
 
-   // 0,0 is the top left corner of the board / [x][y]
-  private gamePieces: Piece[][]; 
-  
+  // 0,0 is the top left corner of the board / [x][y]
+  private gamePieces: Piece[][];
+
   // this is our empty square / null was the og idea but it was hard to implement
   // The space lost isn't that bad from this structure for we are dealing with board of 8 by 8 for this project
   // private nullPiece: Piece; Not sure if this is the best way
-  
+
   // false = lowerCase's turn // true = upperCase's turn
   private playerMove: boolean = false;
 }
