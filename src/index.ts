@@ -18,6 +18,14 @@ const x: number = 8; // set up board
 const y: number = 8;
 const myChessBoard = new Board(x, y); // data struc that holds on piece objects
 myChessBoard.checkMove();
+
+// Testing Point2D methods
+
+const pointTest = new Point2D(4, 5); // should output 44: 8(5) + 4
+const index: number | undefined = pointTest.convertToIndex();
+
+console.log(`The index of Point (4, 5) is ${index}`);
+
 // const moveGood: number = 1; // sential, if check move makes a vaild move return 1; otherwise the player no longer wishes to play so return 0 and end loop and code
 // 0 = quit
 // 1 = bad move
