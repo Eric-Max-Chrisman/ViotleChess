@@ -1,4 +1,4 @@
-import { Piece } from './Piece';
+import { Piece, Piece } from './Piece';
 
 export class Board {
   constructor(sizeX: number = 8, sizeY: number = 8) {

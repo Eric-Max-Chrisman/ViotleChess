@@ -34,9 +34,9 @@ class Piece {
     this.startPosition = new Point2D(startX, startY);
   }
 
-  // setPossibleMoves(){
-
-  // }
+  setPossibleMoves(newMoveSet: Array<Point2D>) {
+    this.possibleMoves = newMoveSet;
+  }
 
   // returns string
   getName(): string {
