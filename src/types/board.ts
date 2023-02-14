@@ -44,10 +44,19 @@ export class Board {
   // prints board to the screen / may have to be private
   printBoard(): void {
     console.log(`printBoard was called. Board is ${this.sizeX} by ${this.sizeY}`);
+    let indexCounter: number = 0;
     for (let i: number = 0; i < this.sizeY; i += 1) {
       let tempString: string = '';
       for (let j: number = 0; j < this.sizeX; j += 1) {
-        tempString = tempString.concat(' [', i.toString(), ', ', j.toString(), '] ');
+        indexCounter += 1;
+        tempString = tempString.concat(
+          indexCounter.toString(),
+          ': [',
+          i.toString(),
+          ', ',
+          j.toString(),
+          '] '
+        );
       }
       console.log(tempString);
     }

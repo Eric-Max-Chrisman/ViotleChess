@@ -5,7 +5,7 @@
 // 3) Controlls turn order
 // 4) Template of Pieces
 
-import { Board } from './Board';
+import { Board } from './board';
 
 // All methods private / The creation of this class will halt process until chess is over
 export class ChessTemplate {
@@ -21,7 +21,7 @@ export class ChessTemplate {
     /*
     // Castles - CC - cc
     makeCastle(0, 0, 0);
-    makeCastle(0, 0, 0);
+    makeCastle(0, 7, 0);
     makeCastle(0, 0, 0);
     makeCastle(0, 0, 0);
 
