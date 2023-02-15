@@ -42,10 +42,7 @@ export class Board {
     for (let i: number = 0; i < this.sizeY; i += 1) {
       let tempString: string = '';
       for (let j: number = 0; j < this.sizeX; j += 1) {
-        if (this.gamePieces[j][i].getName() !== 'null') {
-          tempString = tempString.concat('[', this.gamePieces[j][i].getName().substr(0, 1), '] ');
-        } else {
-          tempString = tempString.concat('[ ] ');
+          tempString = tempString.concat('[', this.gamePieces[j][i].getSprite(), '] ');
         }
       }
       console.log(tempString);
