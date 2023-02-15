@@ -6,7 +6,7 @@ export class Board {
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     this.gamePieces = [];
-    console.log('yee');
+
     // loop to generate space for pieces
     for (let i: number = 0; i < this.sizeY; i += 1) {
       // y axis
@@ -18,15 +18,6 @@ export class Board {
       }
       this.gamePieces.push(tempArray);
     }
-    console.log(this.gamePieces.length);
-    console.log(this.gamePieces[0].length);
-    this.createBoard();
-  }
-
-  // makes empty board with pieces in right place. Changes turn to white. Calls printBoard()
-  createBoard(): void {
-    this.printBoard();
-    console.log('createBoard not Impetmented yet');
   }
 
   // cin move vaildation loop that returns 1 if move maded is vaild, returns 0 if players wish to quit. Calls makeMove()
@@ -43,20 +34,15 @@ export class Board {
 
   // prints board to the screen / may have to be private
   printBoard(): void {
-    console.log(`printBoard was called. Board is ${this.sizeX} by ${this.sizeY}`);
-    let indexCounter: number = 0;
+    // console.log(`printBoard was called. Board is ${this.sizeX} by ${this.sizeY}`);
     for (let i: number = 0; i < this.sizeY; i += 1) {
       let tempString: string = '';
       for (let j: number = 0; j < this.sizeX; j += 1) {
-        indexCounter += 1;
-        tempString = tempString.concat(
-          indexCounter.toString(),
-          ': [',
-          i.toString(),
-          ', ',
-          j.toString(),
-          '] '
-        );
+        if (this.gamePieces[j][i].getName() !== 'null') {
+          tempString = tempString.concat('[', this.gamePieces[j][i].getName().substr(0, 1), '] ');
+        } else {
+          tempString = tempString.concat('[ ] ');
+        }
       }
       console.log(tempString);
     }

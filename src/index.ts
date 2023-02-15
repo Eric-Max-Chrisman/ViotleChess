@@ -15,7 +15,7 @@ app.listen(PORT, () => {
 
 console.log('Chess program started.');
 const myChessBoard = new ChessTemplate();
-console.log(myChessBoard);
+// console.log(myChessBoard);
 
 // Testing Point2D methods
 
@@ -45,4 +45,4 @@ do{
 }while(moveGood != 0) // not 0 = move made / 0 = players wish to stop program
 */
 
-console.log('thanks for playing! Ending program.');
+console.log('Thanks for playing! Ending the program.');

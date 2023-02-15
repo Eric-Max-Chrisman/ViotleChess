@@ -22,37 +22,36 @@ export class ChessTemplate {
   setPieces(): void {
     // Castles - CC - cc
     this.makeCastle(0, 0, 0);
-    this.makeCastle(0, 7, 0);
-    this.makeCastle(0, 0, 0);
-    this.makeCastle(0, 0, 0);
-    /*
+    this.makeCastle(7, 0, 0);
+    this.makeCastle(0, 7, 1);
+    this.makeCastle(7, 7, 1);
 
     // Knights - Horses - HH -hh
-    makeKnight(0, 0, 0);
-    makeKnight(0, 0, 0);
-    makeKnight(0, 0, 0);
-    makeKnight(0, 0, 0);
+    this.makeKnight(1, 0, 0);
+    this.makeKnight(6, 0, 0);
+    this.makeKnight(1, 7, 1);
+    this.makeKnight(6, 7, 1);
 
     // Bishops - BB - bb
-    makeBishop(0, 0, 0);
-    makeBishop(0, 0, 0);
-    makeBishop(0, 0, 0);
-    makeBishop(0, 0, 0);
+    this.makeBishop(2, 0, 0);
+    this.makeBishop(5, 0, 0);
+    this.makeBishop(2, 7, 1);
+    this.makeBishop(5, 7, 1);
 
     // Queens - QQ - qq
-    makeQueen(0, 0, 0);
-    makeQueen(0, 0, 0);
+    this.makeQueen(3, 0, 0);
+    this.makeQueen(4, 7, 1);
 
     // Kings - KK - kk
-    makeKing(0, 0, 0);
-    makeKing(0, 0, 0);
+    this.makeKing(4, 0, 0);
+    this.makeKing(3, 7, 1);
 
     // Pawns - PP - pp
-    for (let i: number = 0; i < this.CHESS_SIZE_CONSTANT; i += 1) {
-      makePawn(i, 1, 0);
-      makePawn(i, 6, 1);
+    for (let i: number = 0; i < this.CHESS_BOARD_CONSTANT; i += 1) {
+      this.makePawn(i, 1, 0);
+      this.makePawn(i, 6, 1);
     }
-    */
+    this.chessBoard.printBoard();
   }
 
   makeCastle(x: number, y: number, playerOwner: number): void {
@@ -65,57 +64,83 @@ export class ChessTemplate {
     } else {
       tempPiece.setColor(1);
     }
-    console.log('changed castle');
-    this.chessBoard.printBoard();
-    // make piece
-    // place piece on board
     // define piece's  movement (good luck Hayden)
-  } /*
+  }
 
   makeKnight(x: number, y: number, playerOwner: number): void {
-    // make piece
-    // place piece on board
+    const tempPiece = this.chessBoard.getGamePiece(x, y); // piece to change to knight
+
+    // give piece the attributes of a Knight
+    tempPiece.setName('Knight');
+    if (playerOwner === 0) {
+      tempPiece.setColor(0);
+    } else {
+      tempPiece.setColor(1);
+    }
     // define piece's  movement (good luck Hayden)
   }
 
   makeBishop(x: number, y: number, playerOwner: number): void {
-    // make piece
-    // place piece on board
+    const tempPiece = this.chessBoard.getGamePiece(x, y); // piece to change to Bishop
+
+    // give piece the attributes of a Bishop
+    tempPiece.setName('Bishop');
+    if (playerOwner === 0) {
+      tempPiece.setColor(0);
+    } else {
+      tempPiece.setColor(1);
+    }
     // define piece's  movement (good luck Hayden)
   }
 
   makeQueen(x: number, y: number, playerOwner: number): void {
-    // make piece
-    // place piece on board
+    const tempPiece = this.chessBoard.getGamePiece(x, y); // piece to change to queen
+
+    // give piece the attributes of a queen
+    tempPiece.setName('Queen');
+    if (playerOwner === 0) {
+      tempPiece.setColor(0);
+    } else {
+      tempPiece.setColor(1);
+    }
     // define piece's  movement (good luck Hayden)
   }
 
   makeKing(x: number, y: number, playerOwner: number): void {
-    // make piece
-    // place piece on board
+    const tempPiece = this.chessBoard.getGamePiece(x, y); // piece to change to king
+
+    // give piece the attributes of a king
+    tempPiece.setName('King');
+    if (playerOwner === 0) {
+      tempPiece.setColor(0);
+    } else {
+      tempPiece.setColor(1);
+    }
     // define piece's  movement (good luck Hayden)
   }
 
   makePawn(x: number, y: number, playerOwner: number): void {
-    // make piece
-    // place piece on board
-    // define piece's  movement (good luck Hayden)
-  }
-  */
-
-  makePawn(x: number, y: number, playerOwner: number): void {
+    /*
     console.log(this.CHESS_BOARD_CONSTANT); // delete this; gets weird of weird 'no this' error
     const startPos = new Point2D(x, y);
     const pawn = new Piece('Pawn', playerOwner, startPos); // make piece
     pawn.generatePawnMoves(); // define piece's  movement (good luck Hayden)
+    */
 
     // no need to create a new pawn piece. The pieces on the board only need to be changed to look like a pawn
-    //
+    // like this
+    const tempPiece = this.chessBoard.getGamePiece(x, y); // piece to change to pawn
 
-    // place piece on board
+    // give piece the attributes of a pawn
+    tempPiece.setName('Pawn');
+    if (playerOwner === 0) {
+      tempPiece.setColor(0);
+    } else {
+      tempPiece.setColor(1);
+    }
   }
 
-  // main game logic
+  // main game logic / need to figure out cin
   chessLogic(): void {
     console.log(this.CHESS_BOARD_CONSTANT);
   }

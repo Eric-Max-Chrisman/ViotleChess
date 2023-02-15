@@ -2,8 +2,8 @@ import { Point2D } from './Point2D';
 
 class Piece {
   constructor(name: string, color: number, start: Point2D) {
-    this.pieceName = name;
     this.pieceColor = color;
+    this.pieceName = name;
     this.startPosition = start;
   }
 
@@ -23,11 +23,16 @@ class Piece {
   // accessors and mutators for private data
 
   setName(name: string): void {
-    this.pieceName = name;
+    if (this.pieceColor === 0) {
+      this.pieceName = name.toLowerCase();
+    } else {
+      this.pieceName = name.toUpperCase();
+    }
   }
 
   setColor(color: number): void {
     this.pieceColor = color;
+    this.setName(this.pieceName);
   }
 
   setSprite(sprite: string): void {
