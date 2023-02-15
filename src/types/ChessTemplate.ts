@@ -1,4 +1,4 @@
-// This file will cotain the template of a chess game
+// This file will cotain the template of a chess game / markdown
 
 // 1) Create Board
 // 2) Set Pieces
@@ -141,9 +141,15 @@ export class ChessTemplate {
       tempPiece.setColor(1);
     }
   }
+  
+  ckeckMove():void{
+    
+  }
 
   // main game logic / need to figure out cin
   chessLogic(): void {
+    this.checkMove(0,0, 0, 1);
+    this.chessBoard.printBoard();
     /*
     const rl = readline.createInterface({ input, output });
 
