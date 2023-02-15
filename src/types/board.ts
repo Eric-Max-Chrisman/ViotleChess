@@ -44,10 +44,12 @@ export class Board {
     for (let i: number = 0; i < this.sizeY; i += 1) {
       let tempString: string = '';
       for (let j: number = 0; j < this.sizeX; j += 1) {
-        tempString = tempString.concat('[', this.gamePieces[j][i].getSprite(), '] ');
+        tempString = tempString.concat('[', this.gamePieces[j][i].getSprite(), ' ] ');
       }
+      console.log(tempString);
     }
-    console.log(tempString);
+    console.log(''); // skip lines
+    console.log('');
   }
 
   getGamePiece(x: number, y: number): Piece {
