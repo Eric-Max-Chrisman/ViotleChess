@@ -5,6 +5,8 @@
 // 3) Controlls turn order
 // 4) Template of Pieces
 
+import * as readline from 'node:readline'; // Docs: https://nodejs.org/api/readline.html#readline_readline
+import { stdin as input, stdout as output } from 'node:process'; // from same Docs as above
 import { Board } from './Board';
 import { Piece } from './Piece';
 import { Point2D } from './Point2D';
@@ -142,7 +144,15 @@ export class ChessTemplate {
 
   // main game logic / need to figure out cin
   chessLogic(): void {
-    console.log(this.CHESS_BOARD_CONSTANT);
+    /*
+    const rl = readline.createInterface({ input, output });
+
+    const answer = await rl.question('What do you think of Node.js? ');
+
+    console.log(`Thank you for your valuable feedback: ${answer}`);
+
+    rl.close();
+    */
   }
 
   // data sturcture that holds pieces and keeps tracks of them in a semi-sparse 2d table

@@ -20,14 +20,24 @@ export class Board {
     }
   }
 
-  // cin move vaildation loop that returns 1 if move maded is vaild, returns 0 if players wish to quit. Calls makeMove()
-  checkMove(): void {
-    this.sizeX = this.sizeX + 1 - 1;
-    console.log('checkMove not Impetmented yet');
+  // this function checks if a given move is valid. returns 1 if move maded is vaild, returns 1 if move is invaild,
+  // returns 2 if players wish to quit. Calls makeMove() if move is vaild
+  checkMove(): number {
+    let tempBool: number = 0;
+    tempBool = 1;
+
+    // step one, check if move is vaild (Hayden)
+
+    if (tempBool === 1) {
+      this.makeMove();
+    }
+
+    console.log(`CHECK MOVE: returning ${tempBool}`);
+    return tempBool;
   }
 
   // once move is identified to be okey. change the board to refelct that move. Calls printBoard()
-  makeMove(): void {
+  private makeMove(): void {
     this.sizeX = this.sizeX + 1 - 1;
     console.log('makeMove not Impetmented yet');
   }
