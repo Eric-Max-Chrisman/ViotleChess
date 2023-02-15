@@ -4,7 +4,7 @@ class Piece {
   constructor(name: string, color: number, start: Point2D) {
     this.pieceColor = color;
     this.pieceName = name;
-    this.startPosition = start;
+    this.currentPos = start;
   }
 
   private pieceName: string = '';
@@ -81,17 +81,42 @@ class Piece {
 
   generatePawnMoves(): void {
     const moveSet: Array<Point2D> = [];
+    const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+    const move2 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+    const move3 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
     if (this.getColor() === 0) {
-      this.getCurrent().setY(this.getCurrent().getY() + 1);
+      move1.setY(move1.getY() + 1);
     } else if (this.getColor() === 1) {
-      this.getCurrent().setY(this.getCurrent().getY() - 1);
+      move1.setY(move1.getY() - 1);
     }
 
-    moveSet.push(this.getCurrent());
+    moveSet.push(move1);
+    // Diagonal attacks
+    if (this.getColor() === 0) {
+      move2.setY(move2.getY() + 1);
+      move2.setX(move2.getX() + 1);
+    } else if (this.getColor() === 1) {
+      move2.setY(move2.getY() - 1);
+      move2.setX(move2.getX() + 1);
+    }
+    moveSet.push(move2);
+
+    if (this.getColor() === 0) {
+      move3.setY(move3.getY() + 1);
+      move3.setX(move3.getX() - 1);
+    } else if (this.getColor() === 1) {
+      move3.setY(move3.getY() - 1);
+      move3.setX(move3.getX() - 1);
+    }
+    moveSet.push(move3);
+
     this.possibleMoves = moveSet;
-    console.log(
-      `Pawn move set is: (${this.possibleMoves[0].getX()}, ${this.possibleMoves[0].getY()})`
-    );
+
+    console.log(`Pawn move set is: `);
+    for (let i = 0; i < this.possibleMoves.length; i++) {
+      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    }
+    console.log(); // blank line for output
   }
 
   generateMovesUniversal(): void {

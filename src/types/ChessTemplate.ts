@@ -154,6 +154,9 @@ export class ChessTemplate {
       tempPiece.setSprite('♟');
     }
     tempPiece.setCurrent(x, y);
+    console.log(
+      `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    );
     tempPiece.generatePawnMoves();
   }
 
