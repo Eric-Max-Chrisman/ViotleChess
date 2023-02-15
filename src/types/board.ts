@@ -13,7 +13,7 @@ export class Board {
       const tempArray: Piece[] = [];
       for (let j: number = 0; j < this.sizeX; j += 1) {
         // x axis
-        const tempPiece = new Piece('null', 0, new Point2D(j, i));
+        const tempPiece = new Piece('null', 3, new Point2D(j, i));
         tempArray.push(tempPiece);
       }
       this.gamePieces.push(tempArray);
@@ -21,9 +21,19 @@ export class Board {
   }
   
   // once move is identified to be okey. change the board to refelct that move. Calls printBoard()
-  private makeMove(): void {
-    this.sizeX = this.sizeX + 1 - 1;
-    console.log('makeMove not Impetmented yet');
+  makeMove(x: number, y: number, newX: number, newY: number): void {
+    this.gamePieces[newX][newY] = this.gamePieces[x][y];
+    this.setNullPiece(x, y);
+    // copy (x,y)'s piece into the (newX, newY)
+    // then set (x,y) to null piece
+    // if king taken, call it quits and Win state.
+  }
+  
+  setNullPiece(x:number, y:number){
+    const piecePtr = this.gamePieces[x][y];
+    piecePtr.setName('null');
+    piecePtr.setColor(3);
+    piecePtr.setSprite(' ');
   }
 
   // prints board to the screen / may have to be private
@@ -32,10 +42,7 @@ export class Board {
     for (let i: number = 0; i < this.sizeY; i += 1) {
       let tempString: string = '';
       for (let j: number = 0; j < this.sizeX; j += 1) {
-        if (this.gamePieces[j][i].getName() !== 'null') {
-          tempString = tempString.concat('[', this.gamePieces[j][i].getName().substr(0, 1), '] ');
-        } else {
-          tempString = tempString.concat('[ ] ');
+          tempString = tempString.concat('[', this.gamePieces[j][i].getSprite(), '] ');
         }
       }
       console.log(tempString);

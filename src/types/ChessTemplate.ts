@@ -63,9 +63,12 @@ export class ChessTemplate {
     tempPiece.setName('Castle');
     if (playerOwner === 0) {
       tempPiece.setColor(0);
+      tempPiece.setSprite('♖');
     } else {
       tempPiece.setColor(1);
+      tempPiece.setSprite('♜');
     }
+    
     // define piece's  movement (good luck Hayden)
   }
 
@@ -76,8 +79,10 @@ export class ChessTemplate {
     tempPiece.setName('Knight');
     if (playerOwner === 0) {
       tempPiece.setColor(0);
+      tempPiece.setSprite('♘');
     } else {
       tempPiece.setColor(1);
+      tempPiece.setSprite('♞');
     }
     // define piece's  movement (good luck Hayden)
   }
@@ -89,8 +94,10 @@ export class ChessTemplate {
     tempPiece.setName('Bishop');
     if (playerOwner === 0) {
       tempPiece.setColor(0);
+      tempPiece.setSprite('♗');
     } else {
       tempPiece.setColor(1);
+      tempPiece.setSprite('♝');
     }
     // define piece's  movement (good luck Hayden)
   }
@@ -102,8 +109,10 @@ export class ChessTemplate {
     tempPiece.setName('Queen');
     if (playerOwner === 0) {
       tempPiece.setColor(0);
+      tempPiece.setSprite('♕');
     } else {
       tempPiece.setColor(1);
+      tempPiece.setSprite('♛');
     }
     // define piece's  movement (good luck Hayden)
   }
@@ -115,8 +124,10 @@ export class ChessTemplate {
     tempPiece.setName('King');
     if (playerOwner === 0) {
       tempPiece.setColor(0);
+      tempPiece.setSprite('♔');
     } else {
       tempPiece.setColor(1);
+      tempPiece.setSprite('♚');
     }
     // define piece's  movement (good luck Hayden)
   }
@@ -137,8 +148,10 @@ export class ChessTemplate {
     tempPiece.setName('Pawn');
     if (playerOwner === 0) {
       tempPiece.setColor(0);
+      tempPiece.setSprite('♙');
     } else {
       tempPiece.setColor(1);
+      tempPiece.setSprite('♟');
     }
     tempPiece.setStart(x, y);
     tempPiece.setCurrent(x, y);
