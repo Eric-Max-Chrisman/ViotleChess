@@ -47,6 +47,10 @@ class Piece {
     this.possibleMoves = newMoveSet;
   }
 
+  setCurrent(x: number, y: number): void {
+    this.currentPos = new Point2D(x, y);
+  }
+
   getCurrent(): Point2D {
     return this.currentPos;
   }
@@ -77,11 +81,12 @@ class Piece {
 
   generatePawnMoves(): void {
     const moveSet: Array<Point2D> = [];
-    console.log(`Point before move: (${this.getCurrent().getX()}, ${this.getCurrent().getY()})`);
     this.getCurrent().setY(this.getCurrent().getY() + 1);
-    console.log(`Point before move: (${this.getCurrent().getX()}, ${this.getCurrent().getY()})`);
     moveSet.push(this.getCurrent());
     this.possibleMoves = moveSet;
+    console.log(
+      `Pawn move set to: (${this.possibleMoves[0].getX()}, ${this.possibleMoves[0].getY()})`
+    );
   }
   // pieces deconstruct automatically when they fall out of scope. We can handle piece deletion by overriding its spot on the board.
 }

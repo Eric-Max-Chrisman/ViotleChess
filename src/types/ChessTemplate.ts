@@ -140,6 +140,8 @@ export class ChessTemplate {
     } else {
       tempPiece.setColor(1);
     }
+    tempPiece.setStart(x, y);
+    tempPiece.setCurrent(x, y);
     tempPiece.generatePawnMoves();
   }
 
