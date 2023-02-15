@@ -160,5 +160,5 @@ export class ChessTemplate {
   private chessBoard: Board;
 
   // square size of chess board
-  private CHESS_BOARD_CONSTANT: number = 8;
+  private readonly CHESS_BOARD_CONSTANT: number = 8;
 }
