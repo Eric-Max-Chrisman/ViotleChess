@@ -19,7 +19,7 @@ export class Board {
       this.gamePieces.push(tempArray);
     }
   }
-  
+
   // once move is identified to be okey. change the board to refelct that move. Calls printBoard()
   makeMove(x: number, y: number, newX: number, newY: number): void {
     this.gamePieces[newX][newY] = this.gamePieces[x][y];
@@ -28,8 +28,8 @@ export class Board {
     // then set (x,y) to null piece
     // if king taken, call it quits and Win state.
   }
-  
-  setNullPiece(x:number, y:number){
+
+  setNullPiece(x: number, y: number) {
     const piecePtr = this.gamePieces[x][y];
     piecePtr.setName('null');
     piecePtr.setColor(3);
@@ -42,11 +42,10 @@ export class Board {
     for (let i: number = 0; i < this.sizeY; i += 1) {
       let tempString: string = '';
       for (let j: number = 0; j < this.sizeX; j += 1) {
-          tempString = tempString.concat('[', this.gamePieces[j][i].getSprite(), '] ');
-        }
+        tempString = tempString.concat('[', this.gamePieces[j][i].getSprite(), '] ');
       }
-      console.log(tempString);
     }
+    console.log(tempString);
   }
 
   getGamePiece(x: number, y: number): Piece {
