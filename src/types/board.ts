@@ -21,17 +21,28 @@ export class Board {
   }
 
   // once move is identified to be okey. change the board to refelct that move. Calls printBoard()
+  // Use splice to swap pieces around
+  // Create a new null piece to take the place of moved piece
+  // moved piece is the piece the player moved
+  // the piece that was where the moved piece is now gets written out of scope and deleted
   makeMove(x: number, y: number, newX: number, newY: number): void {
-    this.gamePieces[newX][newY] = this.gamePieces[x][y];
+    const nullPiece = new Piece('null', 3, new Point2D(x, y)); // create new null piece to take place of moved piece
+    const tempPieceMoved = this.gamePieces[x].splice(y, 1, nullPiece); // replaces the the moved piece from array. Stores moved piece
+    const removedPieceType: string = this.gamePieces[newX][newY].getName();
+    this.gamePieces[x].splice(newY, 1, ...tempPieceMoved); // the moved piece now replaces the piece that was at newX, newY
+
     this.gamePieces[newX][newY].setCurrent(newX, newY); // sets Pieces current to new spot to generate moves from
     this.gamePieces[newX][newY].generateMovesUniversal(); // Universal reads the name of the Piece at [newX], [newY] and generates the correct moves.
-    this.setNullPiece(x, y);
-    // copy (x,y)'s piece into the (newX, newY)
-    // then set (x,y) to null piece
-    // if king taken, call it quits and Win state.
+    this.makeNullPiece(x, y); // sets the og spot to null. As if the piece moved from that spot
+
+    if (removedPieceType.toLowerCase() === 'king') {
+      // end the match and declare victor
+      console.log('THE KING IS DEADDDD');
+    }
+    this.printBoard();
   }
 
-  setNullPiece(x: number, y: number) {
+  makeNullPiece(x: number, y: number): void {
     const piecePtr = this.gamePieces[x][y];
     piecePtr.setName('null');
     piecePtr.setColor(3);

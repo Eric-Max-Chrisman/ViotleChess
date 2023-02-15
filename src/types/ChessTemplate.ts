@@ -157,14 +157,15 @@ export class ChessTemplate {
     tempPiece.generatePawnMoves();
   }
 
-  // ckeckMove():void{
-
-  // }
+  checkMove(x: number, y: number, newX: number, newY: number): void {
+    this.chessBoard.makeMove(x, y, newX, newY);
+  }
 
   // main game logic / need to figure out cin
   chessLogic(): void {
-    // this.checkMove(0,0, 0, 1);
-    this.chessBoard.printBoard();
+    this.checkMove(0, 1, 0, 2);
+
+    this.checkMove(4, 6, 4, 0);
     /*
     const rl = readline.createInterface({ input, output });
 
