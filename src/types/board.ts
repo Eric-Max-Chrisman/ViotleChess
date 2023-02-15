@@ -23,6 +23,8 @@ export class Board {
   // once move is identified to be okey. change the board to refelct that move. Calls printBoard()
   makeMove(x: number, y: number, newX: number, newY: number): void {
     this.gamePieces[newX][newY] = this.gamePieces[x][y];
+    this.gamePieces[newX][newY].setCurrent(newX, newY); // sets Pieces current to new spot to generate moves from
+    this.gamePieces[newX][newY].generateMovesUniversal(); // Universal reads the name of the Piece at [newX], [newY] and generates the correct moves.
     this.setNullPiece(x, y);
     // copy (x,y)'s piece into the (newX, newY)
     // then set (x,y) to null piece

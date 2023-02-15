@@ -68,7 +68,7 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♜');
     }
-    
+
     // define piece's  movement (good luck Hayden)
   }
 
@@ -153,7 +153,6 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♟');
     }
-    tempPiece.setStart(x, y);
     tempPiece.setCurrent(x, y);
     tempPiece.generatePawnMoves();
   }
