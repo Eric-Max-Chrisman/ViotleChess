@@ -5,7 +5,7 @@
 // 3) Controlls turn order
 // 4) Template of Pieces
 
-import { Board } from './board';
+import { Board } from './Board';
 import { Piece } from './Piece';
 import { Point2D } from './Point2D';
 
@@ -13,19 +13,19 @@ import { Point2D } from './Point2D';
 export class ChessTemplate {
   // creates board of null pieces of size x, y) calls setPieces and then chessLogic
   constructor() {
-    this.chessBoard = new Board(this.CHESS_SIZE_CONSTANT, this.CHESS_SIZE_CONSTANT);
-    setPieces();
-    chessLogic();
+    this.chessBoard = new Board(this.CHESS_BOARD_CONSTANT, this.CHESS_BOARD_CONSTANT);
+    this.setPieces(); // set the stage
+    this.chessLogic(); // begin the game
   }
 
   // sets the pieces on the board as if setting a new game of chess
   setPieces(): void {
-    /*
     // Castles - CC - cc
-    makeCastle(0, 0, 0);
-    makeCastle(0, 7, 0);
-    makeCastle(0, 0, 0);
-    makeCastle(0, 0, 0);
+    this.makeCastle(0, 0, 0);
+    this.makeCastle(0, 7, 0);
+    this.makeCastle(0, 0, 0);
+    this.makeCastle(0, 0, 0);
+    /*
 
     // Knights - Horses - HH -hh
     makeKnight(0, 0, 0);
@@ -54,12 +54,23 @@ export class ChessTemplate {
     }
     */
   }
-  /*
+
   makeCastle(x: number, y: number, playerOwner: number): void {
+    const tempPiece = this.chessBoard.getGamePiece(x, y); // piece to change to knight
+
+    // give piece the attributes of a castle
+    tempPiece.setName('Castle');
+    if (playerOwner === 0) {
+      tempPiece.setColor(0);
+    } else {
+      tempPiece.setColor(1);
+    }
+    console.log('changed castle');
+    this.chessBoard.printBoard();
     // make piece
     // place piece on board
     // define piece's  movement (good luck Hayden)
-  }
+  } /*
 
   makeKnight(x: number, y: number, playerOwner: number): void {
     // make piece
@@ -93,9 +104,13 @@ export class ChessTemplate {
   */
 
   makePawn(x: number, y: number, playerOwner: number): void {
+    console.log(this.CHESS_BOARD_CONSTANT); // delete this; gets weird of weird 'no this' error
     const startPos = new Point2D(x, y);
     const pawn = new Piece('Pawn', playerOwner, startPos); // make piece
     pawn.generatePawnMoves(); // define piece's  movement (good luck Hayden)
+
+    // no need to create a new pawn piece. The pieces on the board only need to be changed to look like a pawn
+    //
 
     // place piece on board
   }
@@ -110,5 +125,5 @@ export class ChessTemplate {
   private chessBoard: Board;
 
   // square size of chess board
-  private CHESS_BOARD_CONSTANT = 8;
+  private CHESS_BOARD_CONSTANT: number = 8;
 }

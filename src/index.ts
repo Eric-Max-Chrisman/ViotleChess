@@ -1,6 +1,6 @@
 // index.ts (Eric)
 import express, { Express } from 'express';
-import { Board } from './types/board';
+import { ChessTemplate } from './types/ChessTemplate';
 import { Point2D } from './types/Point2D';
 
 const app: Express = express();
@@ -14,10 +14,8 @@ app.listen(PORT, () => {
 });
 
 console.log('Chess program started.');
-const x: number = 8; // set up board
-const y: number = 8;
-const myChessBoard = new Board(x, y); // data struc that holds on piece objects
-myChessBoard.checkMove();
+const myChessBoard = new ChessTemplate();
+console.log(myChessBoard);
 
 // Testing Point2D methods
 

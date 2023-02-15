@@ -1,19 +1,19 @@
 import { Piece } from './Piece';
+import { Point2D } from './Point2D';
 
 export class Board {
   constructor(sizeX: number = 8, sizeY: number = 8) {
     this.sizeX = sizeX;
     this.sizeY = sizeY;
-
     this.gamePieces = [];
-
+    console.log('yee');
     // loop to generate space for pieces
     for (let i: number = 0; i < this.sizeY; i += 1) {
       // y axis
       const tempArray: Piece[] = [];
       for (let j: number = 0; j < this.sizeX; j += 1) {
         // x axis
-        const tempPiece = new Piece('null', 'null');
+        const tempPiece = new Piece('null', 0, new Point2D(j, i));
         tempArray.push(tempPiece);
       }
       this.gamePieces.push(tempArray);
@@ -62,6 +62,10 @@ export class Board {
     }
   }
 
+  getGamePiece(x: number, y: number): Piece {
+    return this.gamePieces[x][y];
+  }
+
   // left and right board size
   private sizeX: number;
 
@@ -76,5 +80,5 @@ export class Board {
   // private nullPiece: Piece; Not sure if this is the best way
 
   // false = lowerCase's turn // true = upperCase's turn
-  private playerMove: boolean = false;
+  // private playerMove: boolean = false;
 }

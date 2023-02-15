@@ -29,7 +29,7 @@ class Point2D {
   convertToIndex(): number | undefined {
     const index: number = this.y * 8 + this.x;
     if (index < 0 || index > 64) {
-      return;
+      return undefined;
     }
     return index;
   }

@@ -26,7 +26,7 @@ class Piece {
     this.pieceName = name;
   }
 
-  setColor(color: string): void {
+  setColor(color: number): void {
     this.pieceColor = color;
   }
 
@@ -38,7 +38,7 @@ class Piece {
     this.startPosition = new Point2D(startX, startY);
   }
 
-  setPossibleMoves(newMoveSet: Array<Point2D>) {
+  setPossibleMoves(newMoveSet: Array<Point2D>): void {
     this.possibleMoves = newMoveSet;
   }
 
@@ -57,7 +57,7 @@ class Piece {
   }
 
   // returns string
-  getColor(): string {
+  getColor(): number {
     return this.pieceColor;
   }
 
