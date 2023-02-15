@@ -81,11 +81,16 @@ class Piece {
 
   generatePawnMoves(): void {
     const moveSet: Array<Point2D> = [];
-    this.getCurrent().setY(this.getCurrent().getY() + 1);
+    if (this.getColor() === 0) {
+      this.getCurrent().setY(this.getCurrent().getY() + 1);
+    } else if (this.getColor() === 1) {
+      this.getCurrent().setY(this.getCurrent().getY() - 1);
+    }
+
     moveSet.push(this.getCurrent());
     this.possibleMoves = moveSet;
     console.log(
-      `Pawn move set to: (${this.possibleMoves[0].getX()}, ${this.possibleMoves[0].getY()})`
+      `Pawn move set is: (${this.possibleMoves[0].getX()}, ${this.possibleMoves[0].getY()})`
     );
   }
 
