@@ -33,6 +33,7 @@ export class Board {
     const piecePtr = this.gamePieces[x][y];
     piecePtr.setName('null');
     piecePtr.setColor(3);
+    piecePtr.setSprite(' ');
   }
 
   // prints board to the screen / may have to be private
