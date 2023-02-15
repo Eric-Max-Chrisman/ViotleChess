@@ -140,15 +140,16 @@ export class ChessTemplate {
     } else {
       tempPiece.setColor(1);
     }
+    tempPiece.generatePawnMoves();
   }
-  
-  ckeckMove():void{
-    
-  }
+
+  // ckeckMove():void{
+
+  // }
 
   // main game logic / need to figure out cin
   chessLogic(): void {
-    this.checkMove(0,0, 0, 1);
+    // this.checkMove(0,0, 0, 1);
     this.chessBoard.printBoard();
     /*
     const rl = readline.createInterface({ input, output });
