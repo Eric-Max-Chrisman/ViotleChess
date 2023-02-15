@@ -153,6 +153,7 @@ export class ChessTemplate {
 
     rl.close();
     */
+    // https://stackoverflow.com/questions/43638105/how-to-get-synchronous-readline-or-simulate-it-using-async-in-nodejs
   }
 
   // data sturcture that holds pieces and keeps tracks of them in a semi-sparse 2d table
