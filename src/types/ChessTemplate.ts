@@ -134,7 +134,12 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♚');
     }
-    // define piece's  movement (good luck Hayden)
+    tempPiece.setCurrent(x, y);
+    // debug Kings
+    // console.log(
+    //   `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    // );
+    tempPiece.generateKingMoves(); // define piece's  movement (good luck Hayden)
   }
 
   makePawn(x: number, y: number, playerOwner: number): void {
