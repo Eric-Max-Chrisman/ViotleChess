@@ -113,7 +113,7 @@ class Piece {
     this.possibleMoves = moveSet;
 
     console.log(`Pawn move set is: `);
-    for (let i = 0; i < this.possibleMoves.length; i++) {
+    for (let i = 0; i < this.possibleMoves.length; i += 1) {
       console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
     }
     console.log(); // blank line for output
