@@ -42,11 +42,11 @@ export class ChessTemplate {
 
     // Queens - QQ - qq
     this.makeQueen(3, 0, 0);
-    this.makeQueen(4, 7, 1);
+    this.makeQueen(3, 7, 1);
 
     // Kings - KK - kk
     this.makeKing(4, 0, 0);
-    this.makeKing(3, 7, 1);
+    this.makeKing(4, 7, 1);
 
     // Pawns - PP - pp
     for (let i: number = 0; i < this.CHESS_BOARD_CONSTANT; i += 1) {
