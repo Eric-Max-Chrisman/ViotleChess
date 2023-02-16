@@ -123,22 +123,22 @@ class Piece {
     const moveSet: Array<Point2D> = [];
     for (let i = 1; i < 8; i++) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
-      move1.setY(move1.getY() + i); // This loop is adding 1 + 2 + ... + 8 then pushing. It needs to add 1, push that point, then add 2 and push. Output is adding all, then pushing the same number 7 times
+      move1.setY(move1.getY() + i);
       moveSet.push(move1);
     }
     for (let i = 1; i < 8; i++) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
-      move1.setY(move1.getY() - i); // This loop is adding 1 + 2 + ... + 8 then pushing. It needs to add 1, push that point, then add 2 and push. Output is adding all, then pushing the same number 7 times
+      move1.setY(move1.getY() - i);
       moveSet.push(move1);
     }
     for (let i = 1; i < 8; i++) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
-      move1.setX(move1.getX() + i); // This loop is adding 1 + 2 + ... + 8 then pushing. It needs to add 1, push that point, then add 2 and push. Output is adding all, then pushing the same number 7 times
+      move1.setX(move1.getX() + i);
       moveSet.push(move1);
     }
     for (let i = 1; i < 8; i++) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
-      move1.setX(move1.getX() - i); // This loop is adding 1 + 2 + ... + 8 then pushing. It needs to add 1, push that point, then add 2 and push. Output is adding all, then pushing the same number 7 times
+      move1.setX(move1.getX() - i);
       moveSet.push(move1);
     }
     this.setPossibleMoves(moveSet);
