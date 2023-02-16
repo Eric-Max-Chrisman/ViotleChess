@@ -68,6 +68,10 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♜');
     }
+    tempPiece.setCurrent(x, y);
+    // debug Castle
+    // console.log(`Castle start: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`);
+    tempPiece.generateCastleMoves();
 
     // define piece's  movement (good luck Hayden)
   }
@@ -84,6 +88,7 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♞');
     }
+    tempPiece.setCurrent(x, y);
     // define piece's  movement (good luck Hayden)
   }
 
@@ -129,7 +134,12 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♚');
     }
-    // define piece's  movement (good luck Hayden)
+    tempPiece.setCurrent(x, y);
+    // debug Kings
+    // console.log(
+    //   `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    // );
+    tempPiece.generateKingMoves(); // define piece's  movement (good luck Hayden)
   }
 
   makePawn(x: number, y: number, playerOwner: number): void {
@@ -154,9 +164,12 @@ export class ChessTemplate {
       tempPiece.setSprite('♟');
     }
     tempPiece.setCurrent(x, y);
-    console.log(
-      `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
-    );
+
+    // debug Pawns
+    // console.log(
+    //   `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    // );
+
     tempPiece.generatePawnMoves();
   }
 
