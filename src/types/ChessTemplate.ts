@@ -68,6 +68,9 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♜');
     }
+    tempPiece.setCurrent(x, y);
+    console.log(`Castle start: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`);
+    tempPiece.generateCastleMoves();
 
     // define piece's  movement (good luck Hayden)
   }
@@ -154,9 +157,12 @@ export class ChessTemplate {
       tempPiece.setSprite('♟');
     }
     tempPiece.setCurrent(x, y);
-    console.log(
-      `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
-    );
+
+    // debug Pawns
+    // console.log(
+    //   `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    // );
+
     tempPiece.generatePawnMoves();
   }
 

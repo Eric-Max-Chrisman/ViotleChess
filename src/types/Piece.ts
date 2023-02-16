@@ -111,8 +111,24 @@ class Piece {
     moveSet.push(move3);
 
     this.possibleMoves = moveSet;
+    // debug Pawn
+    // console.log(`Pawn move set is: `);
+    // for (let i = 0; i < this.possibleMoves.length; i++) {
+    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    // }
+    // console.log(); // blank line for output
+  }
 
-    console.log(`Pawn move set is: `);
+  generateCastleMoves(): void {
+    const moveSet: Array<Point2D> = [];
+    const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+    for (let i = 1; i < 8; i++) {
+      move1.setY(move1.getY() + i); // This loop is adding 1 + 2 + ... + 8 then pushing. It needs to add 1, push that point, then add 2 and push. Output is adding all, then pushing the same number 7 times
+      moveSet.push(move1);
+    }
+    this.setPossibleMoves(moveSet);
+    // debug Rook
+    console.log(`Rook move set is: `);
     for (let i = 0; i < this.possibleMoves.length; i++) {
       console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
     }
@@ -123,7 +139,7 @@ class Piece {
     if (this.getName() === 'Pawn') {
       this.generatePawnMoves();
     } else if (this.getName() === 'Castle') {
-      this.generatePawnMoves();
+      this.generateCastleMoves();
     } else if (this.getName() === 'Knight') {
       this.generatePawnMoves();
     } else if (this.getName() === 'King') {
