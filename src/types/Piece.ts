@@ -207,6 +207,51 @@ class Piece {
     const move2 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
     const move3 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
     const move4 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+    const move5 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+    const move6 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+    const move7 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+    const move8 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+
+    move1.setY(move1.getY() + 3);
+    move1.setX(move1.getX() + 1);
+    moveSet.push(move1);
+
+    move2.setY(move2.getY() + 3);
+    move2.setX(move2.getX() - 1);
+    moveSet.push(move2);
+
+    move3.setY(move3.getY() + 1);
+    move3.setX(move3.getX() + 3);
+    moveSet.push(move3);
+
+    move4.setY(move4.getY() + 1);
+    move4.setX(move4.getX() - 3);
+    moveSet.push(move4);
+
+    move5.setY(move5.getY() - 1);
+    move5.setX(move5.getX() - 3);
+    moveSet.push(move5);
+
+    move6.setY(move6.getY() - 1);
+    move6.setX(move6.getX() + 3);
+    moveSet.push(move6);
+
+    move7.setY(move7.getY() - 3);
+    move7.setX(move7.getX() + 1);
+    moveSet.push(move7);
+
+    move8.setY(move8.getY() - 3);
+    move8.setX(move8.getX() - 1);
+    moveSet.push(move8);
+
+    this.possibleMoves = moveSet;
+
+    // debug Knight
+    console.log(`Knight move set is: `);
+    for (let i = 0; i < this.possibleMoves.length; i++) {
+      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    }
+    console.log(); // blank line for output
   }
 
   generateMovesUniversal(): void {

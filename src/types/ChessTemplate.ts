@@ -89,7 +89,12 @@ export class ChessTemplate {
       tempPiece.setSprite('♞');
     }
     tempPiece.setCurrent(x, y);
-    // define piece's  movement (good luck Hayden)
+
+    // debug Knights
+    console.log(
+      `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    );
+    tempPiece.generateKnightMoves(); // define piece's  movement (good luck Hayden)
   }
 
   makeBishop(x: number, y: number, playerOwner: number): void {
