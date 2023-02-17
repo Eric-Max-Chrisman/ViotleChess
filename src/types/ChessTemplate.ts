@@ -91,9 +91,9 @@ export class ChessTemplate {
     tempPiece.setCurrent(x, y);
 
     // debug Knights
-    console.log(
-      `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
-    );
+    // console.log(
+    //   `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    // );
     tempPiece.generateKnightMoves(); // define piece's  movement (good luck Hayden)
   }
 
@@ -109,7 +109,13 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♝');
     }
-    // define piece's  movement (good luck Hayden)
+    tempPiece.setCurrent(x, y);
+
+    // debug Bishops
+    // console.log(
+    //   `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    // );
+    tempPiece.generateBishopMoves(); // define piece's  movement (good luck Hayden)
   }
 
   makeQueen(x: number, y: number, playerOwner: number): void {
