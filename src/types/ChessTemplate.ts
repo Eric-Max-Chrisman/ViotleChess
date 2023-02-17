@@ -130,6 +130,14 @@ export class ChessTemplate {
       tempPiece.setColor(1);
       tempPiece.setSprite('♛');
     }
+    tempPiece.setCurrent(x, y);
+
+    // debug Queens
+    // console.log(
+    //   `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    // );
+
+    tempPiece.generateQueenMoves();
     // define piece's  movement (good luck Hayden)
   }
 

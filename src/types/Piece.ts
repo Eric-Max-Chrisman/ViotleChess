@@ -291,6 +291,67 @@ class Piece {
     // console.log(); // blank line for output
   }
 
+  generateQueenMoves(): void {
+    const moveSet: Array<Point2D> = [];
+
+    // copied from bishop moves
+    for (let i = 1; i < 8; i++) {
+      const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+      move1.setY(move1.getY() + i);
+      move1.setX(move1.getX() + i);
+
+      moveSet.push(move1);
+    }
+    for (let i = 1; i < 8; i++) {
+      const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+      move1.setY(move1.getY() - i);
+      move1.setX(move1.getX() + i);
+      moveSet.push(move1);
+    }
+    for (let i = 1; i < 8; i++) {
+      const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+      move1.setY(move1.getY() + i);
+      move1.setX(move1.getX() - i);
+      moveSet.push(move1);
+    }
+    for (let i = 1; i < 8; i++) {
+      const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+      move1.setY(move1.getY() - i);
+      move1.setX(move1.getX() - i);
+      moveSet.push(move1);
+    }
+
+    // copied from castle moves
+    for (let i = 1; i < 8; i++) {
+      const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+      move1.setY(move1.getY() + i);
+      moveSet.push(move1);
+    }
+    for (let i = 1; i < 8; i++) {
+      const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+      move1.setY(move1.getY() - i);
+      moveSet.push(move1);
+    }
+    for (let i = 1; i < 8; i++) {
+      const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+      move1.setX(move1.getX() + i);
+      moveSet.push(move1);
+    }
+    for (let i = 1; i < 8; i++) {
+      const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+      move1.setX(move1.getX() - i);
+      moveSet.push(move1);
+    }
+    this.setPossibleMoves(moveSet);
+
+    // debug Queen
+    // console.log(`Queen move set is: `);
+    // for (let i = 0; i < this.possibleMoves.length; i++) {
+    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    // }
+    // console.log(); // blank line for output
+  }
+
   generateMovesUniversal(): void {
     if (this.getName() === 'Pawn') {
       this.generatePawnMoves();
