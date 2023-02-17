@@ -112,11 +112,11 @@ class Piece {
 
     this.possibleMoves = moveSet;
     // debug Pawn
-    // console.log(`Pawn move set is: `);
-    // for (let i = 0; i < this.possibleMoves.length; i++) {
-    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
-    // }
-    // console.log(); // blank line for output
+    console.log(`Pawn move set is: `);
+    for (let i = 0; i < this.possibleMoves.length; i++) {
+      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    }
+    console.log(); // blank line for output
   }
 
   generateCastleMoves(): void {
