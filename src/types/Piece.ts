@@ -84,6 +84,7 @@ class Piece {
     const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
     const move2 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
     const move3 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
+    const move4 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
     if (this.getColor() === 0) {
       move1.setY(move1.getY() + 1);
     } else if (this.getColor() === 1) {
@@ -110,13 +111,20 @@ class Piece {
     }
     moveSet.push(move3);
 
+    if (this.getColor() === 0) {
+      move4.setY(move4.getY() + 2);
+    } else if (this.getColor() === 1) {
+      move4.setY(move4.getY() - 2);
+    }
+    moveSet.push(move4);
+
     this.possibleMoves = moveSet;
     // debug Pawn
-    console.log(`Pawn move set is: `);
-    for (let i = 0; i < this.possibleMoves.length; i++) {
-      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
-    }
-    console.log(); // blank line for output
+    // console.log(`Pawn move set is: `);
+    // for (let i = 0; i < this.possibleMoves.length; i++) {
+    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    // }
+    // console.log(); // blank line for output
   }
 
   generateCastleMoves(): void {
