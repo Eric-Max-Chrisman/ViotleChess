@@ -51,15 +51,17 @@ export class Board {
 
   // prints board to the screen / may have to be private
   printBoard(): void {
+    console.log('    0    1    2    3    4    5    6    7    (x)');
     // console.log(`printBoard was called. Board is ${this.sizeX} by ${this.sizeY}`);
     for (let i: number = 0; i < this.sizeY; i += 1) {
-      let tempString: string = '';
+      let tempString: string = `${i}  `;
       for (let j: number = 0; j < this.sizeX; j += 1) {
         tempString = tempString.concat('[', this.gamePieces[j][i].getSprite(), ' ] ');
       }
       console.log(tempString);
     }
     console.log(''); // skip lines
+    console.log('(y)');
     console.log('');
   }
 

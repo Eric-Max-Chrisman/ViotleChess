@@ -7,7 +7,7 @@ const app: Express = express();
 const PORT = 3636;
 
 app.listen(PORT, () => {
-  // console.log(`listening on port ${PORT}`);
+  // console.log(`listsening on port ${PORT}`);
 });
 
 console.log('Chess program started.');
