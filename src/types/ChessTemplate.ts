@@ -193,7 +193,31 @@ export class ChessTemplate {
   }
 
   checkMove(x: number, y: number, newX: number, newY: number): void {
-    this.chessBoard.makeMove(x, y, newX, newY);
+    let moveValid: boolean = true;
+
+    if (newX < 0 || newX > 7 || newY < 0 || newY > 7 || x < 0 || x > 7 || y < 0 || y > 7) {
+      moveValid = false;
+    }
+    if (
+      this.chessBoard.getGamePiece(x, y).getColor() ===
+      this.chessBoard.getGamePiece(newX, newY).getColor()
+    ) {
+      moveValid = false;
+    }
+    if (
+      !this.chessBoard
+        .getGamePiece(x, y)
+        .getPossibleMoves()
+        .find((element) => element.getX() === newX && element.getY() === newY)
+    ) {
+      moveValid = false;
+    }
+
+    if (moveValid) {
+      this.chessBoard.makeMove(x, y, newX, newY);
+    } else {
+      console.log(`Invalid Move!`);
+    }
   }
 
   // main game logic / need to figure out cin
