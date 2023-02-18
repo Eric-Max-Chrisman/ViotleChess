@@ -197,19 +197,11 @@ export class ChessTemplate {
   }
 
   // main game logic / need to figure out cin
-  chessLogic(): void {
+  async chessLogic(): Promise<void> {
     this.checkMove(0, 1, 0, 2);
-
+    console.log('3');
     this.checkMove(4, 6, 4, 0);
-    /*
-    const rl = readline.createInterface({ input, output });
 
-    const answer = await rl.question('What do you think of Node.js? ');
-
-    console.log(`Thank you for your valuable feedback: ${answer}`);
-
-    rl.close();
-    */
     // https://stackoverflow.com/questions/43638105/how-to-get-synchronous-readline-or-simulate-it-using-async-in-nodejs
   }
 
