@@ -27,7 +27,7 @@ export class Board {
   // the piece that was where the moved piece is now gets written out of scope and deleted
   makeMove(x: number, y: number, newX: number, newY: number): void {
     const nullPiece = new Piece('null', 3, new Point2D(x, y)); // create new null piece to take place of moved piece
-    const tempPieceMoved = this.gamePieces[x].splice(y, 1, nullPiece); // replaces the the moved piece from array. Stores moved piece
+    const tempPieceMoved = this.gamePieces[x].splice(y, 1, nullPiece); // replaces the the moved piece from array. Stores moved piece (Problematic?)
     const removedPieceType: string = this.gamePieces[newX][newY].getName();
     this.gamePieces[x].splice(newY, 1, ...tempPieceMoved); // the moved piece now replaces the piece that was at newX, newY
 
