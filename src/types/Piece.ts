@@ -124,11 +124,11 @@ class Piece {
 
     this.possibleMoves = moveSet;
     // debug Pawn
-    // console.log(`Pawn move set is: `);
-    // for (let i = 0; i < this.possibleMoves.length; i++) {
-    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
-    // }
-    // console.log(); // blank line for output
+    console.log(`Pawn move set is: `);
+    for (let i = 0; i < this.possibleMoves.length; i++) {
+      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    }
+    console.log(); // blank line for output
   }
 
   generateCastleMoves(): void {
@@ -205,11 +205,11 @@ class Piece {
     this.possibleMoves = moveSet;
 
     // debug King
-    // console.log(`King move set is: `);
-    // for (let i = 0; i < this.possibleMoves.length; i++) {
-    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
-    // }
-    // console.log(); // blank line for output
+    console.log(`King move set is: `);
+    for (let i = 0; i < this.possibleMoves.length; i++) {
+      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    }
+    console.log(); // blank line for output
   }
 
   generateKnightMoves(): void {
@@ -224,46 +224,46 @@ class Piece {
     const move7 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
     const move8 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
 
-    move1.setY(move1.getY() + 3);
+    move1.setY(move1.getY() + 2);
     move1.setX(move1.getX() + 1);
     moveSet.push(move1);
 
-    move2.setY(move2.getY() + 3);
+    move2.setY(move2.getY() + 2);
     move2.setX(move2.getX() - 1);
     moveSet.push(move2);
 
     move3.setY(move3.getY() + 1);
-    move3.setX(move3.getX() + 3);
+    move3.setX(move3.getX() + 2);
     moveSet.push(move3);
 
     move4.setY(move4.getY() + 1);
-    move4.setX(move4.getX() - 3);
+    move4.setX(move4.getX() - 2);
     moveSet.push(move4);
 
     move5.setY(move5.getY() - 1);
-    move5.setX(move5.getX() - 3);
+    move5.setX(move5.getX() - 2);
     moveSet.push(move5);
 
     move6.setY(move6.getY() - 1);
-    move6.setX(move6.getX() + 3);
+    move6.setX(move6.getX() + 2);
     moveSet.push(move6);
 
-    move7.setY(move7.getY() - 3);
+    move7.setY(move7.getY() - 2);
     move7.setX(move7.getX() + 1);
     moveSet.push(move7);
 
-    move8.setY(move8.getY() - 3);
+    move8.setY(move8.getY() - 2);
     move8.setX(move8.getX() - 1);
     moveSet.push(move8);
 
     this.possibleMoves = moveSet;
 
     // debug Knight
-    // console.log(`Knight move set is: `);
-    // for (let i = 0; i < this.possibleMoves.length; i++) {
-    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
-    // }
-    // console.log(); // blank line for output
+    console.log(`Knight move set is: `);
+    for (let i = 0; i < this.possibleMoves.length; i++) {
+      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    }
+    console.log(); // blank line for output
   }
 
   generateBishopMoves(): void {
@@ -296,11 +296,11 @@ class Piece {
     this.setPossibleMoves(moveSet);
 
     // debug Bishop
-    // console.log(`Bishop move set is: `);
-    // for (let i = 0; i < this.possibleMoves.length; i++) {
-    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
-    // }
-    // console.log(); // blank line for output
+    console.log(`Bishop move set is: `);
+    for (let i = 0; i < this.possibleMoves.length; i++) {
+      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    }
+    console.log(); // blank line for output
   }
 
   generateQueenMoves(): void {
@@ -357,26 +357,26 @@ class Piece {
     this.setPossibleMoves(moveSet);
 
     // debug Queen
-    // console.log(`Queen move set is: `);
-    // for (let i = 0; i < this.possibleMoves.length; i++) {
-    //   console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
-    // }
-    // console.log(); // blank line for output
+    console.log(`Queen move set is: `);
+    for (let i = 0; i < this.possibleMoves.length; i++) {
+      console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
+    }
+    console.log(); // blank line for output
   }
 
   generateMovesUniversal(): void {
-    if (this.getName() === 'Pawn') {
+    if (this.getName().toLowerCase() === 'pawn') {
       this.generatePawnMoves();
-    } else if (this.getName() === 'Castle') {
+    } else if (this.getName().toLowerCase() === 'castle') {
       this.generateCastleMoves();
-    } else if (this.getName() === 'Knight') {
-      this.generatePawnMoves();
-    } else if (this.getName() === 'King') {
-      this.generatePawnMoves();
-    } else if (this.getName() === 'Queen') {
-      this.generatePawnMoves();
-    } else if (this.getName() === 'Bishop') {
-      this.generatePawnMoves();
+    } else if (this.getName().toLowerCase() === 'knight') {
+      this.generateKnightMoves();
+    } else if (this.getName().toLowerCase() === 'king') {
+      this.generateKingMoves();
+    } else if (this.getName().toLowerCase() === 'queen') {
+      this.generateQueenMoves();
+    } else if (this.getName().toLowerCase() === 'bishop') {
+      this.generateBishopMoves();
     }
   }
   // pieces deconstruct automatically when they fall out of scope. We can handle piece deletion by overriding its spot on the board.
