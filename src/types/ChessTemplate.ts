@@ -8,8 +8,6 @@
 import * as readline from 'node:readline'; // Docs: https://nodejs.org/api/readline.html#readline_readline
 import { stdin as input, stdout as output } from 'node:process'; // from same Docs as above
 import { Board } from './Board';
-import { Piece } from './Piece';
-import { Point2D } from './Point2D';
 
 // All methods private / The creation of this class will halt process until chess is over
 export class ChessTemplate {

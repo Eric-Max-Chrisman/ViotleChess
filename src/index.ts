@@ -1,7 +1,6 @@
 // index.ts (Eric)
 import express, { Express } from 'express';
 import { ChessTemplate } from './types/ChessTemplate';
-import { Point2D } from './types/Point2D';
 
 const app: Express = express();
 const PORT = 3636;
