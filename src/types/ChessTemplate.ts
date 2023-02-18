@@ -198,11 +198,21 @@ export class ChessTemplate {
 
   // main game logic / need to figure out cin
   async chessLogic(): Promise<void> {
-    this.checkMove(0, 1, 0, 2);
-    console.log('3');
-    this.checkMove(4, 6, 4, 0);
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
 
-    // https://stackoverflow.com/questions/43638105/how-to-get-synchronous-readline-or-simulate-it-using-async-in-nodejs
+    rl.question(
+      'Enter the coords (x,y) of the piece to want to move and the coords of where to place the piece. Separate each number with space: ',
+      (responce: string) => {
+        const nums = responce.split(' '); // creates array of strings that is separated by the detection of a space
+        this.checkMove(Number(nums[0]), Number(nums[1]), Number(nums[2]), Number(nums[3]));
+        console.log('');
+        rl.close(); // Close the readline interface
+        this.chessLogic(); // Call the function again
+      }
+    );
   }
 
   // data sturcture that holds pieces and keeps tracks of them in a semi-sparse 2d table
