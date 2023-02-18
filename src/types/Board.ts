@@ -39,6 +39,7 @@ export class Board {
       // end the match and declare victor
       console.log('THE KING IS DEADDDD');
     }
+    this.playerMove = !this.playerMove;
     this.printBoard();
   }
 
@@ -82,6 +83,6 @@ export class Board {
   // The space lost isn't that bad from this structure for we are dealing with board of 8 by 8 for this project
   // private nullPiece: Piece; Not sure if this is the best way
 
-  // false = lowerCase's turn // true = upperCase's turn
-  // private playerMove: boolean = false;
+  // false = white's turn // true = black's turn
+  private playerMove: boolean = false;
 }

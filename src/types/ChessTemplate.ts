@@ -132,7 +132,7 @@ export class ChessTemplate {
 
     // debug Queens
     // console.log(
-    //   `Start position: ${tempPiece.getCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
+    //   `Start position: ${tempPiecse.gestCurrent().getX()}, ${tempPiece.getCurrent().getY()}`
     // );
 
     tempPiece.generateQueenMoves();
