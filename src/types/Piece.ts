@@ -133,22 +133,22 @@ class Piece {
 
   generateCastleMoves(): void {
     const moveSet: Array<Point2D> = [];
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() + i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() - i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setX(move1.getX() + i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setX(move1.getX() - i);
       moveSet.push(move1);
@@ -156,7 +156,7 @@ class Piece {
     this.setPossibleMoves(moveSet);
     // debug Rook
     console.log(`Rook move set is: `);
-    for (let i = 0; i < this.possibleMoves.length; i++) {
+    for (let i = 0; i < this.possibleMoves.length; i += 1) {
       console.log(`(${this.possibleMoves[i].getX()}, ${this.possibleMoves[i].getY()})`);
     }
     console.log(); // blank line for output
@@ -268,26 +268,26 @@ class Piece {
 
   generateBishopMoves(): void {
     const moveSet: Array<Point2D> = [];
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() + i);
       move1.setX(move1.getX() + i);
 
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() - i);
       move1.setX(move1.getX() + i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() + i);
       move1.setX(move1.getX() - i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() - i);
       move1.setX(move1.getX() - i);
@@ -307,26 +307,26 @@ class Piece {
     const moveSet: Array<Point2D> = [];
 
     // copied from bishop moves
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() + i);
       move1.setX(move1.getX() + i);
 
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() - i);
       move1.setX(move1.getX() + i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() + i);
       move1.setX(move1.getX() - i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() - i);
       move1.setX(move1.getX() - i);
@@ -334,22 +334,22 @@ class Piece {
     }
 
     // copied from castle moves
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() + i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setY(move1.getY() - i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setX(move1.getX() + i);
       moveSet.push(move1);
     }
-    for (let i = 1; i < 8; i++) {
+    for (let i = 1; i < 8; i += 1) {
       const move1 = new Point2D(this.getCurrent().getX(), this.getCurrent().getY());
       move1.setX(move1.getX() - i);
       moveSet.push(move1);

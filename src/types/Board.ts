@@ -29,7 +29,7 @@ export class Board {
     const nullPiece = new Piece('null', 3, new Point2D(x, y)); // create new null piece to take place of moved piece
     const tempPieceMoved = this.gamePieces[x].splice(y, 1, nullPiece); // replaces the the moved piece from array. Stores moved piece (Problematic?)
     const removedPieceType: string = this.gamePieces[newX][newY].getName();
-    this.gamePieces[x].splice(newY, 1, ...tempPieceMoved); // the moved piece now replaces the piece that was at newX, newY
+    this.gamePieces[newX].splice(newY, 1, ...tempPieceMoved); // the moved piece now replaces the piece that was at newX, newY
 
     this.gamePieces[newX][newY].setCurrent(newX, newY); // sets Pieces current to new spot to generate moves from
     this.gamePieces[newX][newY].generateMovesUniversal(); // Universal reads the name of the Piece at [newX], [newY] and generates the correct moves.
