@@ -6,7 +6,7 @@
 // 4) Template of Pieces
 
 import * as readline from 'node:readline'; // Docs: https://nodejs.org/api/readline.html#readline_readline
-import { stdin as input, stdout as output } from 'node:process'; // from same Docs as above
+// import { stdin as input, stdout as output } from 'node:process'; // from same Docs as above
 import { Board } from './Board';
 
 // All methods private / The creation of this class will halt process until chess is over

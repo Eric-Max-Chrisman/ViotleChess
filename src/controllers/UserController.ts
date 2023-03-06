@@ -5,14 +5,14 @@ import { addUser, getUserByEmail } from '../models/UserModel';
 import { parseDatabaseError } from '../utils/db-utils';
 
 async function registerUser(req: Request, res: Response): Promise<void> {
-  const { email, password } = req.body as AuthRequest;
+  const { email, userName, password } = req.body as AuthRequest;
 
   // IMPORTANT: Hash the password
   const passwordHash = await argon2.hash(password);
 
   try {
     // IMPORTANT: Store the `passwordHash` and NOT the plaintext password
-    const newUser = await addUser(email, passwordHash);
+    const newUser = await addUser(email, userName, passwordHash);
     console.log(newUser);
     res.sendStatus(201);
   } catch (err) {

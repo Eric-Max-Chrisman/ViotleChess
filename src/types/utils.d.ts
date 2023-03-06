@@ -7,5 +7,6 @@ type DatabaseConstraintError = {
 
 type AuthRequest = {
   email: string;
+  userName: string;
   password: string;
 };
