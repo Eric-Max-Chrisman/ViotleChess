@@ -19,5 +19,6 @@ export class CustomPiece {
   @Column({ unique: false })
   piecePlacements: Point2D[];
 
-  // TODO @ManyToMany PieceOwner
+  @ManyToMany(() => PieceOwner, (pieceOwner) => pieceOwners.customPieces, { cascade: ['insert', 'update'] })
+  customPieces: Relation<PieceOwner>[];
 }
