@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, Relation } from 'typeorm';
 import { LeaderBoard } from './LeaderBoard';
 import { Set } from './Set';
+import { CustomPiece } from './CustomPiece';
 
 @Entity()
 export class User {
@@ -15,8 +16,12 @@ export class User {
 
   @Column({ unique: true })
   passwordHash: string;
-  
-  //TODO
-  //@OneToOne LeaderBoard
-  //@OneToMany Set
+
+  @ManyToMany(() => CustomPiece, (customPiece) => customPiece.user, {
+    cascade: ['insert', 'update'],
+  })
+  customPiece: Relation<CustomPiece>[];
+  // TODO
+  // @OneToOne LeaderBoard
+  // @OneToMany Set
 }

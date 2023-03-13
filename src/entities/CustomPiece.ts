@@ -1,24 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, Relation } from 'typeorm';
-import { Point2d } from '././types/Point2d';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, Relation, JoinTable } from 'typeorm';
+import { Point2D } from './Point2D';
 import { PieceOwner } from './PieceOwner';
+import { User } from './User';
 
 @Entity()
 export class CustomPiece {
   @PrimaryGeneratedColumn('uuid')
   pieceId: string;
-  
-  @Column({ unique: false})
-  pieceName: string;
-  
-  @Column({ unique: false})
-  pieceColor: number;
 
   @Column({ unique: false })
+  pieceName: string;
+
+  @Column({ unique: false })
+  pieceColor: number;
+
+  @Column({ unique: false }) // Use this as starting position
   piecePosition: Point2D;
 
   @Column({ unique: false })
   piecePlacements: Point2D[];
 
-  @ManyToMany(() => PieceOwner, (pieceOwner) => pieceOwners.customPieces, { cascade: ['insert', 'update'] })
-  customPieces: Relation<PieceOwner>[];
+  // Replace this with relation to User?
+  @ManyToMany(() => User, (user) => user.customPiece, {
+    cascade: ['insert', 'update'],
+  })
+  @JoinTable()
+  user: Relation<CustomPiece>[];
 }
