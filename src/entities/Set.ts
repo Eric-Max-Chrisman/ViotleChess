@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Relation } from 'typeorm';
 import { User } from './Book';
+import { LeaderBoard } from './LeaderBoard';
 
 @Set()
 export class Set {
@@ -9,6 +10,9 @@ export class Set {
   @Column({ unique: false })
   setName: string;
 
-  @ManyToOne(() => Set, (set) => set, { cascade: true })
+  @ManyToOne(() => Set, (set) => set, { cascade: true }) //needs edit
   user: Relation<User>;
+  
+  //ToDO
+  //@OneToMany Leaderboard
 }
