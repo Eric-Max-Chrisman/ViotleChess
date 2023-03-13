@@ -6,6 +6,12 @@ import { PieceOwner } from './PieceOwner';
 export class CustomPiece {
   @PrimaryGeneratedColumn('uuid')
   pieceId: string;
+  
+  @Column({ unique: false})
+  pieceName: string;
+  
+  @Column({ unique: false})
+  pieceColor: number;
 
   @Column({ unique: false })
   piecePosition: Point2D;
