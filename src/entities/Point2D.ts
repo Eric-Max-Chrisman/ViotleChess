@@ -1,9 +1,9 @@
 // ToDo
-import { Entity, Column, ManyToMany, Relation, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 class Point2D {
-  @Column()
+  @PrimaryColumn()
   private x: number;
 
   @Column()

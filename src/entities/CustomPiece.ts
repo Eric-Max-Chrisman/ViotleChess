@@ -14,9 +14,11 @@ export class CustomPiece {
   @Column({ unique: false })
   pieceColor: number;
 
+  // Possibly convert this to OneToOne Relation. Waiting on answer from Chris
   @Column({ unique: false }) // Use this as starting position
   piecePosition: Point2D;
 
+  // This will probably need to be One to Many on this side.
   @Column({ unique: false })
   piecePlacements: Point2D[];
 
