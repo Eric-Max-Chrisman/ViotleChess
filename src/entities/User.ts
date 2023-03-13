@@ -1,4 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { LeaderBoard } from './LeaderBoard';
+import { Set } from './Set';
 
 @Entity()
 export class User {
@@ -13,4 +15,8 @@ export class User {
 
   @Column({ unique: true })
   passwordHash: string;
+  
+  //TODO
+  //@OneToOne LeaderBoard
+  //@OneToMany Set
 }
