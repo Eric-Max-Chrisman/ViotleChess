@@ -6,8 +6,7 @@ import { Set } from './Set';
 export class LeaderBoard {
   @Column({ unique: false })
   wins: number;
-  
-  //ToDo
-  @ManyToOne set
-  @OneToOne user
+
+  // ToDo
+  // @OneToOne user
 }
