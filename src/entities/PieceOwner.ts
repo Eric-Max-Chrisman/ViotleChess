@@ -3,7 +3,7 @@ import { CustomPiece } from './CustomPiece';
 import { Set } from './Set';
 
 @Entity()
-export class Author {
+export class PieceOwner {
 //ToDo
    //@ManyToMany setId
    //@ManyToMany pieceId
