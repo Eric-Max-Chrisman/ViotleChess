@@ -7,7 +7,7 @@ import { registerUser, logIn } from './controllers/UserController';
 dotenv.config();
 const app: Express = express();
 app.use(express.json());
-const PORT = process.env;
+const { PORT } = process.env;
 
 app.listen(PORT, () => {
   console.log(`listsening on port ${PORT}`);
