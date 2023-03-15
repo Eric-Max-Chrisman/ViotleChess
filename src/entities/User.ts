@@ -17,10 +17,10 @@ export class User {
   @Column({ unique: true })
   passwordHash: string;
 
-  @ManyToMany(() => CustomPiece, (customPiece) => customPiece.user, {
+  @ManyToMany(() => CustomPiece, (customPieces) => customPieces.users, {
     cascade: ['insert', 'update'],
   })
-  customPiece: Relation<CustomPiece>[];
+  customPieces: Relation<CustomPiece>[];
   // TODO
   // @OneToOne LeaderBoard
   // @OneToMany Set

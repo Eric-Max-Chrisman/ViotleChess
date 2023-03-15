@@ -23,9 +23,9 @@ export class CustomPiece {
   piecePlacements: Point2D[];
 
   // Replace this with relation to User?
-  @ManyToMany(() => User, (user) => user.customPiece, {
+  @ManyToMany(() => User, (users) => users.customPieces, {
     cascade: ['insert', 'update'],
   })
   @JoinTable()
-  user: Relation<CustomPiece>[];
+  users: Relation<CustomPiece>[];
 }
