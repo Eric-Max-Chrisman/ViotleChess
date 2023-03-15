@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, Relation } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+  Relation,
+  ManyToMany,
+} from 'typeorm';
 import { LeaderBoard } from './LeaderBoard';
 import { Set } from './Set';
 import { CustomPiece } from './CustomPiece';
@@ -24,4 +32,9 @@ export class User {
     cascade: ['insert', 'update'],
   })
   leaderBoards: Relation<LeaderBoard>[];
+
+  @ManyToMany(() => CustomPiece, (customPieces) => customPieces.users, {
+    cascade: ['insert', 'update'],
+  })
+  users: Relation<User>[];
 }
