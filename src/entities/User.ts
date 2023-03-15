@@ -31,10 +31,10 @@ export class User {
   @ManyToOne(() => LeaderBoard, (leaderBoard) => leaderBoard.users, {
     cascade: ['insert', 'update'],
   })
-  leaderBoards: Relation<LeaderBoard>[];
+  leaderBoards: Relation<LeaderBoard>;
 
   @ManyToMany(() => CustomPiece, (customPieces) => customPieces.users, {
     cascade: ['insert', 'update'],
   })
-  users: Relation<User>[];
+  customPieces: Relation<User>[];
 }

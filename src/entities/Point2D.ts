@@ -1,5 +1,6 @@
 // ToDo
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, Relation, OneToOne, ManyToOne } from 'typeorm';
+import { CustomPiece } from './CustomPiece';
 
 @Entity()
 class Point2D {
@@ -8,6 +9,14 @@ class Point2D {
 
   @Column()
   private y: number;
+
+  @OneToOne(() => CustomPiece, (customPiece) => customPiece.point) // Use this as starting position
+  customPiece: Relation<CustomPiece>;
+
+  @ManyToOne(() => CustomPiece, (customPiece2) => customPiece2.users, {
+    cascade: ['insert', 'update'],
+  })
+  customPiece2: Relation<CustomPiece>[];
 
   constructor(x = 0, y = 0) {
     this.x = x;
