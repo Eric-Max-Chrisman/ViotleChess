@@ -17,9 +17,11 @@ export class User {
   @Column({ unique: true })
   passwordHash: string;
 
-  @OneToMany(() => Set, (set) => set.users, {cascade: ['insert', 'update']})
+  @OneToMany(() => Set, (set) => set.user, { cascade: ['insert', 'update'] })
   set: Relation<Set>;
-  
-  @ManyToOne (() => LederBoard, (leaderBoard) => leaderBoard.user, {cascade: ['insert', 'update']})
+
+  @ManyToOne(() => LeaderBoard, (leaderBoard) => leaderBoard.users, {
+    cascade: ['insert', 'update'],
+  })
   leaderBoards: Relation<LeaderBoard[]>;
 }
