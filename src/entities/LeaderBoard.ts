@@ -7,6 +7,10 @@ export class LeaderBoard {
   @Column({ unique: false })
   wins: number;
 
-  // ToDo
-  // @OneToOne user
+  @OneToMany(() => User, (user) => user.leaderBoards, { cascade: ['insert', 'update'])})
+  user: Relation<User>;
+  
+  @ManyToOne(() => Set, (set) => set.leaderBoards, { cascade: ['insert', 'update']})
+  set: Relation<Set>;
+   
 }
