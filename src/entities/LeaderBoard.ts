@@ -1,13 +1,5 @@
-import {
-  Entity,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  Relation,
-  OneToMany,
-  ManyToOne,
-} from 'typeorm';
+import { Entity, PrimaryColumn, Column, Relation, OneToMany, ManyToOne } from 'typeorm';
+
 import { User } from './User';
 import { Set } from './Set';
 
