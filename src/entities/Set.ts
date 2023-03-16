@@ -11,12 +11,12 @@ export class Set {
   @Column({ unique: false })
   setName: string;
 
-  @ManyToOne(() => User, (user) => user.set, { cascade: ['insert', 'update'])
+  @ManyToOne(() => User, (user) => user.set, { cascade: ['insert', 'update'] })
   user: Relation<User>;
 
-  @OneToMany(() => LeaderBoard, (leaderBoard) => leaderBoard.set, { cascade: ['insert', 'update'])
+  @OneToMany(() => LeaderBoard, (leaderBoard) => leaderBoard.set, { cascade: ['insert', 'update'] })
   leaderBoards: Relation<LeaderBoard>[];
 
-  @OneToMany(() => CustomPiece, (customPiece) => customPiece.set, { cascade: ['insert', 'update'])
-  customPieces: Relation<CustomPiece>[];
+  // @OneToMany(() => CustomPiece, (customPiece) => customPiece.set, { cascade: ['insert', 'update'] })
+  // customPieces: Relation<CustomPiece>[];
 }

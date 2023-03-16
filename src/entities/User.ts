@@ -7,6 +7,7 @@ import {
   Relation,
   ManyToMany,
 } from 'typeorm';
+
 import { LeaderBoard } from './LeaderBoard';
 import { Set } from './Set';
 import { CustomPiece } from './CustomPiece';

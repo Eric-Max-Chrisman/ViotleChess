@@ -8,6 +8,7 @@ import {
   OneToOne,
   OneToMany,
 } from 'typeorm';
+
 import { Point2D } from './Point2D';
 import { User } from './User';
 
