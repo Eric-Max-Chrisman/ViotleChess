@@ -7,10 +7,12 @@ import {
   JoinTable,
   OneToOne,
   OneToMany,
+  ManyToOne,
 } from 'typeorm';
 
 import { Point2D } from './Point2D';
 import { User } from './User';
+import { Set } from './Set';
 
 @Entity()
 export class CustomPiece {
@@ -42,4 +44,7 @@ export class CustomPiece {
   })
   @JoinTable()
   users: Relation<CustomPiece>[];
+
+  @ManyToOne(() => Set, (set) => set.customPieces, { cascade: ['insert', 'update'] })
+  set: Relation<Set>;
 }
