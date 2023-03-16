@@ -18,5 +18,5 @@ export class Set {
   leaderBoards: Relation<LeaderBoard>[];
 
   @OneToMany(() => CustomPiece, (customPiece) => customPiece.set, { cascade: ['insert', 'update'] })
-  CustomPieces: Relation<CustomPiece>[];
+  customPieces: Relation<CustomPiece>[];
 }
