@@ -37,13 +37,55 @@ async function logIn(req: Request, res: Response): Promise<void> {
 
   // If the password does not match
   if (!(await argon2.verify(passwordHash, password))) {
+    /* if (!req.session.logInAttempts){ //req.sessions isnt implemented properly yet. Something wierd with it not finding my d.ts file.
+      req.session.logInAttempts = 1; //Initialize to zero if it doesnt exist yet
+    }
+    else{
+      req.session.logInAttempts += 1; //Increment by one
+    }
+
+    }
+    */
     res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
     return;
   }
 
   // The user has successfully logged in
   // NOTES: We will update this once we implement session management
+
+  // UNCOMMENT WHEN SESSIONS ARE FIXED
+  // await req.session.clearSession();
+  // req.session.user = {
+  //   userId: user.userId,
+  //   email: user.email,
+  // };
+  // req.session.isLoggedIn = true;
   res.sendStatus(200); // 200 OK
 }
 
-export { registerUser, logIn };
+async function updateUserEmail(req: Request, res: Response): Promise<void> {
+  const { userId } = req.params as UserIdParam;
+  const { isLoggedIn, authenticatedUser } = req.session;
+
+  if (!isLoggedIn || authenticatedUser.userId !== userId) {
+    res.sendStatus(403); // 403 Forbidden
+    return;
+  }
+
+  const { email } = req.body as { email: string };
+
+  // Get the user account
+  const user = await getUserById(userId);
+  if (!user) {
+    res.sendStatus(404); // 404 Not Found
+    return;
+  }
+
+  // Now update their email address (THIS SHOULD BE IN A try/catch)
+  // It was omitted for space on the sldie
+  await updateEmailAddress(userId, email);
+
+  res.sendStatus(200);
+}
+
+export { registerUser, logIn, updateUserEmail };

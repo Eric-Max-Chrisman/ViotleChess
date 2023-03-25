@@ -1,28 +1,30 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  Relation,
-  JoinTable,
-  OneToOne,
-  OneToMany,
-  ManyToOne,
-  PrimaryColumn
-} from 'typeorm';
+// Dont know if well be using this yet
 
-import { Point2D } from './Point2D';
-import { User } from './User';
-import { CustomPiece } from './CustomPiece';
+// import {
+//   Entity,
+//   PrimaryGeneratedColumn,
+//   Column,
+//   ManyToMany,
+//   Relation,
+//   JoinTable,
+//   OneToOne,
+//   OneToMany,
+//   ManyToOne,
+//   PrimaryColumn
+// } from 'typeorm';
 
-@Entity()
-export class Move{
-  @PrimaryColumn()
-  moveName: string;
+// import { Point2D } from './Point2D';
+// import { User } from './User';
+// import { CustomPiece } from './CustomPiece';
 
-  @Column()
-  newPosition: Point2D;
+// @Entity()
+// export class Move{
+//   @PrimaryColumn()
+//   moveName: string;
 
-  @Column
+//   @Column()
+//   newPosition: Point2D;
 
-}
+//   @Column
+
+// }
