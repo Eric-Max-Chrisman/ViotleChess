@@ -22,4 +22,8 @@ async function getUserByEmail(email: string): Promise<User | null> {
   return await userRepository.findOne({ where: { email } });
 }
 
-export { addUser, getUserByEmail };
+async function getUserById(userId: string): Promise<User | null> {
+  return await userRepository.findOne({ where: { userId } });
+}
+
+export { addUser, getUserByEmail, getUserById };

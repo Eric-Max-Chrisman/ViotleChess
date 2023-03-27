@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import argon2 from 'argon2';
-import { addUser, getUserByEmail } from '../models/UserModel';
+import { addUser, getUserByEmail, getUserById } from '../models/UserModel';
 import { parseDatabaseError } from '../utils/db-utils';
 
 async function registerUser(req: Request, res: Response): Promise<void> {
@@ -37,15 +37,13 @@ async function logIn(req: Request, res: Response): Promise<void> {
 
   // If the password does not match
   if (!(await argon2.verify(passwordHash, password))) {
-    /* if (!req.session.logInAttempts){ //req.sessions isnt implemented properly yet. Something wierd with it not finding my d.ts file.
-      req.session.logInAttempts = 1; //Initialize to zero if it doesnt exist yet
-    }
-    else{
-      req.session.logInAttempts += 1; //Increment by one
+    if (!req.session.logInAttempts) {
+      // req.sessions isnt implemented properly yet. Something wierd with it not finding my d.ts file.
+      req.session.logInAttempts = 1; // Initialize to zero if it doesnt exist yet
+    } else {
+      req.session.logInAttempts += 1; // Increment by one
     }
 
-    }
-    */
     res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
     return;
   }
@@ -54,12 +52,12 @@ async function logIn(req: Request, res: Response): Promise<void> {
   // NOTES: We will update this once we implement session management
 
   // UNCOMMENT WHEN SESSIONS ARE FIXED
-  // await req.session.clearSession();
-  // req.session.user = {
-  //   userId: user.userId,
-  //   email: user.email,
-  // };
-  // req.session.isLoggedIn = true;
+  await req.session.clearSession();
+  req.session.user = {
+    userId: user.userId,
+    email: user.email,
+  };
+  req.session.isLoggedIn = true;
   res.sendStatus(200); // 200 OK
 }
 

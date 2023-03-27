@@ -10,3 +10,7 @@ type AuthRequest = {
   userName: string;
   password: string;
 };
+
+type UserIdParam = {
+  userId: string;
+};
