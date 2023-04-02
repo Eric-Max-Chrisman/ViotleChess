@@ -14,6 +14,11 @@ dotenv.config();
 const app: Express = express();
 const { PORT, COOKIE_SECRET } = process.env;
 
+// html stuff
+app.use(express.static('public', { extensions: ['html'] }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public')); // delet
+
 const SQLiteStore = connectSqlite3(session);
 
 app.use(
