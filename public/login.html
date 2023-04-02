@@ -12,6 +12,21 @@
   <p>Login stuff should go here.</p>
   <p>need to create js file to handel login</p>
 
+  <h1>Create a new account</h1>
+    <form action = "/api/login" method = "post">
+        <div>
+            <label for = "email">Email</label>
+            <input type = "email" id = "email" name = "email" required>
+        </div>
+        <div>
+            <label for = "password"> Password</label>
+            <input type = "password" id = "email" name = "email" required>
+        </div>
+        <div>
+            <button>Enter</button>
+        </div>
+    </form>
+
   <div class = "navbar">
     <a href = "index.html" class = "active">Volatile Chess</a>
     <a href = "createUser.html">Register Account</a>
