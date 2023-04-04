@@ -53,7 +53,7 @@ async function logIn(req: Request, res: Response): Promise<void> {
 
   // UNCOMMENT WHEN SESSIONS ARE FIXED
   await req.session.clearSession();
-  req.session.user = {
+  req.session.authenticatedUser = {
     userId: user.userId,
     email: user.email,
   };

@@ -1,10 +1,11 @@
 // index.ts (Eric)
 import dotenv from 'dotenv';
-import express, { Express } from 'express';
+import express, { Express, NextFunction } from 'express';
 import './config';
 import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
+import { Server, Socket } from 'socket.io';
 
 import { ChessTemplate } from './types/ChessTemplate';
 import { registerUser, logIn } from './controllers/UserController';
@@ -14,33 +15,35 @@ dotenv.config();
 const app: Express = express();
 const { PORT, COOKIE_SECRET } = process.env;
 
+const SQLiteStore = connectSqlite3(session);
+
+// WebSockets this replaces the normal express sessions code.
+const sessionMiddleware = session({
+  store: new SQLiteStore({ db: 'sessions.sqlite' }),
+  secret: COOKIE_SECRET,
+  cookie: { maxAge: 8 * 60 * 60 * 1000 }, // 8 hours
+  name: 'session',
+  resave: false,
+  saveUninitialized: false,
+});
+
+app.use(sessionMiddleware);
+
 // html stuff
 app.use(express.static('public', { extensions: ['html'] }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public')); // delet
 
-const SQLiteStore = connectSqlite3(session);
-
-app.use(
-  session({
-    store: new SQLiteStore({ db: 'sessions.sqlite' }),
-    secret: COOKIE_SECRET,
-    cookie: { maxAge: 8 * 60 * 60 * 1000 }, // 8 hours
-    name: 'session',
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-
 app.use(express.json());
 
+// endpoints
 app.post('/users', registerUser); // Create Account
 app.post('/api/login', logIn); // Log in to an account
 app.post('/api/piece', createPiece);
 app.get('/api/piece/:pieceId', getPieceData);
 
 app.listen(PORT, () => {
-  console.log(`listsening on port ${PORT}`);
+  console.log(`listsening at http://localhost:${PORT}`);
 });
 // test
 

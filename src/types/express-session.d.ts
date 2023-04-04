@@ -11,5 +11,6 @@ declare module 'express-session' {
     isLoggedIn: boolean;
     logInAttempts: number;
     logInTimeout: Date;
+    coins: number;
   }
 }
