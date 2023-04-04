@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import argon2 from 'argon2';
-import { addUser, getUserByEmail, getUserById } from '../models/UserModel';
+import { addUser, getUserByEmail, getUserById, updateEmailAdress } from '../models/UserModel';
 import { parseDatabaseError } from '../utils/db-utils';
 
 async function registerUser(req: Request, res: Response): Promise<void> {
@@ -81,7 +81,7 @@ async function updateUserEmail(req: Request, res: Response): Promise<void> {
 
   // Now update their email address (THIS SHOULD BE IN A try/catch)
   // It was omitted for space on the sldie
-  await updateEmailAddress(userId, email);
+  await updateEmailAdress(userId, email);
 
   res.sendStatus(200);
 }

@@ -8,6 +8,7 @@ async function addUser(email: string, userName: string, passwordHash: string): P
   let newUser = new User();
   newUser.email = email;
   newUser.userName = userName;
+
   newUser.passwordHash = passwordHash;
 
   // Then save it to the database
