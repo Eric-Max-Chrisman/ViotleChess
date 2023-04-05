@@ -30,17 +30,24 @@ const sessionMiddleware = session({
 app.use(sessionMiddleware);
 
 // html stuff
-app.use(express.static('public', { extensions: ['html'] }));
+// app.use(express.static('public', { extensions: ['html'] }));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public')); // delet
+// app.use(express.static('public')); // delete
 
 app.use(express.json());
 
-// endpoints
+// ejs set up (all redirects should be ejs renders)
+app.set('view engine', 'ejs');
+
+// endpoints to webpages
+app.get('/', (req, res) => {
+  res.render('index.ejs', {});
+});
+
 app.post('/users', registerUser); // Create Account
-app.post('/api/login', logIn); // Log in to an account
-app.post('/api/piece', createPiece);
-app.get('/api/piece/:pieceId', getPieceData);
+app.post('/login', logIn); // Log in to an account
+app.post('/piece', createPiece);
+app.get('/piece/:pieceId', getPieceData);
 
 app.listen(PORT, () => {
   console.log(`listsening at http://localhost:${PORT}`);

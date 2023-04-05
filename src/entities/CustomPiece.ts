@@ -19,8 +19,8 @@ export class CustomPiece {
   @PrimaryGeneratedColumn('uuid')
   pieceId: string;
 
-  constructor(name: string, start: Point2D, moveSet: Array<Point2D>) {
-    this.pieceName = name;
+  constructor(pieceName: string, start: Point2D, moveSet: Array<Point2D>) {
+    this.pieceName = pieceName;
     this.point = start;
     this.point2 = moveSet;
   }
