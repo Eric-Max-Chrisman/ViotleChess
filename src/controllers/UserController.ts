@@ -79,9 +79,21 @@ async function updateUserEmail(req: Request, res: Response): Promise<void> {
     return;
   }
 
-  // Now update their email address (THIS SHOULD BE IN A try/catch)
-  // It was omitted for space on the sldie
-  await updateEmailAdress(userId, email);
+  try {
+    // Now update their email address (THIS SHOULD BE IN A try/catch)
+    // It was omitted for space on the sldie
+    // check to see if works
+    const oldUser = await getUserById(userId);
+    const updatedUser = await updateEmailAdress(userId, email);
+    console.log('DEBUG TEST: OLD USER');
+    console.log(oldUser);
+    console.log('NEW USER');
+    console.log(updatedUser);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(501);
+    return;
+  }
 
   res.sendStatus(200);
 }

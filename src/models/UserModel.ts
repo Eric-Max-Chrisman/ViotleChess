@@ -27,4 +27,16 @@ async function getUserById(userId: string): Promise<User | null> {
   return await userRepository.findOne({ where: { userId } });
 }
 
-export { addUser, getUserByEmail, getUserById };
+// check to see if works
+async function updateEmailAdress(userId: string, email: string): Promise<User | null> {
+  await userRepository
+    .createQueryBuilder('user')
+    .update(User)
+    .where('userId = :userId', { userId })
+    .set({ email })
+    .execute();
+
+  return await getUserById(userId);
+}
+
+export { addUser, getUserByEmail, getUserById, updateEmailAdress };
