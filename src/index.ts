@@ -1,17 +1,54 @@
 // index.ts (Eric)
-import express, { Express } from 'express';
-import { ChessTemplate } from './types/ChessTemplate';
+import dotenv from 'dotenv';
+import express, { Express, NextFunction } from 'express';
+import './config';
+import 'express-async-errors';
+import session from 'express-session';
+import connectSqlite3 from 'connect-sqlite3';
+import { Server, Socket } from 'socket.io';
 
+import { ChessTemplate } from './types/ChessTemplate';
+import { registerUser, logIn } from './controllers/UserController';
+import { createPiece, getPieceData } from './controllers/PieceController';
+
+dotenv.config();
 const app: Express = express();
-const PORT = 3636;
+const { PORT, COOKIE_SECRET } = process.env;
+
+const SQLiteStore = connectSqlite3(session);
+
+// WebSockets this replaces the normal express sessions code.
+const sessionMiddleware = session({
+  store: new SQLiteStore({ db: 'sessions.sqlite' }),
+  secret: COOKIE_SECRET,
+  cookie: { maxAge: 8 * 60 * 60 * 1000 }, // 8 hours
+  name: 'session',
+  resave: false,
+  saveUninitialized: false,
+});
+
+app.use(sessionMiddleware);
+
+// html stuff
+app.use(express.static('public', { extensions: ['html'] }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public')); // delet
+
+app.use(express.json());
+
+// endpoints
+app.post('/users', registerUser); // Create Account
+app.post('/api/login', logIn); // Log in to an account
+app.post('/api/piece', createPiece);
+app.get('/api/piece/:pieceId', getPieceData);
 
 app.listen(PORT, () => {
-  // console.log(`listsening on port ${PORT}`);
+  console.log(`listsening at http://localhost:${PORT}`);
 });
+// test
 
 console.log('Chess program started.');
 const myChessBoard = new ChessTemplate();
-// console.log(myChessBoard);
 
 // Testing Point2D methods
 
@@ -19,26 +56,3 @@ const myChessBoard = new ChessTemplate();
 // const index: number | undefined = pointTest.convertToIndex();
 
 // console.log(`The index of Point (4, 5) is ${index}`);
-
-// const moveGood: number = 1; // sential, if check move makes a vaild move return 1; otherwise the player no longer wishes to play so return 0 and end loop and code
-// 0 = quit
-// 1 = bad move
-// 2 = good move
-// game loop
-
-/*
-do{
-    while(moveGood == 1){
-      moveGood = 0;
-    }
-    if(moveGood != 0){
-
-    }
-    else{
-        console.log("thanks for playing! Ending program.")
-    }
-
-}while(moveGood != 0) // not 0 = move made / 0 = players wish to stop program
-*/
-
-// console.log('Thanks for playing! Ending the program.');
