@@ -11,9 +11,9 @@ async function registerUser(req: Request, res: Response): Promise<void> {
 
   try {
     // IMPORTANT: Store the `passwordHash` and NOT the plaintext password
-    // const newUser = await addUser(email, userName, passwordHash);
-    await addUser(email, userName, passwordHash);
-    // console.log(newUser);
+    const newUser = await addUser(email, userName, passwordHash);
+    // await addUser(email, userName, passwordHash);
+    console.log(newUser);
     // res.sendStatus(201);
     res.render('login.ejs', {});
   } catch (err) {
@@ -26,9 +26,9 @@ async function registerUser(req: Request, res: Response): Promise<void> {
 async function logIn(req: Request, res: Response): Promise<void> {
   const { email, password } = req.body as LoginRequest;
 
-  console.log(email);
+  console.log(`Email: ${email}`);
   const user = await getUserByEmail(email);
-  console.log(user);
+  console.log(`User: ${user}`);
 
   // Check if the user account exists for that email
   if (!user) {

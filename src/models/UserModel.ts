@@ -20,10 +20,9 @@ async function addUser(email: string, userName: string, passwordHash: string): P
 }
 
 async function getUserByEmail(email: string): Promise<User | null> {
-  const user = await userRepository.findOne({
-    where: { email },
-    // relations: ['sets', 'leaderBoards', 'customPieces'],
-  });
+  const user = await userRepository.findOne({ where: { email } });
+  console.log(`User in getByEmail: ${user}`);
+  // relations: ['sets', 'leaderBoards', 'customPieces'],
   return user;
 }
 
