@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Relation, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  Relation,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { User } from './User';
 import { LeaderBoard } from './LeaderBoard';
 import { CustomPiece } from './CustomPiece';
@@ -11,11 +19,11 @@ export class Set {
   @Column({ unique: false })
   setName: string;
 
-  @ManyToOne(() => User, (user) => user.set, { cascade: ['insert', 'update'] })
+  @ManyToOne(() => User, (user) => user.sets, { cascade: ['insert', 'update'] })
   user: Relation<User>;
 
-  @OneToMany(() => LeaderBoard, (leaderBoard) => leaderBoard.set, { cascade: ['insert', 'update'] })
-  leaderBoards: Relation<LeaderBoard>[];
+  @OneToOne(() => LeaderBoard, (leaderBoard) => leaderBoard.set, { cascade: ['insert', 'update'] })
+  leaderBoard: Relation<LeaderBoard>;
 
   @OneToMany(() => CustomPiece, (customPiece) => customPiece.set, { cascade: ['insert', 'update'] })
   customPieces: Relation<CustomPiece>[];

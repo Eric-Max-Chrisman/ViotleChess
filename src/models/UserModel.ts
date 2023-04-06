@@ -20,11 +20,22 @@ async function addUser(email: string, userName: string, passwordHash: string): P
 }
 
 async function getUserByEmail(email: string): Promise<User | null> {
-  return await userRepository.findOne({ where: { email } });
+  const user = await userRepository.findOne({
+    where: { email },
+    // relations: ['sets', 'leaderBoards', 'customPieces'],
+  });
+  return user;
 }
 
 async function getUserById(userId: string): Promise<User | null> {
   return await userRepository.findOne({ where: { userId } });
+}
+
+async function getUserByUsername(userName: string): Promise<User | null> {
+  return await userRepository.findOne({
+    where: { userName },
+    select: ['userId', 'userName', 'email'],
+  });
 }
 
 // check to see if works
@@ -39,4 +50,4 @@ async function updateEmailAdress(userId: string, email: string): Promise<User | 
   return await getUserById(userId);
 }
 
-export { addUser, getUserByEmail, getUserById, updateEmailAdress };
+export { addUser, getUserByEmail, getUserById, updateEmailAdress, getUserByUsername };

@@ -1,15 +1,16 @@
 // index.ts (Eric)
 import dotenv from 'dotenv';
-import express, { Express, NextFunction } from 'express';
+import express, { Express /* NextFunction */ } from 'express';
 import './config';
 import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
-import { Server, Socket } from 'socket.io';
+// import { Server, Socket } from 'socket.io';
 
-import { ChessTemplate } from './types/ChessTemplate';
+// import { ChessTemplate } from './types/ChessTemplate';
 import { registerUser, logIn } from './controllers/UserController';
 import { createPiece, getPieceData } from './controllers/PieceController';
+import { getUserByUsername } from './models/UserModel';
 
 dotenv.config();
 const app: Express = express();
@@ -30,9 +31,9 @@ const sessionMiddleware = session({
 app.use(sessionMiddleware);
 
 // html stuff
-// app.use(express.static('public', { extensions: ['html'] }));
+app.use(express.static('public', { extensions: ['html'] }));
 app.use(express.urlencoded({ extended: false }));
-// app.use(express.static('public')); // delete
+app.use(express.static('public'));
 
 app.use(express.json());
 
@@ -41,9 +42,22 @@ app.set('view engine', 'ejs');
 
 // endpoints to webpages
 app.get('/', (req, res) => {
-  res.render('index.ejs', {});
+  res.render('login.ejs', {});
 });
+app.get('/createUser', (req, res) => {
+  res.render('createUser.ejs', {});
+});
+app.get('/login', (req, res) => {
+  res.render('login.ejs', {});
+});
+app.get('/:username', (req, res) => {
+  const { userName } = req.body as UsernameParam;
+  const thisUser = getUserByUsername(userName);
+  res.render('userPage.ejs', { thisUser });
+});
+// app.get('/chessBoard', checkIfInGame); chessBoard should olny be accessed if in game
 
+// function endpoints
 app.post('/users', registerUser); // Create Account
 app.post('/login', logIn); // Log in to an account
 app.post('/piece', createPiece);
@@ -54,8 +68,8 @@ app.listen(PORT, () => {
 });
 // test
 
-console.log('Chess program started.');
-const myChessBoard = new ChessTemplate();
+// console.log('Chess program started.');
+// const myChessBoard = new ChessTemplate();
 
 // Testing Point2D methods
 

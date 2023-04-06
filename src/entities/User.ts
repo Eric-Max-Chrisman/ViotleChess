@@ -27,12 +27,12 @@ export class User {
   passwordHash: string;
 
   @OneToMany(() => Set, (set) => set.user, { cascade: ['insert', 'update'] })
-  set: Relation<Set>;
+  sets: Relation<Set>[];
 
-  @ManyToOne(() => LeaderBoard, (leaderBoard) => leaderBoard.users, {
+  @ManyToMany(() => LeaderBoard, (leaderBoard) => leaderBoard.users, {
     cascade: ['insert', 'update'],
   })
-  leaderBoards: Relation<LeaderBoard>;
+  leaderBoards: Relation<LeaderBoard>[];
 
   @ManyToMany(() => CustomPiece, (customPieces) => customPieces.users, {
     cascade: ['insert', 'update'],

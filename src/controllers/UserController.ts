@@ -11,9 +11,11 @@ async function registerUser(req: Request, res: Response): Promise<void> {
 
   try {
     // IMPORTANT: Store the `passwordHash` and NOT the plaintext password
-    const newUser = await addUser(email, userName, passwordHash);
-    console.log(newUser);
-    res.sendStatus(201);
+    // const newUser = await addUser(email, userName, passwordHash);
+    await addUser(email, userName, passwordHash);
+    // console.log(newUser);
+    // res.sendStatus(201);
+    res.render('login.ejs', {});
   } catch (err) {
     console.error(err);
     const databaseErrorMessage = parseDatabaseError(err);
@@ -22,13 +24,17 @@ async function registerUser(req: Request, res: Response): Promise<void> {
 }
 
 async function logIn(req: Request, res: Response): Promise<void> {
-  const { email, password } = req.body as AuthRequest;
+  const { email, password } = req.body as LoginRequest;
 
+  console.log(email);
   const user = await getUserByEmail(email);
+  console.log(user);
 
   // Check if the user account exists for that email
   if (!user) {
-    res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
+    const errorMes: string = "User Email Doesn't Exist";
+    res.render('error.ejs', { errorMes });
+    // res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
     return;
   }
 
@@ -36,14 +42,18 @@ async function logIn(req: Request, res: Response): Promise<void> {
   const { passwordHash } = user;
 
   // If the password does not match
+
   if (!(await argon2.verify(passwordHash, password))) {
+    /*
     if (!req.session.logInAttempts) {
       // req.sessions isnt implemented properly yet. Something wierd with it not finding my d.ts file.
       req.session.logInAttempts = 1; // Initialize to zero if it doesnt exist yet
     } else {
       req.session.logInAttempts += 1; // Increment by one
     }
-
+    */
+    const errorMes: string = "User Password doesn't match";
+    res.render('error.ejs', { errorMes });
     res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
     return;
   }
@@ -58,7 +68,8 @@ async function logIn(req: Request, res: Response): Promise<void> {
     email: user.email,
   };
   req.session.isLoggedIn = true;
-  res.sendStatus(200); // 200 OK
+  res.render(`/${user.userName}`);
+  // res.sendStatus(200); // 200 OK
 }
 
 async function updateUserEmail(req: Request, res: Response): Promise<void> {
