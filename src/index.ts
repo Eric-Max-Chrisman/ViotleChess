@@ -8,9 +8,8 @@ import connectSqlite3 from 'connect-sqlite3';
 // import { Server, Socket } from 'socket.io';
 
 // import { ChessTemplate } from './types/ChessTemplate';
-import { registerUser, logIn } from './controllers/UserController';
+import { registerUser, logIn, getUserWithUsername } from './controllers/UserController';
 import { createPiece, getPieceData } from './controllers/PieceController';
-import { getUserByUsername } from './models/UserModel';
 
 dotenv.config();
 const app: Express = express();
@@ -42,7 +41,7 @@ app.set('view engine', 'ejs');
 
 // endpoints to webpages
 app.get('/', (req, res) => {
-  res.render('login.ejs', {});
+  res.render('index.ejs', {});
 });
 app.get('/createUser', (req, res) => {
   res.render('createUser.ejs', {});
@@ -50,11 +49,7 @@ app.get('/createUser', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login.ejs', {});
 });
-app.get('/:username', (req, res) => {
-  const { userName } = req.body as UsernameParam;
-  const thisUser = getUserByUsername(userName);
-  res.render('userPage.ejs', { thisUser });
-});
+app.get('/:username', getUserWithUsername);
 // app.get('/chessBoard', checkIfInGame); chessBoard should olny be accessed if in game
 
 // function endpoints

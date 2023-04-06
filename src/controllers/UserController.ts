@@ -1,6 +1,12 @@
 import { Request, Response } from 'express';
 import argon2 from 'argon2';
-import { addUser, getUserByEmail, getUserById, updateEmailAdress } from '../models/UserModel';
+import {
+  addUser,
+  getUserByEmail,
+  getUserById,
+  updateEmailAdress,
+  getUserByUsername,
+} from '../models/UserModel';
 import { parseDatabaseError } from '../utils/db-utils';
 
 async function registerUser(req: Request, res: Response): Promise<void> {
@@ -68,7 +74,7 @@ async function logIn(req: Request, res: Response): Promise<void> {
     email: user.email,
   };
   req.session.isLoggedIn = true;
-  res.render(`/${user.userName}`);
+  res.redirect(`/${user.userName}`);
   // res.sendStatus(200); // 200 OK
 }
 
@@ -109,4 +115,19 @@ async function updateUserEmail(req: Request, res: Response): Promise<void> {
   res.sendStatus(200);
 }
 
-export { registerUser, logIn, updateUserEmail };
+// not intended for clients to use
+// for other functions
+async function getUserWithUsername(req: Request, res: Response): Promise<void> {
+  const { userName } = req.body as UsernameParam;
+  const tempUser = await getUserByUsername(userName);
+
+  if (!tempUser) {
+    const errorMes = "User Doesn't exist";
+    res.render('error', { errorMes });
+    return;
+  }
+
+  res.render('userPage.ejs', { tempUser });
+}
+
+export { registerUser, logIn, updateUserEmail, getUserWithUsername };
