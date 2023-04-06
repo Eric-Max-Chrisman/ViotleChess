@@ -1,12 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToOne,
-  Relation,
-  ManyToMany,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Relation, ManyToMany } from 'typeorm';
 
 import { LeaderBoard } from './LeaderBoard';
 import { Set } from './Set';
