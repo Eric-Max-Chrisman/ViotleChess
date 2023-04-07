@@ -10,6 +10,7 @@ import connectSqlite3 from 'connect-sqlite3';
 // import { ChessTemplate } from './types/ChessTemplate';
 import { registerUser, logIn, getUserWithUsername } from './controllers/UserController';
 import { createPiece, getPieceData } from './controllers/PieceController';
+import { loadChessPage } from './controllers/chessController'
 
 dotenv.config();
 const app: Express = express();
@@ -49,8 +50,9 @@ app.get('/createUser', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login.ejs', {});
 });
-app.get('/:userName', getUserWithUsername);
-// app.get('/chessBoard', checkIfInGame); chessBoard should olny be accessed if in game
+app.get('/chess', loadChessPage);
+app.get('/users/:userName', getUserWithUsername);
+
 
 // function endpoints
 app.post('/users', registerUser); // Create Account
