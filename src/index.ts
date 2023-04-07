@@ -49,7 +49,7 @@ app.get('/createUser', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login.ejs', {});
 });
-app.get('/:username', getUserWithUsername);
+app.get('/:userName', getUserWithUsername);
 // app.get('/chessBoard', checkIfInGame); chessBoard should olny be accessed if in game
 
 // function endpoints

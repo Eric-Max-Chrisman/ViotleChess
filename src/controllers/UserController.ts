@@ -34,7 +34,8 @@ async function logIn(req: Request, res: Response): Promise<void> {
 
   console.log(`Email: ${email}`);
   const user = await getUserByEmail(email);
-  console.log(`User: ${user}`);
+  console.log(`User: ${user.email}`);
+  console.log(`Username: ${user.userName}`);
 
   // Check if the user account exists for that email
   if (!user) {
@@ -118,7 +119,7 @@ async function updateUserEmail(req: Request, res: Response): Promise<void> {
 // not intended for clients to use
 // for other functions
 async function getUserWithUsername(req: Request, res: Response): Promise<void> {
-  const { userName } = req.body as UsernameParam;
+  const { userName } = req.params as UsernameParam;
   const tempUser = await getUserByUsername(userName);
 
   if (!tempUser) {
