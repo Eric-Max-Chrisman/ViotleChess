@@ -10,7 +10,7 @@ import connectSqlite3 from 'connect-sqlite3';
 // import { ChessTemplate } from './types/ChessTemplate';
 import { registerUser, logIn, getUserWithUsername } from './controllers/UserController';
 import { createPiece, getPieceData } from './controllers/PieceController';
-import { loadChessPage } from './controllers/chessController'
+import { loadChessPage } from './controllers/chessController';
 
 dotenv.config();
 const app: Express = express();
@@ -52,7 +52,6 @@ app.get('/login', (req, res) => {
 });
 app.get('/chess', loadChessPage);
 app.get('/users/:userName', getUserWithUsername);
-
 
 // function endpoints
 app.post('/users', registerUser); // Create Account
