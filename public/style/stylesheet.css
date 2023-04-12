@@ -54,12 +54,30 @@ h1.main{
 	color:Yellow;
 	}
 
+h1{
+	background-color:black;
+	text-align:center;
+	color:Yellow;
+}
+
+h2{
+	background-color:black;
+	text-align:center;
+	color:Yellow;
+}
+
+h3{
+	background-color:black;
+	text-align:center;
+	color:Yellow;
+}
+
 h1.personal{
 	text-align:center;
 	color:yellow;
 	}
 
-p.Essay{
+p.eassy{
 	color:white;
 	font-size:15px;
 	text-align:justify;
@@ -72,6 +90,15 @@ p.Essay{
 	border-width:5px 5px 5px 5px; /*top,right,bottom,left*/
 	border-width: 5px 5px 5px 5px;
 	}
+
+form{
+	text-align: center;
+	color: yellow;
+	background-color: black;
+	margin-left:30%;
+	margin-right:30%;
+	
+}
 
 p{
 	text-align:center;

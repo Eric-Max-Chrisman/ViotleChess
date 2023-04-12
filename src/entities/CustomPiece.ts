@@ -13,6 +13,7 @@ import {
 import { Point2D } from './Point2D';
 import { User } from './User';
 import { Set } from './Set';
+import { Move } from './Moves';
 
 @Entity()
 export class CustomPiece {
@@ -63,4 +64,7 @@ export class CustomPiece {
 
   @ManyToOne(() => Set, (set) => set.customPieces, { cascade: ['insert', 'update'] })
   set: Relation<Set>;
+
+  @OneToMany(() => Move, (moves) => moves.customPiece, { cascade: ['insert', 'update'] })
+  moves: Relation<Move>[];
 }
