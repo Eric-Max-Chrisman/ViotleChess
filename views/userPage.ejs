@@ -12,7 +12,8 @@
   <p>Add javascript to display user's data if signed in</p>
   <p>If not sign in, the page should display messesage telling the user to make a account and provide a link to the register page and login page</p>
   <p><%= tempUser.userName%></p>
-  <a href = "chessBoard.html";>chess board</a>
+  <% var chessBoardString = "chess" %>
+  <a href = "/chessBoard/<%= chessBoardString%>";>chess board</a>
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>
     <a href = "/createUser">Register Account</a>
