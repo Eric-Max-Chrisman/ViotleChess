@@ -20,11 +20,11 @@ export class CustomPiece {
   @PrimaryGeneratedColumn('uuid')
   pieceId: string;
 
-  constructor(pieceName: string, start: Point2D, moveSet: Array<Point2D>) {
-    this.pieceName = pieceName;
-    this.point = start;
-    this.point2 = moveSet;
-  }
+  // constructor(pieceName: string, start: Point2D, moveSet: Array<Point2D>) {
+  //   this.pieceName = pieceName;
+  //   this.point = start;
+  //   this.point2 = moveSet;
+  // }
 
   @Column({ unique: false })
   pieceName: string;
@@ -33,10 +33,9 @@ export class CustomPiece {
   pieceColor: number;
 
   // Possibly convert this to OneToOne Relation.
-  @OneToOne(() => Point2D, (point) => point.customPiece, {
-    cascade: ['insert', 'update'],
-  }) // Use this as starting position
-  point: Relation<Point2D>;
+  // replaces the starting positions of defalt piece. ex if replaces === 'pawn', the custom piece will start in all places a pawn would.
+  @Column()
+  replaces: string;
 
   // This will probably need to be One to Many on this side.
   @OneToMany(() => Point2D, (point2) => point2.customPiece2, { cascade: ['insert', 'update'] })
@@ -55,7 +54,6 @@ export class CustomPiece {
   // @Column({ unique: false })
   // piecePlacements: Point2D[];
 
-  // Replace this with relation to User?
   @ManyToMany(() => User, (users) => users.customPieces, {
     cascade: ['insert', 'update'],
   })

@@ -9,7 +9,7 @@ import connectSqlite3 from 'connect-sqlite3';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import { registerUser, logIn, getUserWithUsername } from './controllers/UserController';
-import { createPiece, getPieceData } from './controllers/PieceController';
+import { createPiece, getPieceData, generateMoves } from './controllers/PieceController';
 import { loadChessPage } from './controllers/chessController';
 
 dotenv.config();
@@ -50,14 +50,20 @@ app.get('/createUser', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login.ejs', {});
 });
+app.get('/createPiece', (req, res) => {
+  res.render('createPiece.ejs', {});
+});
 app.get('/chess', loadChessPage);
 app.get('/users/:userName', getUserWithUsername);
 
 // function endpoints
 app.post('/users', registerUser); // Create Account
 app.post('/login', logIn); // Log in to an account
-app.post('/piece', createPiece);
+app.post('/createPiece', createPiece);
+app.get('/piece');
 app.get('/piece/:pieceId', getPieceData);
+
+app.post('/piece/:pieceId', generateMoves);
 
 app.listen(PORT, () => {
   console.log(`listsening at http://localhost:${PORT}`);

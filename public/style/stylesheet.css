@@ -1,9 +1,9 @@
-body{
-	background-color:darkred;
+body {
+  background-color: darkred;
 
-	font-family: Verdana, Arial, sans-serif;
+  font-family: Verdana, Arial, sans-serif;
 
-	/*
+  /*
 	background-image:url("darkredbackground.png");
 	background-repeat:repeat-y;
 	background-position: left top;
@@ -12,149 +12,149 @@ body{
 	background-repeat:repeat-y;
 	background-position:right top;
 	*/
-
-	}
-
-body.unscrollable{
-	background-color:darkred;
-
-	font-family:Verdana, Arial, sans-serif;
-
-	overflow-y:hidden;
 }
 
-table{
-	border: 3px solid yellow;
-	color: yellow;
-	margin-left: auto;
-	margin-right:auto;
-	margin-top:auto;
-	margin-bottom:auto;
-	font-size:25px;
-	}
+body.unscrollable {
+  background-color: darkred;
 
-tr{
-	border: 1px solid yellow;
-	color: yellow
-	}
+  font-family: Verdana, Arial, sans-serif;
 
-th{
-	border: 1px solid yellow;
-	background-color:black;
-	color: white;
-	}
-
-body{
-	background-color:darkred;
-	}
-
-h1.main{
-    background-color:black;
-	text-align:center;
-	color:Yellow;
-	}
-
-h1{
-	background-color:black;
-	text-align:center;
-	color:Yellow;
+  overflow-y: hidden;
 }
 
-h2{
-	background-color:black;
-	text-align:center;
-	color:Yellow;
+table {
+  border: 3px solid yellow;
+  color: yellow;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 25px;
 }
 
-h3{
-	background-color:black;
-	text-align:center;
-	color:Yellow;
+tr {
+  border: 1px solid yellow;
+  color: yellow;
 }
 
-h1.personal{
-	text-align:center;
-	color:yellow;
-	}
-
-p.eassy{
-	color:white;
-	font-size:15px;
-	text-align:justify;
-	border: 1px solid;
-	background-color:black;
-	margin-left:30%;
-	margin-right:30%;
-	margin-top:5%;
-	border-color:yellow;
-	border-width:5px 5px 5px 5px; /*top,right,bottom,left*/
-	border-width: 5px 5px 5px 5px;
-	}
-
-form{
-	text-align: center;
-	color: yellow;
-	background-color: black;
-	margin-left:30%;
-	margin-right:30%;
-	
+th {
+  border: 1px solid yellow;
+  background-color: black;
+  color: white;
 }
 
-p{
-	text-align:center;
-	color:yellow;
-	}
+body {
+  background-color: darkred;
+}
 
-img.main{
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:auto;
-	margin-bottom:auto;
-	width:50%;
-	height:65%;
-	}
+h1.main {
+  background-color: black;
+  text-align: center;
+  color: Yellow;
+}
 
-img.Personal{
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
-	width:50%;
-	height:70%
-	}
+h1 {
+  background-color: black;
+  text-align: center;
+  color: Yellow;
+}
 
-img{
-	display:block;
-	margin-left:auto;
-	margin-right:auto;
-	width:10%;
-	height:10%;
-	}
+h2 {
+  background-color: black;
+  text-align: center;
+  color: Yellow;
+}
+
+h3 {
+  background-color: black;
+  text-align: center;
+  color: Yellow;
+}
+
+h1.personal {
+  text-align: center;
+  color: yellow;
+}
+
+p.eassy {
+  color: white;
+  font-size: 15px;
+  text-align: justify;
+  border: 1px solid;
+  background-color: black;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 5%;
+  border-color: yellow;
+  border-width: 5px 5px 5px 5px; /*top,right,bottom,left*/
+  border-width: 5px 5px 5px 5px;
+}
+
+form {
+  vertical-align: center;
+  text-align: center;
+  color: yellow;
+  background-color: black;
+  margin-left: 30%;
+  margin-right: 30%;
+  width: 600px;
+}
+
+p {
+  text-align: center;
+  color: yellow;
+}
+
+img.main {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 50%;
+  height: 65%;
+}
+
+img.Personal {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 70%;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+  height: 10%;
+}
 
 .navbar {
-	overflow: hidden;
-	background-color: black;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	}
+  overflow: hidden;
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 
-.navbar a{
-	float: left;
-	display: block;
-	color: yellow;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 17px;
-	}
+.navbar a {
+  float: left;
+  display: block;
+  color: yellow;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
 
-.navbar a:hover{
-	background-color: white;
-	color: black;
-	}
+.navbar a:hover {
+  background-color: white;
+  color: black;
+}
 
-.navbar a.active{
-	background-color:yellow;
-	color: black;
-	}
+.navbar a.active {
+  background-color: yellow;
+  color: black;
+}

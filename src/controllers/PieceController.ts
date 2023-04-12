@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { addPiece, getPieceByID } from '../models/PieceModels';
+import { addPiece, getPieceByID, interperateMoves } from '../models/PieceModels';
 import { parseDatabaseError } from '../utils/db-utils';
 
 async function createPiece(req: Request, res: Response): Promise<void> {
-  const { pieceName, pieceColor } = req.body as NewPieceRequest;
+  const { pieceName, replaces, moves } = req.body as NewPieceRequest;
 
   try {
-    const newPiece = await addPiece(pieceName, pieceColor);
+    const newPiece = await addPiece(pieceName, replaces, moves);
     console.log(newPiece);
     res.sendStatus(201);
   } catch (err) {
@@ -28,4 +28,17 @@ async function getPieceData(req: Request, res: Response): Promise<void> {
   res.sendStatus(200);
 }
 
-export { createPiece, getPieceData };
+async function generateMoves(req: Request, res: Response): Promise<void> {
+  const { moves, currentPosition } = req.body as MovePack;
+
+  const validPoints = await interperateMoves(moves, currentPosition);
+
+  // debug
+  for (const point of validPoints) {
+    console.log(`(${point.getX()}, ${point.getY()})`);
+  }
+
+  res.sendStatus(201).json(validPoints);
+}
+
+export { createPiece, getPieceData, generateMoves };
