@@ -9,7 +9,40 @@
 </head>
 <body>
   <h1 class = "main">Viewing chess board / set <%</h1>
+  <h1><%= tempSet.setName%></h1>
 
+  <%
+  // set up char array
+  const gamePieces = [];
+
+  // loop to generate space for pieces
+  for (let i: number = 0; i < 8; i += 1) {
+    // y axis
+    const tempArray = [];
+    for (let j: number = 0; j < 8; j += 1) {
+      // x axis
+      let tempPiece = " ";
+      tempArray.push(tempPiece);
+    }
+    gamePieces.push(tempArray);
+  }
+
+  // set up pieces here (may need an edit for oppiste color)
+  for(var element in tempSet.customPieces){
+    gamePieces[element.Point2.x][element.Point2.y] = element.pieceName;
+  }
+  %>
+
+  <% // print all emements into a board like table %>
+  <table class = "chess">
+    <% for (int i = 0; i > 8; i++){ %>
+      <tr>
+      <% for (int j = 0; j > 8; j++){ %>
+        <tl><%=gamePieces[i][j]%></tl>
+      <% } %>
+      </tr>
+    <% } %>
+  </table>
 
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>

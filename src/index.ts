@@ -53,7 +53,7 @@ app.get('/login', (req, res) => {
 app.get('/createPiece', (req, res) => {
   res.render('createPiece.ejs', {});
 });
-app.get('/chess', loadChessPage);
+app.get('/chess/:setName', loadChessPage);
 app.get('/users/:userName', getUserWithUsername);
 
 // function endpoints
