@@ -23,3 +23,7 @@ type UserIdParam = {
 type UsernameParam = {
   userName: string;
 };
+
+type SetNameTestParam = {
+  setName: string;
+};
