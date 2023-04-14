@@ -62,6 +62,7 @@ app.post('/login', logIn); // Log in to an account
 app.post('/createPiece', createPiece);
 app.get('/piece');
 app.get('/piece/:pieceId', getPieceData);
+app.post('/:pieceId/move', addMove);
 
 app.post('/piece/:pieceId', generateMoves);
 

@@ -72,4 +72,19 @@ async function interperateMoves(moves: Move[], currentPosition: Point2D): Promis
   return validPoints;
 }
 
+async function addMove(
+  x: number,
+  y: number,
+  repeating: boolean,
+  special: string,
+  piece: CustomPiece
+): Promise<void> {
+  // make a new move
+  const newMove = new Move();
+  newMove.moveX = x;
+  newMove.moveY = y;
+  newMove.repeating = repeating;
+  newMove.special = special;
+}
+
 export { addPiece, getPieceByID, interperateMoves };
