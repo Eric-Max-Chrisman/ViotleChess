@@ -1,5 +1,5 @@
-// import { Move } from '../entities/Moves';
-// import { Point2D } from '../entities/Point2D';
+type Move = import('../entities/Moves').Move;
+type Point2D = import('../entities/Point2D').Point2D;
 
 type NewPieceRequest = {
   pieceName: string;
