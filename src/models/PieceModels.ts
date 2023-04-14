@@ -5,13 +5,13 @@ import { Point2D } from '../entities/Point2D';
 
 const pieceRepository = AppDataSource.getRepository(CustomPiece);
 
-async function addPiece(pieceName: string, replaces: string, moves: Move[]): Promise<CustomPiece> {
+async function addPiece(pieceName: string, replaces: string, userId: string): Promise<CustomPiece> {
   // this will eventually also take points to move to as a parameter
   // Create the new user object
   let newPiece = new CustomPiece();
   newPiece.pieceName = pieceName;
   newPiece.replaces = replaces;
-  newPiece.moves = moves;
+  newPiece.owner = userId;
 
   // Then save it to the database
   // NOTES: We reassign to `newPiece` so we can access

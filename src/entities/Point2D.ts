@@ -10,8 +10,13 @@ class Point2D {
   @Column()
   private y: number;
 
-  @OneToOne(() => CustomPiece, (customPiece) => customPiece.point) // Use this as starting position
-  customPiece: Relation<CustomPiece>;
+  // @OneToOne(() => CustomPiece, (customPiece) => customPiece.validPoints) // Use this as starting position
+  // customPiece: Relation<CustomPiece>;
+
+  @ManyToOne(() => CustomPiece, (customPiece) => customPiece.validPoints, {
+    cascade: ['insert', 'update'],
+  })
+  customPiece: Relation<CustomPiece>; // Relation handles moves
 
   @ManyToOne(() => CustomPiece, (customPiece2) => customPiece2.users, {
     cascade: ['insert', 'update'],

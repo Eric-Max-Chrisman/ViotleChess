@@ -5,7 +5,6 @@ import {
   ManyToMany,
   Relation,
   JoinTable,
-  OneToOne,
   OneToMany,
   ManyToOne,
 } from 'typeorm';
@@ -29,7 +28,7 @@ export class CustomPiece {
   @Column({ unique: false })
   pieceName: string;
 
-  @Column({ unique: false })
+  @Column({ unique: false, nullable: true })
   pieceColor: number;
 
   // Possibly convert this to OneToOne Relation.
@@ -37,9 +36,14 @@ export class CustomPiece {
   @Column()
   replaces: string;
 
+  // @Column({ unique: false })
+  owner: string; // owner's userId;
+
   // This will probably need to be One to Many on this side.
-  @OneToMany(() => Point2D, (point2) => point2.customPiece2, { cascade: ['insert', 'update'] })
-  point2: Relation<Point2D>[];
+  @OneToMany(() => Point2D, (validPoints) => validPoints.customPiece2, {
+    cascade: ['insert', 'update'],
+  })
+  validPoints: Relation<Point2D>[];
 
   currentPosition: Point2D;
 
@@ -59,6 +63,12 @@ export class CustomPiece {
   })
   @JoinTable()
   users: Relation<CustomPiece>[];
+
+  // will be just sending userId for this relations original use. Keeping comment in case I need it again
+  // @ManyToOne(() => User, (owner) => owner.ownedPieces, {
+  //   cascade: ['insert', 'update'],
+  // })
+  // owner: Relation<User>;
 
   @ManyToOne(() => Set, (set) => set.customPieces, { cascade: ['insert', 'update'] })
   set: Relation<Set>;

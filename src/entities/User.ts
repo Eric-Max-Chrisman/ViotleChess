@@ -30,4 +30,9 @@ export class User {
     cascade: ['insert', 'update'],
   })
   customPieces: Relation<User>[];
+
+  // @OneToMany(() => CustomPiece, (ownedPiece) => ownedPiece.owner, {
+  //   cascade: ['insert', 'update'],
+  // })
+  // ownedPieces: Relation<CustomPiece>[];
 }

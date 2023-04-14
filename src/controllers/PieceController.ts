@@ -3,10 +3,11 @@ import { addPiece, getPieceByID, interperateMoves } from '../models/PieceModels'
 import { parseDatabaseError } from '../utils/db-utils';
 
 async function createPiece(req: Request, res: Response): Promise<void> {
-  const { pieceName, replaces, moves } = req.body as NewPieceRequest;
+  const { pieceName, replaces } = req.body as NewPieceRequest;
+  const { userId } = req.session.authenticatedUser as UserIdParam;
 
   try {
-    const newPiece = await addPiece(pieceName, replaces, moves);
+    const newPiece = await addPiece(pieceName, replaces, userId);
     console.log(newPiece);
     res.sendStatus(201);
   } catch (err) {
@@ -25,7 +26,7 @@ async function getPieceData(req: Request, res: Response): Promise<void> {
     return;
   }
   console.log(piece);
-  res.sendStatus(200);
+  res.json(piece);
 }
 
 async function generateMoves(req: Request, res: Response): Promise<void> {
