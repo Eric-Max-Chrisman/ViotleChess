@@ -3,11 +3,11 @@
 import {
   Entity,
   Column,
-  ManyToMany,
+  // ManyToMany,
   Relation,
-  JoinTable,
-  OneToOne,
-  OneToMany,
+  // JoinTable,
+  // OneToOne,
+  // OneToMany,
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';

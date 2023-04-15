@@ -38,7 +38,7 @@ async function interperateMoves(moves: Move[], currentPosition: Point2D): Promis
 
       validPoints.push(curr);
     } else {
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 8; i += 1) {
         const curr: Point2D = currentPosition;
         curr.setX(curr.getX() + move.moveX);
         curr.setY(curr.getY() + move.moveY);
@@ -87,4 +87,4 @@ async function addMove(
   newMove.special = special;
 }
 
-export { addPiece, getPieceByID, interperateMoves };
+export { addPiece, getPieceByID, interperateMoves, addMove };

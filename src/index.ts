@@ -62,7 +62,7 @@ app.post('/login', logIn); // Log in to an account
 app.post('/createPiece', createPiece);
 app.get('/piece');
 app.get('/piece/:pieceId', getPieceData);
-app.post('/:pieceId/move', addMove);
+// app.post('/:pieceId/move', addMove); // You need to add a controller function for this inorder to pass a parameter into addMove
 
 app.post('/piece/:pieceId', generateMoves);
 

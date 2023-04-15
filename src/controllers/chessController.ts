@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getSetByName } from '../models/setModel';
+import { getSetByName } from '../models/SetModel';
 
 async function loadChessPage(req: Request, res: Response): Promise<void> {
   // get set name

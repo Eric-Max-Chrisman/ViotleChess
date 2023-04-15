@@ -1,5 +1,5 @@
 // ToDo
-import { Entity, Column, PrimaryColumn, Relation, OneToOne, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryColumn, Relation, /* OneToOne, */ ManyToOne } from 'typeorm';
 import { CustomPiece } from './CustomPiece';
 
 @Entity()
