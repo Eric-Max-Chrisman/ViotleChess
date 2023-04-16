@@ -78,13 +78,16 @@ async function addMove(
   repeating: boolean,
   special: string,
   piece: CustomPiece
-): Promise<void> {
+): Promise<CustomPiece> {
   // make a new move
   const newMove = new Move();
   newMove.moveX = x;
   newMove.moveY = y;
   newMove.repeating = repeating;
   newMove.special = special;
+
+  piece.moves.push(newMove);
+  return await pieceRepository.save(piece);
 }
 
 export { addPiece, getPieceByID, interperateMoves, addMove };

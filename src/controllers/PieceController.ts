@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { addPiece, getPieceByID, interperateMoves } from '../models/PieceModels';
+import { addPiece, getPieceByID, interperateMoves, addMove } from '../models/PieceModels';
 import { parseDatabaseError } from '../utils/db-utils';
 
 async function createPiece(req: Request, res: Response): Promise<void> {
@@ -42,4 +42,29 @@ async function generateMoves(req: Request, res: Response): Promise<void> {
   res.sendStatus(201).json(validPoints);
 }
 
-export { createPiece, getPieceData, generateMoves };
+async function addNewMove(req: Request, res: Response): Promise<void>{
+  const { x, y, repeating, special} = req.body as NewMoveReq;
+  const { pieceId } = req.params as PieceId;
+  const userId = req.session.authenticatedUser.userId;
+  let piece = await getPieceByID(pieceId);
+
+  if(!req.session.isLoggedIn){
+    res.redirect('/login'); // send user to login to add moves
+    return;
+  }
+
+  if(userId !== piece.owner ){
+    res.sendStatus(403); // users cannot edit pieces they dont own
+    return;
+  }
+
+
+  piece = await addMove(x, y, repeating, special, piece);
+  console.log(piece);
+
+  // replace with redirect to Custom Piece viewing page
+  res.sendStatus(201);
+
+}
+
+export { createPiece, getPieceData, generateMoves, addNewMove };
