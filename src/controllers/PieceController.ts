@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { addPiece, getPieceByID, interperateMoves, addMove } from '../models/PieceModels';
 import { parseDatabaseError } from '../utils/db-utils';
+import { Point2D } from '../entities/Point2D';
 
 async function createPiece(req: Request, res: Response): Promise<void> {
   const { pieceName, replaces } = req.body as NewPieceRequest;
@@ -30,14 +31,9 @@ async function getPieceData(req: Request, res: Response): Promise<void> {
 }
 
 async function generateMoves(req: Request, res: Response): Promise<void> {
-  const { moves, currentPosition } = req.body as MovePack;
-
-  const validPoints = await interperateMoves(moves, currentPosition);
-
-  // debug
-  for (const point of validPoints) {
-    console.log(`(${point.getX()}, ${point.getY()})`);
-  }
+  const { pieceId } = req.params as PieceId;
+  const piece = await getPieceByID(pieceId);
+  const validPoints = await interperateMoves(piece);
 
   res.sendStatus(201).json(validPoints);
 }

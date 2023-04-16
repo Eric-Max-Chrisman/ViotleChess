@@ -5,10 +5,10 @@ import { CustomPiece } from './CustomPiece';
 @Entity()
 class Point2D {
   @PrimaryColumn()
-  private x: number;
+  x: number;
 
   @Column()
-  private y: number;
+  y: number;
 
   // @OneToOne(() => CustomPiece, (customPiece) => customPiece.validPoints) // Use this as starting position
   // customPiece: Relation<CustomPiece>;
@@ -22,27 +22,6 @@ class Point2D {
     cascade: ['insert', 'update'],
   })
   customPiece2: Relation<CustomPiece>[];
-
-  constructor(x = 0, y = 0) {
-    this.x = x;
-    this.y = y;
-  }
-
-  getX(): number {
-    return this.x;
-  }
-
-  getY(): number {
-    return this.y;
-  }
-
-  setX(newX: number): void {
-    this.x = newX;
-  }
-
-  setY(newY: number): void {
-    this.y = newY;
-  }
 }
 
 export { Point2D };

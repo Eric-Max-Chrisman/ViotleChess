@@ -9,14 +9,17 @@ import {
   // OneToOne,
   // OneToMany,
   ManyToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import { CustomPiece } from './CustomPiece';
 
 @Entity()
 export class Move {
-  @PrimaryColumn() // number of spots to move in X direction
+  @PrimaryGeneratedColumn('uuid')
+  moveId: string;
+
+  @Column() // number of spots to move in X direction
   moveX: number;
 
   @Column() // number of spots to move in Y direction

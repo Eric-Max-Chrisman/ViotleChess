@@ -4,7 +4,6 @@ import { Move } from '../entities/Moves';
 import { Point2D } from '../entities/Point2D';
 
 const pieceRepository = AppDataSource.getRepository(CustomPiece);
-
 async function addPiece(pieceName: string, replaces: string, userId: string): Promise<CustomPiece> {
   // Create the new user object
   let newPiece = new CustomPiece();
@@ -21,26 +20,31 @@ async function addPiece(pieceName: string, replaces: string, userId: string): Pr
 }
 
 async function getPieceByID(pieceId: string): Promise<CustomPiece | null> {
-  return await pieceRepository.findOne({ where: { pieceId } });
+  const piece = await pieceRepository
+    .createQueryBuilder('piece')
+    .leftJoinAndSelect('piece.moves', 'moves')
+    .where('piece.pieceId = :pieceId', { pieceId })
+    .getOne();
+  return piece;
 }
 
-async function interperateMoves(moves: Move[], currentPosition: Point2D): Promise<Point2D[]> {
+async function interperateMoves(piece: CustomPiece): Promise<CustomPiece> {
   // TODO
   // create an array of Point2D
   const validPoints: Point2D[] = [];
   // create a for loop that iterates over moves
-  for (const move of moves) {
+  for (const move of piece.moves) {
     if (!move.repeating) {
-      const curr: Point2D = currentPosition;
-      curr.setX(curr.getX() + move.moveX);
-      curr.setY(curr.getY() + move.moveY);
+      const curr: Point2D = piece.currentPosition;
+      curr.x += move.moveX;
+      curr.y += move.moveY;
 
       validPoints.push(curr);
     } else {
       for (let i = 0; i < 8; i += 1) {
-        const curr: Point2D = currentPosition;
-        curr.setX(curr.getX() + move.moveX);
-        curr.setY(curr.getY() + move.moveY);
+        const curr: Point2D = piece.currentPosition;
+        curr.x += move.moveX;
+        curr.y += move.moveY;
 
         validPoints.push(curr);
         move.moveX += move.moveX;
@@ -50,14 +54,14 @@ async function interperateMoves(moves: Move[], currentPosition: Point2D): Promis
       }
     }
     if (move.special === 'diagonalPawn') {
-      let curr: Point2D = currentPosition;
-      curr.setX(curr.getX() + 1);
-      curr.setY(curr.getY() + 1);
+      let curr: Point2D = piece.currentPosition;
+      curr.x += 1;
+      curr.y += 1;
 
       validPoints.push(curr);
-      curr = currentPosition;
-      curr.setX(curr.getX() - 1);
-      curr.setY(curr.getY() + 1);
+      curr = piece.currentPosition;
+      curr.x -= 1;
+      curr.y += 1;
 
       validPoints.push(curr);
     }
@@ -67,8 +71,9 @@ async function interperateMoves(moves: Move[], currentPosition: Point2D): Promis
   // add X to current.X and repeat for Y.
   // add new Point2D to array
 
+  piece.validPoints = validPoints;
   // if else block to read special and apply special moves
-  return validPoints;
+  return await pieceRepository.save(piece);
 }
 
 async function addMove(
@@ -86,7 +91,6 @@ async function addMove(
   newMove.special = special;
   newMove.customPiece = piece;
 
-  console.log(newMove);
   if (!piece.moves) {
     piece.moves = [newMove]; // error on this line is fine
   } else {
