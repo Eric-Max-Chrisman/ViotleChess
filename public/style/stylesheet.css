@@ -188,3 +188,7 @@ div.shortTextBox{
   border-color: yellow;
   border-width: 3px;
 }
+
+a.login{
+  color: rgb(255, 225, 0);
+}
