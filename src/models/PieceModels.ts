@@ -6,15 +6,11 @@ import { Point2D } from '../entities/Point2D';
 const pieceRepository = AppDataSource.getRepository(CustomPiece);
 
 async function addPiece(pieceName: string, replaces: string, userId: string): Promise<CustomPiece> {
-  // this will eventually also take points to move to as a parameter
   // Create the new user object
   let newPiece = new CustomPiece();
   newPiece.pieceName = pieceName;
   newPiece.replaces = replaces;
   newPiece.owner = userId;
-  newPiece.moves = [];
-  // newPiece.set = [];
-  newPiece.users = [];
 
   // Then save it to the database
   // NOTES: We reassign to `newPiece` so we can access
@@ -88,8 +84,15 @@ async function addMove(
   newMove.moveY = y;
   newMove.repeating = repeating;
   newMove.special = special;
+  newMove.customPiece = piece;
 
-  piece.moves.push(newMove);
+  console.log(newMove);
+  if (!piece.moves) {
+    piece.moves = [newMove]; // error on this line is fine
+  } else {
+    piece.moves.push(newMove);
+  }
+
   return await pieceRepository.save(piece);
 }
 
