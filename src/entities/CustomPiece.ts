@@ -36,7 +36,7 @@ export class CustomPiece {
   @Column()
   replaces: string;
 
-  // @Column({ unique: false })
+  @Column({ unique: false })
   owner: string; // owner's userId;
 
   // This will probably need to be One to Many on this side.
