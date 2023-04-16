@@ -7,9 +7,13 @@ const pieceRepository = AppDataSource.getRepository(CustomPiece);
 async function addPiece(pieceName: string, replaces: string, userId: string): Promise<CustomPiece> {
   // Create the new user object
   let newPiece = new CustomPiece();
+  const current = new Point2D();
+  current.x = 0;
+  current.y = 0;
   newPiece.pieceName = pieceName;
   newPiece.replaces = replaces;
   newPiece.owner = userId;
+  newPiece.currentPosition = current;
 
   // Then save it to the database
   // NOTES: We reassign to `newPiece` so we can access
@@ -33,6 +37,7 @@ async function interperateMoves(piece: CustomPiece): Promise<CustomPiece> {
   // create an array of Point2D
   const validPoints: Point2D[] = [];
   // create a for loop that iterates over moves
+  console.log(piece.currentPosition);
   for (const move of piece.moves) {
     if (!move.repeating) {
       const curr: Point2D = piece.currentPosition;

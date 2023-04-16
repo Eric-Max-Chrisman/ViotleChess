@@ -45,7 +45,8 @@ export class CustomPiece {
   })
   validPoints: Relation<Point2D>[];
 
-  currentPosition: Point2D;
+  @Column()
+  currentPosition: Point2D; // NEEDS TO BE A RELATION
 
   getCurrent(): Point2D {
     return this.currentPosition;
