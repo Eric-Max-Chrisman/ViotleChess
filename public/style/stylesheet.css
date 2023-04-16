@@ -12,6 +12,7 @@ body {
 	background-repeat:repeat-y;
 	background-position:right top;
 	*/
+
 }
 
 body.unscrollable {
@@ -95,9 +96,6 @@ form {
   text-align: center;
   color: yellow;
   background-color: black;
-  margin-left: 30%;
-  margin-right: 30%;
-  width: 600px;
 }
 
 p {
@@ -157,4 +155,36 @@ img {
 .navbar a.active {
   background-color: yellow;
   color: black;
+}
+
+div.trueCenter {
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-top: 15%;
+  margin-bottom: auto;
+  background-color:black;
+  border-style: solid;
+  border-color: yellow;
+  border-width: 3px;
+}
+
+div.textBox {
+  background-color: black;
+  border-style: solid;
+  border-color: yellow;
+  border-width: 3px;
+}
+
+tl {
+  text-align: center;
+}
+
+div.shortTextBox{
+  background-color: black;
+  margin-left: 45%;
+  margin-right: 45%;
+  font-size: 14px;
+  border-style: solid;
+  border-color: yellow;
+  border-width: 3px;
 }

@@ -9,6 +9,20 @@ import {
 } from '../models/UserModel';
 import { parseDatabaseError } from '../utils/db-utils';
 
+async function getAuthUserNameFromSession(req: Request): Promise<string | null> {
+  const { authenticatedUser } = req.session;
+
+  if (!authenticatedUser) {
+    return null;
+  }
+  return authenticatedUser.userName;
+}
+
+async function indexPageLoad(req: Request, res: Response): Promise<void> {
+  const userName = await getAuthUserNameFromSession(req);
+  res.render('index.ejs', { userName });
+}
+
 async function registerUser(req: Request, res: Response): Promise<void> {
   const { email, userName, password } = req.body as AuthRequest;
 
@@ -32,10 +46,10 @@ async function registerUser(req: Request, res: Response): Promise<void> {
 async function logIn(req: Request, res: Response): Promise<void> {
   const { email, password } = req.body as LoginRequest;
 
-  console.log(`Email: ${email}`);
+  // console.log(`Email: ${email}`);
   const user = await getUserByEmail(email);
-  console.log(`User: ${user.email}`);
-  console.log(`Username: ${user.userName}`);
+  // console.log(`User: ${user.email}`);
+  // console.log(`Username: ${user.userName}`);
 
   // Check if the user account exists for that email
   if (!user) {
@@ -61,7 +75,7 @@ async function logIn(req: Request, res: Response): Promise<void> {
     */
     const errorMes: string = "User Password doesn't match";
     res.render('error.ejs', { errorMes });
-    res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
+    // res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
     return;
   }
 
@@ -73,6 +87,7 @@ async function logIn(req: Request, res: Response): Promise<void> {
   req.session.authenticatedUser = {
     userId: user.userId,
     email: user.email,
+    userName: user.userName,
   };
   req.session.isLoggedIn = true;
   res.redirect(`/users/${user.userName}`);
@@ -103,9 +118,9 @@ async function updateUserEmail(req: Request, res: Response): Promise<void> {
     // check to see if works
     const oldUser = await getUserById(userId);
     const updatedUser = await updateEmailAdress(userId, email);
-    console.log('DEBUG TEST: OLD USER');
+    // console.log('DEBUG TEST: OLD USER');
     console.log(oldUser);
-    console.log('NEW USER');
+    // console.log('NEW USER');
     console.log(updatedUser);
   } catch (err) {
     console.log(err);
@@ -131,4 +146,4 @@ async function getUserWithUsername(req: Request, res: Response): Promise<void> {
   res.render('userPage.ejs', { tempUser });
 }
 
-export { registerUser, logIn, updateUserEmail, getUserWithUsername };
+export { registerUser, logIn, updateUserEmail, getUserWithUsername, indexPageLoad };

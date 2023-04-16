@@ -8,7 +8,12 @@ import connectSqlite3 from 'connect-sqlite3';
 // import { Server, Socket } from 'socket.io';
 
 // import { ChessTemplate } from './types/ChessTemplate';
-import { registerUser, logIn, getUserWithUsername } from './controllers/UserController';
+import {
+  registerUser,
+  logIn,
+  getUserWithUsername,
+  indexPageLoad,
+} from './controllers/UserController';
 import { createPiece, getPieceData, generateMoves } from './controllers/PieceController';
 import { loadChessPage } from './controllers/chessController';
 
@@ -41,9 +46,7 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 
 // endpoints to webpages
-app.get('/', (req, res) => {
-  res.render('index.ejs', {});
-});
+app.get('/', indexPageLoad);
 app.get('/createUser', (req, res) => {
   res.render('createUser.ejs', {});
 });
@@ -63,7 +66,7 @@ app.post('/createPiece', createPiece);
 app.get('/piece');
 app.get('/piece/:pieceId', getPieceData);
 // app.post('/:pieceId/move', addMove); // You need to add a controller function for this inorder to pass a parameter into addMove
-
+//
 app.post('/piece/:pieceId', generateMoves);
 
 app.listen(PORT, () => {

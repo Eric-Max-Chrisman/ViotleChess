@@ -9,13 +9,20 @@
 </head>
 <body>
   <h1 class = "main">Welcome to Volatile Chess!</h1>
-  <h3 class = "main">Your are now viewing the home screen.</h3>
-  <p>Add what that site is here.</p>
-  <h1>testtetss</h1>
+  <div class = "textBox">
+  <p>Ever felt chess is too boring? Ever think you could fix it? Now's your chance to make your own rules!</p>
+  <p>Volatile chess is a website where users may create their own chess sets with unique pieces. To create a set, create an account/login. Then click your name down in the navbar to get to your user page. From there, you may create you own custom set or start a game with a set to play with a friend.</p>
+  </div>
+
+  <p>CHESS PICTURE HERE WHEN WE FINISH ONE</p>
+
   <div class = "navbar">
     <a href = "/" class = "active">Volatile Chess</a>
     <a href = "/createUser">Register Account</a>
     <a href = "/login">Login</a>
+    <% if(userName) { %>
+      <a href = "users/<%=userName%>">Your Page</a>
+    <% } %>
   </div>
 </body>
 </html>

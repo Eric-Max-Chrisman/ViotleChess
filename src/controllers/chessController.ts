@@ -14,6 +14,7 @@ async function loadChessPage(req: Request, res: Response): Promise<void> {
     res.render('error', { errorMes });
     return;
   }
+
   res.render('chessBoard.ejs', { tempSet });
   // send over set struc that has pieces and size inside
 }

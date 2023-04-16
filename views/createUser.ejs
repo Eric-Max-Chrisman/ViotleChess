@@ -8,20 +8,17 @@
   <link rel="stylesheet" href="./style/stylesheet.css">
 </head>
 <body>
-  <h1 class = "main">Viewing create user</h1>
-  <p>Add create user elements here.</p>
-  <p>Need to create js file to handle create user</p>
-
-  <h1>Create a new account</h1>
+  <h1 class = "main">Create an account</h1>
+  <div class = "trueCenter">
     <form action = "/users" method = "post">
         <div>
             <label for = "email">Email</label>
             <input type = "email" id = "email" name = "email" required>
-        </div>
+          </div>
         <div>
           <label for = "userName">Userame</label>
           <input type = "userName" id = "userName" name = "userName" required>
-      </div>
+        </div>
         <div>
             <label for = "password"> Password</label>
             <input type = "password" id = "password" name = "password" required>
@@ -30,6 +27,12 @@
             <button>Enter</button>
         </div>
     </form>
+    </div>
+
+    <br>
+    <div class = "shortTextBox">
+      <p class = "textBox">Have an account?<br><a href = "/login">Login here!</a></p>
+    </div>
 
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>
