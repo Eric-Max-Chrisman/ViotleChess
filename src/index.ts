@@ -14,7 +14,12 @@ import {
   getUserWithUsername,
   indexPageLoad,
 } from './controllers/UserController';
-import { createPiece, getPieceData, generateMoves, addNewMove } from './controllers/PieceController';
+import {
+  createPiece,
+  getPieceData,
+  generateMoves,
+  addNewMove,
+} from './controllers/PieceController';
 import { loadChessPage } from './controllers/chessController';
 
 dotenv.config();
@@ -67,7 +72,7 @@ app.get('/piece');
 app.get('/piece/:pieceId', getPieceData);
 app.post('/:pieceId/move', addNewMove); // You need to add a controller function for this inorder to pass a parameter into addMove
 
-app.post('/piece/:pieceId', generateMoves);
+app.post('/piece/:pieceId/generate', generateMoves);
 
 app.listen(PORT, () => {
   console.log(`listsening at http://localhost:${PORT}`);

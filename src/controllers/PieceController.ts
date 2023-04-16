@@ -47,12 +47,13 @@ async function addNewMove(req: Request, res: Response): Promise<void> {
   const { pieceId } = req.params as PieceId;
   const { userId } = req.session.authenticatedUser;
   let piece = await getPieceByID(pieceId);
+  console.log(piece);
 
   if (!req.session.isLoggedIn) {
     res.redirect('/login'); // send user to login to add moves
     return;
   }
-
+  console.log(`Owner: ${piece.owner}`);
   if (userId !== piece.owner) {
     res.sendStatus(403); // users cannot edit pieces they dont own
     return;

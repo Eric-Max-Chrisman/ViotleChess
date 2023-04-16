@@ -12,6 +12,9 @@ async function addPiece(pieceName: string, replaces: string, userId: string): Pr
   newPiece.pieceName = pieceName;
   newPiece.replaces = replaces;
   newPiece.owner = userId;
+  newPiece.moves = [];
+  // newPiece.set = [];
+  newPiece.users = [];
 
   // Then save it to the database
   // NOTES: We reassign to `newPiece` so we can access
