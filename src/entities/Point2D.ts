@@ -1,10 +1,12 @@
-// ToDo
-import { Entity, Column, PrimaryColumn, Relation, /* OneToOne, */ ManyToOne } from 'typeorm';
+import { Entity, Column, Relation, OneToOne, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { CustomPiece } from './CustomPiece';
 
 @Entity()
 class Point2D {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
+  PositionId: string;
+
+  @Column()
   x: number;
 
   @Column()
@@ -22,6 +24,9 @@ class Point2D {
     cascade: ['insert', 'update'],
   })
   customPiece2: Relation<CustomPiece>[];
+
+  @OneToOne(() => CustomPiece, (position) => position.currentPosition)
+  position: Relation<CustomPiece>;
 }
 
 export { Point2D };

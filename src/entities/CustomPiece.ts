@@ -7,6 +7,8 @@ import {
   JoinTable,
   OneToMany,
   ManyToOne,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import { Point2D } from './Point2D';
@@ -45,8 +47,9 @@ export class CustomPiece {
   })
   validPoints: Relation<Point2D>[];
 
-  @Column()
-  currentPosition: Point2D; // NEEDS TO BE A RELATION
+  @OneToOne(() => Point2D, (currentPosition) => currentPosition.position)
+  @JoinColumn()
+  currentPosition: Relation<Point2D>;
 
   getCurrent(): Point2D {
     return this.currentPosition;

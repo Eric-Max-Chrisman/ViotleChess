@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { addPiece, getPieceByID, interperateMoves, addMove } from '../models/PieceModels';
 import { parseDatabaseError } from '../utils/db-utils';
-import { Point2D } from '../entities/Point2D';
+// import { Point2D } from '../entities/Point2D';
 
 async function createPiece(req: Request, res: Response): Promise<void> {
   const { pieceName, replaces } = req.body as NewPieceRequest;
