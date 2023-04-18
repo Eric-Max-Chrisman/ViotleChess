@@ -36,30 +36,46 @@ async function interperateMoves(
   // TODO
   // create an array of Point2D
   const validPoints: Point2D[] = [];
-  const curr = new Point2D();
-  curr.x = currentX;
-  curr.y = currentY;
+
   // create a for loop that iterates over moves
   console.log(piece.currentPosition);
   for (const move of piece.moves) {
+    console.log(`moveX: ${move.moveX}`);
+    console.log(`moveY: ${move.moveY}`);
+    console.log();
     if (!move.repeating) {
+      const curr = new Point2D();
+      curr.x = currentX;
+      curr.y = currentY;
+
       curr.x += move.moveX;
       curr.y += move.moveY;
 
       validPoints.push(curr);
     } else {
-      for (let i = 0; i < 8; i += 1) {
+      for (let i = 0; i < 7; i += 1) {
+        const curr = new Point2D();
+        curr.x = currentX;
+        curr.y = currentY;
+
         curr.x += move.moveX;
         curr.y += move.moveY;
 
-        validPoints.push(curr);
-        move.moveX += move.moveX;
-        move.moveY += move.moveY;
+        console.log(`moveX: ${move.moveX}`);
+        console.log(`moveY: ${move.moveY}`);
+        console.log();
 
         validPoints.push(curr);
+        const newMove = new Move(); // getting close :)
+        newMove.moveX += move.moveX;
+        newMove.moveY += move.moveY;
       }
     }
     if (move.special === 'diagonalPawn') {
+      const curr = new Point2D();
+      curr.x = currentX;
+      curr.y = currentY;
+
       curr.x += 1;
       curr.y += 1;
 
@@ -76,6 +92,9 @@ async function interperateMoves(
   // add new Point2D to array
 
   piece.validPoints = validPoints;
+  for (const point of piece.validPoints) {
+    console.log(`DEBUG: (${point.x}, ${point.y})`);
+  }
   // if else block to read special and apply special moves
   return await pieceRepository.save(piece);
 }
