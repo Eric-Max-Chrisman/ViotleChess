@@ -7,13 +7,9 @@ const pieceRepository = AppDataSource.getRepository(CustomPiece);
 async function addPiece(pieceName: string, replaces: string, userId: string): Promise<CustomPiece> {
   // Create the new user object
   let newPiece = new CustomPiece();
-  const current = new Point2D();
-  current.x = 0;
-  current.y = 0;
   newPiece.pieceName = pieceName;
   newPiece.replaces = replaces;
   newPiece.owner = userId;
-  newPiece.currentPosition = current;
 
   // Then save it to the database
   // NOTES: We reassign to `newPiece` so we can access
@@ -32,22 +28,27 @@ async function getPieceByID(pieceId: string): Promise<CustomPiece | null> {
   return piece;
 }
 
-async function interperateMoves(piece: CustomPiece): Promise<CustomPiece> {
+async function interperateMoves(
+  piece: CustomPiece,
+  currentX: number,
+  currentY: number
+): Promise<CustomPiece> {
   // TODO
   // create an array of Point2D
   const validPoints: Point2D[] = [];
+  const curr = new Point2D();
+  curr.x = currentX;
+  curr.y = currentY;
   // create a for loop that iterates over moves
   console.log(piece.currentPosition);
   for (const move of piece.moves) {
     if (!move.repeating) {
-      const curr: Point2D = piece.currentPosition;
       curr.x += move.moveX;
       curr.y += move.moveY;
 
       validPoints.push(curr);
     } else {
       for (let i = 0; i < 8; i += 1) {
-        const curr: Point2D = piece.currentPosition;
         curr.x += move.moveX;
         curr.y += move.moveY;
 
@@ -59,12 +60,10 @@ async function interperateMoves(piece: CustomPiece): Promise<CustomPiece> {
       }
     }
     if (move.special === 'diagonalPawn') {
-      let curr: Point2D = piece.currentPosition;
       curr.x += 1;
       curr.y += 1;
 
       validPoints.push(curr);
-      curr = piece.currentPosition;
       curr.x -= 1;
       curr.y += 1;
 
