@@ -36,7 +36,7 @@ async function generateMoves(req: Request, res: Response): Promise<void> {
   const piece = await getPieceByID(pieceId);
   const validPoints = await interperateMoves(piece, currentX, currentY);
 
-  res.sendStatus(201).json(validPoints);
+  res.status(201).json(validPoints);
 }
 
 async function addNewMove(req: Request, res: Response): Promise<void> {
