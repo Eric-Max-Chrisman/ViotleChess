@@ -53,22 +53,25 @@ async function interperateMoves(
 
       validPoints.push(curr);
     } else {
+      const curr = new Point2D();
+      const newMove = new Move(); // getting close :)
+      newMove.moveX = move.moveX;
+      newMove.moveY = move.moveY;
+      curr.x = currentX;
+      curr.y = currentY;
       for (let i = 0; i < 7; i += 1) {
-        const curr = new Point2D();
-        curr.x = currentX;
-        curr.y = currentY;
+        curr.x += newMove.moveX;
+        curr.y += newMove.moveY;
 
-        curr.x += move.moveX;
-        curr.y += move.moveY;
-
-        console.log(`moveX: ${move.moveX}`);
-        console.log(`moveY: ${move.moveY}`);
+        console.log(`moveX: ${newMove.moveX}`);
+        console.log(`moveY: ${newMove.moveY}`);
         console.log();
 
         validPoints.push(curr);
-        const newMove = new Move(); // getting close :)
-        newMove.moveX += move.moveX;
-        newMove.moveY += move.moveY;
+
+        console.log(`currentX: ${curr.x}`);
+        console.log(`currentY: ${curr.y}`);
+        console.log();
       }
     }
     if (move.special === 'diagonalPawn') {
