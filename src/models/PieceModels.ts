@@ -53,15 +53,18 @@ async function interperateMoves(
 
       validPoints.push(curr);
     } else {
-      const curr = new Point2D();
+      let newX: number;
+      let newY: number;
       const newMove = new Move(); // getting close :)
       newMove.moveX = move.moveX;
       newMove.moveY = move.moveY;
-      curr.x = currentX;
-      curr.y = currentY;
+      newX = currentX + newMove.moveX;
+      newY = currentY + newMove.moveY;
+
       for (let i = 0; i < 7; i += 1) {
-        curr.x += newMove.moveX;
-        curr.y += newMove.moveY;
+        const curr = new Point2D();
+        curr.x = newX;
+        curr.y = newY;
 
         console.log(`moveX: ${newMove.moveX}`);
         console.log(`moveY: ${newMove.moveY}`);
@@ -72,6 +75,8 @@ async function interperateMoves(
         console.log(`currentX: ${curr.x}`);
         console.log(`currentY: ${curr.y}`);
         console.log();
+        newX += newMove.moveX;
+        newY += newMove.moveY;
       }
     }
     if (move.special === 'diagonalPawn') {
