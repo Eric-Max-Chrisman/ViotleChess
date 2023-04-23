@@ -16,3 +16,15 @@ type MovePack = {
   moves: Move[];
   currentPosition: Point2D;
 };
+
+type NewMoveReq = {
+  x: number;
+  y: number;
+  repeating: boolean;
+  special: string;
+};
+
+type MovePieceRequest = {
+  currentX: number;
+  currentY: number;
+};

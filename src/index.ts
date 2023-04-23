@@ -14,7 +14,12 @@ import {
   getUserWithUsername,
   indexPageLoad,
 } from './controllers/UserController';
-import { createPiece, getPieceData, generateMoves } from './controllers/PieceController';
+import {
+  createPiece,
+  getPieceData,
+  generateMoves,
+  addNewMove,
+} from './controllers/PieceController';
 import { loadChessPage } from './controllers/chessController';
 
 dotenv.config();
@@ -65,9 +70,9 @@ app.post('/login', logIn); // Log in to an account
 app.post('/createPiece', createPiece);
 app.get('/piece');
 app.get('/piece/:pieceId', getPieceData);
-// app.post('/:pieceId/move', addMove); // You need to add a controller function for this inorder to pass a parameter into addMove
-//
-app.post('/piece/:pieceId', generateMoves);
+app.post('/:pieceId/move', addNewMove); // You need to add a controller function for this inorder to pass a parameter into addMove
+
+app.post('/piece/:pieceId/generate', generateMoves);
 
 // test
 app.get('/test', (req, res) => {

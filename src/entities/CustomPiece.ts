@@ -7,6 +7,8 @@ import {
   JoinTable,
   OneToMany,
   ManyToOne,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import { Point2D } from './Point2D';
@@ -36,7 +38,7 @@ export class CustomPiece {
   @Column()
   replaces: string;
 
-  // @Column({ unique: false })
+  @Column({ unique: false })
   owner: string; // owner's userId;
 
   // This will probably need to be One to Many on this side.
@@ -45,7 +47,9 @@ export class CustomPiece {
   })
   validPoints: Relation<Point2D>[];
 
-  currentPosition: Point2D;
+  @OneToOne(() => Point2D, (currentPosition) => currentPosition.position)
+  @JoinColumn()
+  currentPosition: Relation<Point2D>;
 
   getCurrent(): Point2D {
     return this.currentPosition;

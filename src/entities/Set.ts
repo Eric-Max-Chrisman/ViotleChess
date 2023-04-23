@@ -19,6 +19,9 @@ export class Set {
   @Column({ unique: false })
   setName: string;
 
+  @Column()
+  ownerId: string;
+
   @ManyToOne(() => User, (user) => user.sets, { cascade: ['insert', 'update'] })
   user: Relation<User>;
 

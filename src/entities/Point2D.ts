@@ -1,14 +1,16 @@
-// ToDo
-import { Entity, Column, PrimaryColumn, Relation, /* OneToOne, */ ManyToOne } from 'typeorm';
+import { Entity, Column, Relation, OneToOne, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { CustomPiece } from './CustomPiece';
 
 @Entity()
 class Point2D {
-  @PrimaryColumn()
-  private x: number;
+  @PrimaryGeneratedColumn('uuid')
+  PositionId: string;
 
   @Column()
-  private y: number;
+  x: number;
+
+  @Column()
+  y: number;
 
   // @OneToOne(() => CustomPiece, (customPiece) => customPiece.validPoints) // Use this as starting position
   // customPiece: Relation<CustomPiece>;
@@ -23,26 +25,8 @@ class Point2D {
   })
   customPiece2: Relation<CustomPiece>[];
 
-  constructor(x = 0, y = 0) {
-    this.x = x;
-    this.y = y;
-  }
-
-  getX(): number {
-    return this.x;
-  }
-
-  getY(): number {
-    return this.y;
-  }
-
-  setX(newX: number): void {
-    this.x = newX;
-  }
-
-  setY(newY: number): void {
-    this.y = newY;
-  }
+  @OneToOne(() => CustomPiece, (position) => position.currentPosition)
+  position: Relation<CustomPiece>;
 }
 
 export { Point2D };
