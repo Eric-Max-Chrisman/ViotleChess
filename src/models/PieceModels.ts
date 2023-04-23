@@ -38,11 +38,11 @@ async function interperateMoves(
   const validPoints: Point2D[] = [];
 
   // create a for loop that iterates over moves
-  console.log(piece.currentPosition);
+  // console.log(piece.currentPosition);
   for (const move of piece.moves) {
-    console.log(`moveX: ${move.moveX}`);
-    console.log(`moveY: ${move.moveY}`);
-    console.log();
+    // console.log(`moveX: ${move.moveX}`);
+    // console.log(`moveY: ${move.moveY}`);
+    // console.log();
     if (!move.repeating) {
       const curr = new Point2D();
       curr.x = currentX;
@@ -66,15 +66,15 @@ async function interperateMoves(
         curr.x = newX;
         curr.y = newY;
 
-        console.log(`moveX: ${newMove.moveX}`);
-        console.log(`moveY: ${newMove.moveY}`);
-        console.log();
+        // console.log(`moveX: ${newMove.moveX}`);
+        // console.log(`moveY: ${newMove.moveY}`);
+        // console.log();
 
         validPoints.push(curr);
 
-        console.log(`currentX: ${curr.x}`);
-        console.log(`currentY: ${curr.y}`);
-        console.log();
+        // console.log(`currentX: ${curr.x}`);
+        // console.log(`currentY: ${curr.y}`);
+        // console.log();
         newX += newMove.moveX;
         newY += newMove.moveY;
       }
@@ -100,9 +100,9 @@ async function interperateMoves(
   // add new Point2D to array
 
   piece.validPoints = validPoints;
-  for (const point of piece.validPoints) {
-    console.log(`DEBUG: (${point.x}, ${point.y})`);
-  }
+  // for (const point of piece.validPoints) {
+  //   console.log(`DEBUG: (${point.x}, ${point.y})`);
+  // }
   // if else block to read special and apply special moves
   return await pieceRepository.save(piece);
 }
