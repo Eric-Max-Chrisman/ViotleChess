@@ -45,7 +45,6 @@ app.use(express.json());
 // html stuff
 app.use(express.static('public', { extensions: ['html'] }));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public'));
 
 // ejs set up (all redirects should be ejs renders)
 app.set('view engine', 'ejs');
