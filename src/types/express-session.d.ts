@@ -1,4 +1,4 @@
-import 'express-session';
+import session, { Session } from 'express-session';
 
 declare module 'express-session' {
   export interface Session {
@@ -13,5 +13,12 @@ declare module 'express-session' {
     logInAttempts: number;
     logInTimeout: Date;
     coins: number;
+  }
+}
+
+declare module 'http' {
+  interface IncomingMessage {
+    // cookieHolder?: string;
+    session: Session & Partial<session.SessionData>;
   }
 }
