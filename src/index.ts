@@ -1,11 +1,11 @@
 // index.ts (Eric)
 import dotenv from 'dotenv';
-import express, { Express /* NextFunction */ } from 'express';
+import express, { Express, Request, Response, NextFunction } from 'express';
 import './config';
 import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
-// import { Server, Socket } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -35,12 +35,12 @@ const sessionMiddleware = session({
 
 app.use(sessionMiddleware);
 
+app.use(express.json());
+
 // html stuff
 app.use(express.static('public', { extensions: ['html'] }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
-
-app.use(express.json());
 
 // ejs set up (all redirects should be ejs renders)
 app.set('view engine', 'ejs');
@@ -69,7 +69,12 @@ app.get('/piece/:pieceId', getPieceData);
 //
 app.post('/piece/:pieceId', generateMoves);
 
-app.listen(PORT, () => {
+// test
+app.get('/test', (req, res) => {
+  res.render('test.ejs', {});
+});
+
+const server = app.listen(PORT, () => {
   console.log(`listsening at http://localhost:${PORT}`);
 });
 // test
@@ -83,3 +88,51 @@ app.listen(PORT, () => {
 // const index: number | undefined = pointTest.convertToIndex();
 
 // console.log(`The index of Point (4, 5) is ${index}`);
+
+// socket code
+const connectedClients: Record<string, CustomWebSocket> = {};
+
+const socketServer = new Server<ClientToServerEvents, ServerToClientEvents, null, null>(server);
+
+socketServer.use((socket, next) => {
+  sessionMiddleware(socket.request as Request, {} as Response, next as NextFunction);
+});
+
+socketServer.on('connection', (socket) => {
+  const req = socket.request;
+
+  // We need this chunk of code so that socket.io
+  // will automatically reload the session data
+  // don't change this code
+  socket.use((__, next) => {
+    req.session.reload((err) => {
+      if (err) {
+        socket.disconnect();
+      } else {
+        next();
+      }
+    });
+  });
+
+  // This is just to make sure only logged in users
+  // are able to connect to a game
+  if (!req.session.isLoggedIn) {
+    console.log('An unauthenticated user attempted to connect.');
+    socket.disconnect();
+    return;
+  }
+
+  const { authenticatedUser } = req.session;
+  const { userName } = authenticatedUser;
+
+  console.log(`${userName} has connected`);
+  connectedClients[userName] = socket;
+
+  socket.on('disconnect', () => {
+    delete connectedClients[userName];
+    console.log(`${userName} has disconnected`);
+    socketServer.emit('exitedChat', `${userName} has left the chat.`);
+  });
+
+  socketServer.emit('enteredChat', `${userName} has entered the chat`);
+});
