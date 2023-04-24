@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style/stylesheet.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Find user by typing their user name.</h1>
+  <div class = "trueCenter">
+    <form action = "/userRedirect" method = "post">
+      <div>
+          <label for = "userName">Enter Player's username</label>
+          <input type = "text" id = "userName" name = "userName" required>
+      </div>
+      <button>Submit</button>
+    </form>
+  </div>
+
+  <div class = "navbar">
+    <a href = "/">Volatile Chess</a>
+    <a href = "/createUser">Register Account</a>
+    <a href = "/login">Login</a>
+    <a href = "/users" class = "active">Find User</a>
+    <% if(userName) { %>
+      <a href = "users/<%=userName%>">Your Page</a>
+    <% } %>
+  </div>
+</body>
+</html>

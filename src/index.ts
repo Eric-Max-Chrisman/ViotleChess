@@ -13,6 +13,8 @@ import {
   logIn,
   getUserWithUsername,
   indexPageLoad,
+  loadFindPage,
+  redirectUserPage,
 } from './controllers/UserController';
 import {
   createPiece,
@@ -77,6 +79,9 @@ app.post('/piece/:pieceId/generate', generateMoves);
 app.get('/test', (req, res) => {
   res.render('test.ejs', {});
 });
+
+app.get('/users', loadFindPage);
+app.post('/userRedirect', redirectUserPage);
 
 const server = app.listen(PORT, () => {
   console.log(`listsening at http://localhost:${PORT}`);

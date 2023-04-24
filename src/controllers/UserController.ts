@@ -146,4 +146,34 @@ async function getUserWithUsername(req: Request, res: Response): Promise<void> {
   res.render('userPage.ejs', { tempUser });
 }
 
-export { registerUser, logIn, updateUserEmail, getUserWithUsername, indexPageLoad };
+async function loadFindPage(req: Request, res: Response): Promise<void> {
+  const userName = await getAuthUserNameFromSession(req);
+  res.render('findUser.ejs', { userName });
+}
+
+async function redirectUserPage(req: Request, res: Response): Promise<void> {
+  const { userName } = req.body as UserPageRequest;
+
+  if (!userName) {
+    const errorMes: string = "Can't Use Empty (replace this with joi)";
+    res.render('error.ejs', { errorMes });
+  }
+
+  const tempUser = await getUserByUsername(userName);
+  if (!tempUser) {
+    const errorMes: string = "User doesn't exist";
+    res.render('error.ejs', { errorMes });
+  }
+
+  res.redirect(`/users/${userName}`);
+}
+
+export {
+  registerUser,
+  logIn,
+  updateUserEmail,
+  getUserWithUsername,
+  indexPageLoad,
+  loadFindPage,
+  redirectUserPage,
+};

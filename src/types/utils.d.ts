@@ -16,6 +16,10 @@ type LoginRequest = {
   password: string;
 };
 
+type UserPageRequest = {
+  userName: string;
+};
+
 // User Utils
 type UserIdParam = {
   userId: string;
