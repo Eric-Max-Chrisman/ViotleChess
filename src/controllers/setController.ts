@@ -4,7 +4,7 @@ import { getSetByName, getSetById, addPieceToSet, createSet } from '../models/Se
 // import { Set } from '../entities/Set';
 
 async function getSetWithName(req: Request, res: Response): Promise<void> {
-  const { setName } = req.body as SetNameTestParam;
+  const { setName } = req.params as SetNameTestParam;
 
   const set = await getSetByName(setName);
 
@@ -12,7 +12,7 @@ async function getSetWithName(req: Request, res: Response): Promise<void> {
     res.sendStatus(404);
   }
 
-  res.status(201).json(set);
+  res.sendStatus(201);
 }
 
 async function getSetWithId(req: Request, res: Response): Promise<void> {
@@ -24,7 +24,7 @@ async function getSetWithId(req: Request, res: Response): Promise<void> {
     res.sendStatus(404);
   }
 
-  res.status(201).json(set);
+  res.sendStatus(201);
 }
 
 async function createNewSet(req: Request, res: Response): Promise<void> {
@@ -38,7 +38,7 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
 
   const newSet = await createSet(ownerId, setName);
 
-  res.status(201).json(newSet);
+  res.sendStatus(201);
 }
 
 export { getSetWithName, getSetWithId, createNewSet };
