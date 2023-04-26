@@ -1,6 +1,6 @@
 import { AppDataSource } from '../dataSource';
 import { Set } from '../entities/Set';
-import { User } from '../entities/User';
+// import { User } from '../entities/User';
 import { CustomPiece } from '../entities/CustomPiece';
 import { getUserById } from './UserModel';
 

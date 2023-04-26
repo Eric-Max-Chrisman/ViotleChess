@@ -1,4 +1,4 @@
-// code copied from class notes
+// code copied from class note
 import 'reflect-metadata';
 import { DataSource, EntitySchema } from 'typeorm';
 import glob from 'glob';

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { parseDatabaseError } from '../utils/db-utils';
+// import { parseDatabaseError } from '../utils/db-utils';
 import { getSetByName, getSetById, addPieceToSet, createSet } from '../models/SetModel';
-import { Set } from '../entities/Set';
+// import { Set } from '../entities/Set';
 
 async function getSetWithName(req: Request, res: Response): Promise<void> {
   const { setName } = req.body as SetNameTestParam;
