@@ -28,6 +28,25 @@ export class Set {
   @OneToOne(() => LeaderBoard, (leaderBoard) => leaderBoard.set, { cascade: ['insert', 'update'] })
   leaderBoard: Relation<LeaderBoard>;
 
-  @OneToMany(() => CustomPiece, (customPiece) => customPiece.set, { cascade: ['insert', 'update'] })
-  customPieces: Relation<CustomPiece>[];
+  // @OneToMany(() => CustomPiece, (customPiece) => customPiece.set, { cascade: ['insert', 'update'] })
+  // customPieces: Relation<CustomPiece>[];
+
+ // Use piece Ids in these spots
+  @Column({nullable: true})
+  replacesPawn: string;
+
+  @Column({nullable: true})
+  replacesRook: string;
+
+  @Column({nullable: true})
+  replacesKnight: string;
+
+  @Column({nullable: true})
+  replacesBishop: string;
+
+  @Column({nullable: true})
+  replacesKing: string;
+
+  @Column({nullable: true})
+  replacesQueen: string;
 }

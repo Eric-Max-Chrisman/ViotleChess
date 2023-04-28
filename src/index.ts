@@ -6,7 +6,7 @@ import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { Server, Socket } from 'socket.io';
-import { createNewSet, getSetWithName} from './controllers/setController';
+import { createNewSet, getSetWithName, getSetWithId} from './controllers/setController';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -78,7 +78,8 @@ app.post('/piece/:pieceId/generate', generateMoves);
 
 //sets
 app.post('/set/createSet', createNewSet);
-app.get('/set/:setName', getSetWithName)
+app.get('/set/:setName', getSetWithName);
+app.get('/set/:setId', getSetWithId);
 
 // test
 app.get('/test', (req, res) => {

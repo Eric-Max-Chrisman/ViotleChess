@@ -7,24 +7,28 @@ async function getSetWithName(req: Request, res: Response): Promise<void> {
   const { setName } = req.params as SetNameTestParam;
 
   const set = await getSetByName(setName);
+  console.log(setName);
 
   if (!set) {
     res.sendStatus(404);
+    return;
   }
 
-  res.sendStatus(201);
+  res.sendStatus(200);
 }
 
 async function getSetWithId(req: Request, res: Response): Promise<void> {
-  const { setId } = req.body as SetIdParam;
-
+  const { setId } = req.params as SetIdParam;
+  console.log(setId);
   const set = await getSetById(setId);
+
 
   if (!set) {
     res.sendStatus(404);
+    return;
   }
 
-  res.sendStatus(201);
+  res.sendStatus(200);
 }
 
 async function createNewSet(req: Request, res: Response): Promise<void> {
@@ -38,7 +42,7 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
 
   const newSet = await createSet(ownerId, setName);
 
-  res.sendStatus(201);
+  res.json(newSet);
 }
 
 export { getSetWithName, getSetWithId, createNewSet };

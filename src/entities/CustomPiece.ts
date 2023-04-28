@@ -74,8 +74,8 @@ export class CustomPiece {
   // })
   // owner: Relation<User>;
 
-  @ManyToOne(() => Set, (set) => set.customPieces, { cascade: ['insert', 'update'] })
-  set: Relation<Set>;
+  // @ManyToOne(() => Set, (set) => set.customPieces, { cascade: ['insert', 'update'] })
+  // set: Relation<Set>;
 
   @OneToMany(() => Move, (moves) => moves.customPiece, { cascade: ['insert', 'update'] })
   moves: Relation<Move>[];
