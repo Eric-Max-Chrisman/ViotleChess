@@ -36,10 +36,9 @@ async function registerUser(req: Request, res: Response): Promise<void> {
     console.log(newUser);
     // res.sendStatus(201);
     res.render('login.ejs', {});
-  } catch (err) {
-    console.error(err);
-    const databaseErrorMessage = parseDatabaseError(err);
-    res.status(500).json(databaseErrorMessage);
+  } catch (errorMes) {
+    const errMes: string = 'One of your inputs is taken!';
+    res.render('error.ejs', { errorMes });
   }
 }
 

@@ -6,7 +6,7 @@ import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { Server, Socket } from 'socket.io';
-import { createNewSet, getSetWithName, getSetWithId} from './controllers/setController';
+import { createNewSet, getSetWithName, getSetWithId } from './controllers/setController';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -23,8 +23,8 @@ import {
   generateMoves,
   addNewMove,
 } from './controllers/PieceController';
-import { loadChessPage } from './controllers/chessController';
-
+import { loadChessPage, loadDeafulatChessPage } from './controllers/chessController';
+//
 dotenv.config();
 const app: Express = express();
 const { PORT, COOKIE_SECRET } = process.env;
@@ -76,7 +76,7 @@ app.post('/:pieceId/move', addNewMove); // You need to add a controller function
 
 app.post('/piece/:pieceId/generate', generateMoves);
 
-//sets
+// sets
 app.post('/set/createSet', createNewSet);
 app.get('/set/:setName', getSetWithName);
 app.get('/set/:setId', getSetWithId);
@@ -88,6 +88,8 @@ app.get('/test', (req, res) => {
 
 app.get('/users', loadFindPage);
 app.post('/userRedirect', redirectUserPage);
+
+app.get('/chess', loadDeafulatChessPage);
 
 const server = app.listen(PORT, () => {
   console.log(`listsening at http://localhost:${PORT}`);
@@ -150,4 +152,9 @@ socketServer.on('connection', (socket) => {
   });
 
   socketServer.emit('enteredChat', `${userName} has entered the chat`);
+
+  socket.on('chatMessage', (msg: string) => {
+    console.log(`received a chatMessage event from the client: ${username}`);
+    socketServer.emit('chatMessage', username, msg);
+  });
 });

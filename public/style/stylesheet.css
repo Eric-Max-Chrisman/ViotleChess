@@ -192,3 +192,32 @@ div.shortTextBox{
 a.login{
   color: rgb(255, 225, 0);
 }
+
+
+
+table.chessBoard {
+
+  width: 40vw;
+  height: 10vw;
+  border-collapse: separate;
+  border: 3;
+  border-color: yellow;
+  text-align: center;
+}
+
+.chessBoard td {
+  width: 10%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  background-color: white;
+}
+
+.chessBoard td.white{
+  background-color: white;
+}
+
+.chessBoard td.black{
+  background-color: black;
+}
+
+

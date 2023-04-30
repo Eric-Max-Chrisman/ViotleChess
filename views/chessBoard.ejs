@@ -5,43 +5,73 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Volatile Chess</title>
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="/js/chess.js" defer></script>
   <link rel="stylesheet" href="./style/stylesheet.css">
 </head>
 <body>
-  <h1 class = "main">Viewing chess board / set <%</h1>
-  <h1><%= tempSet.setName%></h1>
+  <%
+  if(!!isDeafultSet){ %>
+    <p>is deafulat</p> <%
+  } else {%>
+    <p><%=setName%></p> <%
+  } %>
 
   <%
-  // set up char array
-  const gamePieces = [];
-
-  // loop to generate space for pieces
-  for (let i: number = 0; i < 8; i += 1) {
-    // y axis
-    const tempArray = [];
-    for (let j: number = 0; j < 8; j += 1) {
-      // x axis
-      let tempPiece = " ";
-      tempArray.push(tempPiece);
-    }
-    gamePieces.push(tempArray);
-  }
-
-  // set up pieces here (may need an edit for oppiste color)
-  for(var element in tempSet.customPieces){
-    gamePieces[element.Point2.x][element.Point2.y] = element.pieceName;
-  }
+  const sizeX = 8;
+  const sizeY = 8;
+  let isWhite = true;
+  const gamePieces = []; // 2d array of pieces
   %>
 
-  <% // print all emements into a board like table %>
-  <table class = "chess">
-    <% for (int i = 0; i > 8; i++){ %>
-      <tr>
-      <% for (int j = 0; j > 8; j++){ %>
-        <tl><%=gamePieces[i][j]%></tl>
-      <% } %>
-      </tr>
-    <% } %>
+  <table class = "chessBoard" border = "1">
+    <% if(!!isDeafultSet){ // default game
+      for (let i = 0; i < sizeY; i += 1) {
+      // y axis
+      %> <tr> <%
+      const tempArray = [];
+      for (let j = 0; j < sizeX; j += 1) {
+        let backgroundColor = "white";
+        if(!isWhite){
+          backgroundColor = "black";
+        }
+        isWhite = !isWhite;
+
+        // x axis
+        const tempPiece = "♛";
+        %> <td class = "<%=backgroundColor%>" id = "<%=j%>,<%=i%>"><%= tempPiece%></td> <%
+        tempArray.push(tempPiece);
+      }
+      isWhite = !isWhite;
+      %> </tr> <%
+      gamePieces.push(tempArray);
+    }
+    %>
+
+
+    <%} else { // set name entered
+        for (let i = 0; i < sizeY; i += 1) {
+        // y axis
+        %> <tr> <%
+        const tempArray = [];
+        for (let j = 0; j < sizeX; j += 1) {
+          let backgroundColor = "white";
+          if(!isWhite){
+            backgroundColor = "black";
+          }
+          isWhite = !isWhite;
+
+          // x axis
+          const tempPiece = "♛";
+          %> <td onclick="clickDetected(this)" class = "<%=backgroundColor%>" id = "<%=j%>,<%=i%>"><%= tempPiece%></td> <%
+          tempArray.push(tempPiece);
+        }
+        isWhite = !isWhite;
+        %> </tr> <%
+        gamePieces.push(tempArray);
+      }
+    }
+    %>
   </table>
 
   <div class = "navbar">

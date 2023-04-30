@@ -15,8 +15,13 @@ async function loadChessPage(req: Request, res: Response): Promise<void> {
     return;
   }
 
-  res.render('chessBoard.ejs', { tempSet });
+  res.render('chessBoard.ejs', { tempSet, setName });
   // send over set struc that has pieces and size inside
 }
 
-export { loadChessPage };
+async function loadDeafulatChessPage(req: Request, res: Response): Promise<void> {
+  const isDeafultSet: boolean = true;
+  res.render('chessBoard.ejs', { isDeafultSet });
+}
+
+export { loadChessPage, loadDeafulatChessPage };
