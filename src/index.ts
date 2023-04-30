@@ -154,7 +154,7 @@ socketServer.on('connection', (socket) => {
   socketServer.emit('enteredChat', `${userName} has entered the chat`);
 
   socket.on('chatMessage', (msg: string) => {
-    console.log(`received a chatMessage event from the client: ${username}`);
-    socketServer.emit('chatMessage', username, msg);
+    console.log(`received a chatMessage event from the client: ${userName}`);
+    socketServer.emit('chatMessage', userName, msg);
   });
 });

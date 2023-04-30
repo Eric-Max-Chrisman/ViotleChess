@@ -12,7 +12,7 @@
 <body>
   <%
   if(!!isDeafultSet){ %>
-    <p>is deafulat</p> <%
+    <p id = "test">is deafulat</p> <%
   } else {%>
     <p><%=setName%></p> <%
   } %>
@@ -24,7 +24,7 @@
   const gamePieces = []; // 2d array of pieces
   %>
 
-  <table class = "chessBoard" border = "1">
+  <table class = "chessBoard" border = "1" id = "chessboard" >
     <% if(!!isDeafultSet){ // default game
       for (let i = 0; i < sizeY; i += 1) {
       // y axis
@@ -73,6 +73,8 @@
     }
     %>
   </table>
+
+
 
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>

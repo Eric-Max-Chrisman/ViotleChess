@@ -1,6 +1,8 @@
-alert('adsf');
+const chessBoard = document.getElementById('chessboard');
+const squares = Array.from(chessBoard.getElementsByTagName('td'));
 
-function clickDetected(cell) {
-  console.log('Clicked cell:', cell);
-  // Add your event handling code here
-}
+squares.forEach((square) => {
+  square.addEventListener('click', () => {
+    console.log(square.id);
+  });
+});
