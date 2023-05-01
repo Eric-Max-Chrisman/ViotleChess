@@ -30,7 +30,7 @@ export class CustomPiece {
   @Column({ unique: false })
   pieceName: string;
 
-  @Column({ unique: false, nullable: true })
+  @Column({ unique: false, nullable: true, default: 0 })
   pieceColor: number;
 
   // Possibly convert this to OneToOne Relation.

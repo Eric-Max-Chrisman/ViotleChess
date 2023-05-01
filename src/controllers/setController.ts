@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-// import { parseDatabaseError } from '../utils/db-utils';
+import { parseDatabaseError } from '../utils/db-utils';
 import { getSetByName, getSetById, addPieceToSet, createSet } from '../models/SetModel';
 // import { Set } from '../entities/Set';
 
@@ -19,9 +19,10 @@ async function getSetWithName(req: Request, res: Response): Promise<void> {
 
 async function getSetWithId(req: Request, res: Response): Promise<void> {
   const { setId } = req.params as SetIdParam;
-  console.log(setId);
-  const set = await getSetById(setId);
 
+  const set = await getSetById(setId);
+  console.log(setId);
+  console.log(set);
 
   if (!set) {
     res.sendStatus(404);
@@ -39,10 +40,15 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
     res.redirect('/login');
     return;
   }
-
-  const newSet = await createSet(ownerId, setName);
-
-  res.json(newSet);
+  try {
+    const newSet = await createSet(ownerId, setName);
+    console.log(newSet);
+    res.sendStatus(201);
+  } catch (err) {
+    console.error(err);
+    const databaseErrorMessage = parseDatabaseError(err);
+    res.status(500).json(databaseErrorMessage);
+  }
 }
 
 export { getSetWithName, getSetWithId, createNewSet };

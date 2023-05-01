@@ -55,7 +55,7 @@ async function addPieceToSet(pieceId: string, setId: string): Promise<Set> {
   else if(piece.replaces === 'queen' || piece.replaces === 'Queen'){
     set.replacesQueen = pieceId;
   }
-  await SetRepository.save(set);
+  return await SetRepository.save(set);
 }
 
 export { getSetByName, createSet, getSetById, addPieceToSet };

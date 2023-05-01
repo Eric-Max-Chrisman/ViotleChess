@@ -5,7 +5,7 @@ import { Point2D } from '../entities/Point2D';
 
 const pieceRepository = AppDataSource.getRepository(CustomPiece);
 async function addPiece(pieceName: string, replaces: string, userId: string): Promise<CustomPiece> {
-  // Create the new user object
+  // Create the new piece object
   let newPiece = new CustomPiece();
   newPiece.pieceName = pieceName;
   newPiece.replaces = replaces;
@@ -98,6 +98,13 @@ async function interperateMoves(
   // check repeating bool
   // add X to current.X and repeat for Y.
   // add new Point2D to array
+
+  if(piece.pieceColor === 1){ // If piece is on black side
+    for (let i: number = 0; i < validPoints.length; i++){
+      validPoints[i].x = validPoints[i].x * -1;
+      validPoints[i].y = validPoints[i].y * -1;
+    }
+  }
 
   piece.validPoints = validPoints;
   // for (const point of piece.validPoints) {
