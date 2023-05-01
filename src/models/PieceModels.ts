@@ -28,6 +28,16 @@ async function getPieceByID(pieceId: string): Promise<CustomPiece | null> {
   return piece;
 }
 
+async function getPieceByName(pieceName: string, ownerId: string): Promise<CustomPiece | null> {
+  const piece = await pieceRepository
+    .createQueryBuilder('piece')
+    .leftJoinAndSelect('piece.moves', 'moves')
+    .where('piece.pieceName = :pieceName', { pieceName })
+    .andWhere('piece.ownerId = ownerId', { ownerId })
+    .getOne();
+  return piece;
+}
+
 async function interperateMoves(
   piece: CustomPiece,
   currentX: number,
@@ -138,4 +148,4 @@ async function addMove(
   return await pieceRepository.save(piece);
 }
 
-export { addPiece, getPieceByID, interperateMoves, addMove };
+export { addPiece, getPieceByID, interperateMoves, addMove, getPieceByName};

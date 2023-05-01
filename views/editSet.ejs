@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Set</title>
+  <link rel="stylesheet" href="/style/stylesheet.css">
+</head>
+<body>
+  <h1>Add A Piece to <%= set.setName %></h1>
+  <form action="/set/<%= set.setId %>/addPiece" method="post">
+    <div>
+      <input type="text" name="pieceName" id="pieceName">
+      <label for="pieceName">Piece Name</label>
+    </div>
+    <div>
+      <button>Add</button>
+    </div>
+  </form>
+  <!-- All redirect to homepage for now. Ill be changing this when editPiece.ejs is done -->
+  <p>Pawn Replacer: <a href='/' class="piece"> <% if(replacesPawn === null){ %> No Piece <% } else {%> <%= replacesPawn.pieceName %> <% } %></a></p>
+  <p>Rook Replacer: <a href='/' class="piece"> <% if(replacesRook === null){ %> No Piece <% } else {%> <%= replacesRook.pieceName %> <% } %></a></p>
+  <p>Knight Replacer: <a href='/' class="piece"> <% if(replacesKnight === null){ %> No Piece <% } else {%> <%= replacesKnight.pieceName %> <% } %></a></p>
+  <p>Bishop Replacer: <a href='/' class="piece"> <% if(replacesBishop === null){ %> No Piece <% } else {%> <%= replacesBishop.pieceName %> <% } %></a></p>
+  <p>King Replacer: <a href='/' class="piece"> <% if(replacesKing === null){ %> No Piece <% } else {%> <%= replacesKing.pieceName %> <% } %></a></p>
+  <p>Queen Replacer: <a href='/' class="piece"> <% if(replacesQueen === null){ %> No Piece <% } else {%> <%= replacesQueen.pieceName %> <% } %></a></p>
+
+</body>
+</html>

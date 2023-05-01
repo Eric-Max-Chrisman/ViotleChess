@@ -13,6 +13,11 @@
     <p><%=tempUser.userName%>'s sets:</p>
       <!-- Hadyen, this is where you should add code for set stuff -->
       <!-- follow index endpoint for /users/username -->
+      <% for( const set of sets ) { %>
+        <div class="set">
+          <a href='/set/id/<%= set.setId %>'><%= set.setName %></a>
+        </div>
+        <% } %>
   </div>
 
   <a href = "/chess";>chess board</a>

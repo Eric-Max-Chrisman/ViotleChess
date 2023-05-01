@@ -2,7 +2,7 @@ import { AppDataSource } from '../dataSource';
 import { Set } from '../entities/Set';
 // import { User } from '../entities/User';
 // import { CustomPiece } from '../entities/CustomPiece';
-import { getPieceByID } from './PieceModels';
+import { getPieceByName } from './PieceModels';
 import { getUserById } from './UserModel';
 
 const SetRepository = AppDataSource.getRepository(Set);
@@ -25,6 +25,12 @@ async function getSetById(setId: string): Promise<Set | null> {
     .getOne();
 }
 
+async function getAllSetsByOwner(ownerId: string): Promise<Set[] | null>{
+  return await SetRepository.createQueryBuilder('set')
+  .where('set.ownerId = ownerId', {ownerId})
+  .getMany();
+}
+
 async function createSet(ownerId: string, setName: string): Promise<Set> {
   const newSet = new Set();
   newSet.ownerId = ownerId;
@@ -33,9 +39,15 @@ async function createSet(ownerId: string, setName: string): Promise<Set> {
   return await SetRepository.save(newSet);
 }
 
-async function addPieceToSet(pieceId: string, setId: string): Promise<Set> {
+
+
+async function addPieceToSet(pieceName: string, setId: string, pieceOwner: string): Promise<Set> {
+  console.log(setId);
   const set = await getSetById(setId);
-  const piece = await getPieceByID(pieceId);
+  const piece = await getPieceByName(pieceName, pieceOwner);
+  console.log(piece);
+  console.log(set);
+  const pieceId = piece.pieceId;
 
   if(piece.replaces === 'pawn' || piece.replaces === 'Pawn'){
     set.replacesPawn = pieceId;
@@ -58,4 +70,4 @@ async function addPieceToSet(pieceId: string, setId: string): Promise<Set> {
   return await SetRepository.save(set);
 }
 
-export { getSetByName, createSet, getSetById, addPieceToSet };
+export { getSetByName, createSet, getSetById, addPieceToSet, getAllSetsByOwner};

@@ -28,3 +28,7 @@ type MovePieceRequest = {
   currentX: number;
   currentY: number;
 };
+
+type PieceNameRequest = {
+  pieceName: string;
+}
