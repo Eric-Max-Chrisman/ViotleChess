@@ -21,14 +21,27 @@ const playerTwoEle = document.getElementById('playerTwoName');
 let playerOneName;
 let playerTwoName;
 
+function changeNames(playerOne, playerTwo) {
+  playerOneName = playerOne;
+  playerTwoName = playerTwo;
+
+  if (playerOneName) {
+    playerOneEle.innerHTML = playerOneName;
+  } else {
+    playerOneEle.innerHTML = '---';
+  }
+  if (playerTwoName) {
+    playerTwoEle.innerHTML = playerTwoName;
+  } else {
+    playerTwoEle.innerHTML = '---';
+  }
+}
+
 const socket = io();
 
 socket.on('enteredChat', (msg, playerOne, playerTwo) => {
   // enter
-  playerOneName = playerOne;
-  playerTwoName = playerTwo;
-  playerOneEle.innerHTML = playerOneName;
-  playerTwoEle.innerHTML = playerTwoName;
+  changeNames(playerOne, playerTwo);
 
   const item = document.createElement('li');
   item.classList.add('enterChatMessage');
@@ -36,8 +49,9 @@ socket.on('enteredChat', (msg, playerOne, playerTwo) => {
   messages.appendChild(item);
 });
 
-socket.on('exitedChat', (msg) => {
+socket.on('exitedChat', (msg, playerOne, playerTwo) => {
   // leave
+  changeNames(playerOne, playerTwo);
   const item = document.createElement('li');
   item.classList.add('enterChatMessage');
   item.textContent = `${msg}`;

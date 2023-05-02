@@ -184,7 +184,7 @@ socketServer.on('connection', (socket) => {
     } else if (userName === playerTwo) {
       playerTwo = undefined;
     }
-    socketServer.emit('exitedChat', `${userName} has left the chat.`);
+    socketServer.emit('exitedChat', `${userName} has left the chat.`, playerOne, playerTwo);
   });
   //
   socketServer.emit('enteredChat', `${userName} has entered the chat`, playerOne, playerTwo);
