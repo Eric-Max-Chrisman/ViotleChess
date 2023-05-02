@@ -12,5 +12,6 @@ interface ServerToClientEvents {
 // to the server
 interface ClientToServerEvents {
   chatMessage: (msg: string) => void;
-  sendCoins: (to: string, amount: number) => void;
+  loadSet: (setName: string) => void;
+  setName: (setName: string) => void;
 }

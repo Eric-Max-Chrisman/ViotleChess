@@ -31,22 +31,22 @@ export class Set {
   // @OneToMany(() => CustomPiece, (customPiece) => customPiece.set, { cascade: ['insert', 'update'] })
   // customPieces: Relation<CustomPiece>[];
 
- // Use piece Ids in these spots
-  @Column({nullable: true})
+  // Use piece Ids in these spots
+  @Column({ nullable: true })
   replacesPawn: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   replacesRook: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   replacesKnight: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   replacesBishop: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   replacesKing: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   replacesQueen: string;
 }

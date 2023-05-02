@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="./style/stylesheet.css">
 </head>
 <body>
+
+  <h1 id = "setName"><%=setName></h1>
   <%
   const sizeX = 8;
   const sizeY = 8;
@@ -38,7 +40,7 @@
 
         // x axis
         const tempPiece = "♛";
-        %> <td class = "<%=backgroundColor%>" id = "<%=j%>,<%=i%>"><%= tempPiece%></td> <%
+        %> <td class = "<%=backgroundColor%>" id = "<%=j%> <%=i%>"><%= tempPiece%></td> <%
         tempArray.push(tempPiece);
       }
       isWhite = !isWhite;

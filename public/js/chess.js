@@ -2,14 +2,51 @@
 const chessBoard = document.getElementById('chessboard');
 const squares = Array.from(chessBoard.getElementsByTagName('td'));
 
+const pieces = [];
+
 squares.forEach((square) => {
+  const str = square.id;
+  const arr = str.split(' ');
+  const x = arr[0];
+  const y = arr[1];
+
+  const piece = {
+    x,
+    y,
+    name: '-',
+    team: 0, // 0 = space, 1 = white, 2 = black
+  };
+
+  pieces.push(piece);
+
   // make all squares clickable
   square.addEventListener('click', () => {
-    console.log(square.id);
+    console.log(`${x} ${y}`);
   });
-
-  //
 });
+
+// Print function
+function printTable() {
+  for (let i = 0; i < pieces.length; i += 1) {
+    if (i < 16) {
+      pieces[i].team = 1;
+    }
+    if (i > 47) {
+      pieces[i].team = 2;
+    }
+
+    if (pieces[i].team === 0) {
+      squares[i].innerHTML = ' ';
+    } else {
+      if (pieces[i].team === 1) {
+        squares[i].style.color = 'Crimson';
+      } else {
+        squares[i].style.color = 'Gold';
+      }
+      squares[i].innerHTML = pieces[i].name;
+    }
+  }
+}
 
 // CHAT ROOM AND PLAYER MANAGMENT
 const messages = document.getElementById('messages');
@@ -38,6 +75,12 @@ function changeNames(playerOne, playerTwo) {
 }
 
 const socket = io();
+
+socket.emit('setName', setName);
+
+// update values
+
+printTable();
 
 socket.on('enteredChat', (msg, playerOne, playerTwo) => {
   // enter

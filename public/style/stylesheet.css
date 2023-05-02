@@ -205,7 +205,8 @@ table.chessBoard {
 }
 
 .chessBoard td {
-  width: 10%;
+  width: 100px;
+  height: 40px;
   padding-top: 2.5%;
   padding-bottom: 2.5%;
   background-color: white;
