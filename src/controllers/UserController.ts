@@ -39,7 +39,6 @@ async function registerUser(req: Request, res: Response): Promise<void> {
     // res.sendStatus(201);
     res.render('login.ejs', {});
   } catch (errorMes) {
-    const errMes: string = 'One of your inputs is taken!';
     res.render('error.ejs', { errorMes });
   }
 }
@@ -53,8 +52,8 @@ async function logIn(req: Request, res: Response): Promise<void> {
   // console.log(`Username: ${user.userName}`);
 
   // Check if the user account exists for that email
+  const errorMes: string = "User Email or Password doesn't match";
   if (!user) {
-    const errorMes: string = "User Email Doesn't Exist";
     res.render('error.ejs', { errorMes });
     // res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
     return;
@@ -74,7 +73,6 @@ async function logIn(req: Request, res: Response): Promise<void> {
       req.session.logInAttempts += 1; // Increment by one
     }
     */
-    const errorMes: string = "User Password doesn't match";
     res.render('error.ejs', { errorMes });
     // res.sendStatus(404); // 404 Not Found (403 Forbidden would also make a lot of sense here)
     return;
@@ -149,7 +147,7 @@ async function getUserWithUsername(req: Request, res: Response): Promise<void> {
   }
 
   if (!sets) {
-    const errorMes = "No sets available";
+    const errorMes = 'No sets available';
     res.render('error', { errorMes });
     return;
   }

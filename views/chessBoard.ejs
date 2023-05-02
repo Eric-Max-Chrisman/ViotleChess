@@ -11,18 +11,17 @@
 </head>
 <body>
   <%
-  if(!!isDeafultSet){ %>
-    <p id = "test">is deafulat</p> <%
-  } else {%>
-    <p><%=setName%></p> <%
-  } %>
-
-  <%
   const sizeX = 8;
   const sizeY = 8;
   let isWhite = true;
   const gamePieces = []; // 2d array of pieces
   %>
+
+  <table class = "playerDisplay">
+  <tr>
+    <td class = "player">Player One<br><span id = "playerOneName">---</span></td>
+    <td>
+
 
   <table class = "chessBoard" border = "1" id = "chessboard" >
     <% if(!!isDeafultSet){ // default game
@@ -73,12 +72,20 @@
     }
     %>
   </table>
+      </td>
+      <td class = "player">Player Two<br><span id = "playerTwoName">---</span></td>
+    </tr>
+  </table>
 
-  <ul id="messages"></ul>
+  <div>
+    <div class = "messages">
+      <ul id="messages"></ul>
+    </div>
 
-  <form id="chatForm" action="">
-    <input id="chatMessage" autocomplete="off" /><button>Send</button>
-  </form>
+    <form id="chatForm" action="">
+      <input id="chatMessage" autocomplete="off" /><button>Send</button>
+    </form>
+  </div>
 
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>

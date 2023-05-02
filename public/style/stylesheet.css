@@ -196,9 +196,8 @@ a.login{
 
 
 table.chessBoard {
-
-  width: 40vw;
-  height: 10vw;
+  width: 30vw;
+  height: 5vw;
   border-collapse: separate;
   border: 3;
   border-color: yellow;
@@ -220,4 +219,22 @@ table.chessBoard {
   background-color: black;
 }
 
+div.messages{
+  color: yellow;
+  background-color: black;
+  height: 100px;
+  overflow: hidden;
+  overflow-y: scroll;
+  margin-top: 5px;
+  margin-left: 15% auto;
+  margin-right:15% auto;
+}
 
+table.playerDisplay{
+  text-align: center;
+  border: none;
+}
+
+.playerDisplay td.player{
+  width: 400px;
+}
