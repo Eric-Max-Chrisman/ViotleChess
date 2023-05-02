@@ -108,15 +108,21 @@ const server = app.listen(PORT, () => {
 
 // socket code
 const connectedClients: Record<string, CustomWebSocket> = {};
+let playerOne: string;
+let playerTwo: string;
+const playerTurn: boolean = true; // playerOne = true, playerTwo = false
 
 const socketServer = new Server<ClientToServerEvents, ServerToClientEvents, null, null>(server);
 
 socketServer.use((socket, next) => {
-  sessionMiddleware(socket.request as Request, {} as Response, next as NextFunction);
+  const res = {} as Response;
+  sessionMiddleware(socket.request as Request, res, next as NextFunction);
 });
 
+// test sever
 socketServer.on('connection', (socket) => {
   const req = socket.request;
+  const res = {} as Response;
 
   // We need this chunk of code so that socket.io
   // will automatically reload the session data
@@ -135,6 +141,7 @@ socketServer.on('connection', (socket) => {
   // are able to connect to a game
   if (!req.session.isLoggedIn) {
     console.log('An unauthenticated user attempted to connect.');
+    socket.emit('redirectLogin', '/login');
     socket.disconnect();
     return;
   }
@@ -143,11 +150,34 @@ socketServer.on('connection', (socket) => {
   const { userName } = authenticatedUser;
 
   console.log(`${userName} has connected`);
+
+  // olny two people allowed
+  if (!playerOne) {
+    playerOne = userName;
+  } else if (!playerTwo) {
+    playerTwo = userName;
+  } else if (userName !== playerOne || userName !== playerTwo) {
+    console.log(userName);
+    console.log('GET OUT');
+    return;
+  }
+
+  console.log('player one is');
+  console.log(playerOne);
+  console.log('playerTwo is');
+  console.log(playerTwo);
   connectedClients[userName] = socket;
 
   socket.on('disconnect', () => {
     delete connectedClients[userName];
     console.log(`${userName} has disconnected`);
+
+    // got to free that space now
+    if (userName === playerOne) {
+      playerOne = undefined;
+    } else if (userName === playerTwo) {
+      playerTwo = undefined;
+    }
     socketServer.emit('exitedChat', `${userName} has left the chat.`);
   });
 

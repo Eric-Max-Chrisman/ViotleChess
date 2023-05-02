@@ -63,7 +63,7 @@
 
           // x axis
           const tempPiece = "♛";
-          %> <td onclick="clickDetected(this)" class = "<%=backgroundColor%>" id = "<%=j%>,<%=i%>"><%= tempPiece%></td> <%
+          %> <td  class = "<%=backgroundColor%>" id = "<%=j%> <%=i%>"><%= tempPiece%></td> <%
           tempArray.push(tempPiece);
         }
         isWhite = !isWhite;
@@ -74,7 +74,11 @@
     %>
   </table>
 
+  <ul id="messages"></ul>
 
+  <form id="chatForm" action="">
+    <input id="chatMessage" autocomplete="off" /><button>Send</button>
+  </form>
 
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>

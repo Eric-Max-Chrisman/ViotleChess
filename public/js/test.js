@@ -14,6 +14,10 @@ socket.on('enteredChat', (msg) => {
   window.scrollTo(0, document.body.scrollHeight);
 });
 
+socket.on('redirect', (url) => {
+  window.location.href = url;
+});
+
 socket.on('exitedChat', (msg) => {
   // leave
   const item = document.createElement('li');

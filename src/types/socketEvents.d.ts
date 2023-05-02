@@ -5,6 +5,7 @@ interface ServerToClientEvents {
   exitedChat: (msg: string) => void;
   chatMessage: (name: string, msg: string) => void;
   receiveCoins: (from: string, amount: number, newBalance: number) => void;
+  redirectLogin: (url: string) => void;
 }
 
 // This is used for the messages from a client
