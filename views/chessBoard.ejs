@@ -24,6 +24,12 @@
   const gamePieces = []; // 2d array of pieces
   %>
 
+  <table>
+  <tr>
+    <td>player one : eric</td>
+    <td>
+
+
   <table class = "chessBoard" border = "1" id = "chessboard" >
     <% if(!!isDeafultSet){ // default game
       for (let i = 0; i < sizeY; i += 1) {
@@ -73,12 +79,20 @@
     }
     %>
   </table>
+      </td>
+      <td>player two: hayden</td>
+    </tr>
+  </table>
 
-  <ul id="messages"></ul>
+  <div>
+    <div class = "messages">
+      <ul id="messages"></ul>
+    </div>
 
-  <form id="chatForm" action="">
-    <input id="chatMessage" autocomplete="off" /><button>Send</button>
-  </form>
+    <form id="chatForm" action="">
+      <input id="chatMessage" autocomplete="off" /><button>Send</button>
+    </form>
+  </div>
 
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>
