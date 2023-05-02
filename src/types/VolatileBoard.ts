@@ -1,19 +1,19 @@
-// import point2d
-// import set
+import { getPieceDataSockets } from '../controllers/PieceController';
 // import LeaderBoard?
-//
+import { getAllIdsInSet } from '../models/SetModel';
 
-type piece = {
+type Piece = {
   name: string;
   picture: string;
-  team: number;
+  team: number; // 0 white / 1 black
 };
 
 export class VolatileBoard {
-  constructor(setName: number, sizeX: number = 8, sizeY: number = 8) {
+  constructor(setName: string, sizeX: number = 8, sizeY: number = 8) {
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     this.gamePieces = [];
+    this.setName = setName;
 
     // loop to generate space for pieces
     for (let i: number = 0; i < this.sizeY; i += 1) {
@@ -21,7 +21,7 @@ export class VolatileBoard {
       const tempArray: Piece[] = [];
       for (let j: number = 0; j < this.sizeX; j += 1) {
         // x axis
-        const tempPiece = new Piece('null', 3, new Point2D(j, i));
+        const tempPiece: Piece = { name: 'empty', picture: ' ', team: 0 };
         tempArray.push(tempPiece);
       }
       this.gamePieces.push(tempArray);
@@ -30,14 +30,34 @@ export class VolatileBoard {
 
   async asyncConstructor(): Promise<void> {
     // get list of customPieces IDs from set name
-    const pieceIDs: string = await getPiecesFromSetName(this.setName);
+    const pieceIDs: string[] = await getAllIdsInSet(this.setName);
 
     // we need a king to play this game
     const kingFound: boolean = false;
 
     // set the pieces
     for (let i: number = 0; i < pieceIDs.length; i += 1) {
-      currentPiece = await getPieceDataSockets(pieceIDs[i]);
+      const currentPiece = await getPieceDataSockets(pieceIDs[i]);
+
+      switch (currentPiece.replaces.toLowerCase()) {
+        case 'pawn':
+          // pawn stuff
+          break;
+        case 'knight':
+          // knight
+          break;
+        case 'rook':
+          break;
+        case 'bishop':
+          break;
+        case 'queen':
+          break;
+        case 'king':
+          // king found
+          break;
+        default:
+        // oh no
+      }
     }
   }
 
@@ -58,6 +78,8 @@ export class VolatileBoard {
   // The space lost isn't that bad from this structure for we are dealing with board of 8 by 8 for this project
   // private nullPiece: Piece; Not sure if this is the best way
 
-  // false = white's turn // true = black's turn
-  private playerMove: boolean = false;
+  // 0 = white's turn // 1 = black's turn
+  private playerMove: number = 0;
+
+  private setName: string;
 }
