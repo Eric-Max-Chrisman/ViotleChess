@@ -42,7 +42,7 @@ async function getAllPiecesByOwner(owner: string): Promise<CustomPiece[]> {
   return await pieceRepository
     .createQueryBuilder('piece')
     .leftJoinAndSelect('piece.moves', 'moves')
-    .where('piece.owner = owner', { owner })
+    .where('piece.owner = :owner', { owner })
     .getMany();
 }
 
@@ -160,4 +160,29 @@ async function addMove(
   return await pieceRepository.save(piece);
 }
 
-export { addPiece, getPieceByID, interperateMoves, addMove, getPieceByName, getAllPiecesByOwner };
+async function pieceBelongsToUser(pieceId: string, owner: string): Promise<boolean> {
+  return await pieceRepository
+    .createQueryBuilder('piece')
+    .where('piece.pieceId = :pieceId', { pieceId })
+    .andWhere('user.userId = :owner', { owner })
+    .getExists();
+}
+
+async function deletePieceById(pieceId: string): Promise<void> {
+  await pieceRepository
+    .createQueryBuilder('piece')
+    .delete()
+    .where('piece.pieceId = :pieceId', { pieceId })
+    .execute();
+}
+
+export {
+  addPiece,
+  getPieceByID,
+  interperateMoves,
+  addMove,
+  getPieceByName,
+  getAllPiecesByOwner,
+  pieceBelongsToUser,
+  deletePieceById,
+};
