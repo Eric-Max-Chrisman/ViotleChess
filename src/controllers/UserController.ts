@@ -8,6 +8,7 @@ import {
   getUserByUsername,
 } from '../models/UserModel';
 import { parseDatabaseError } from '../utils/db-utils';
+import { getAllSetsByOwner } from '../models/SetModel'
 
 async function getAuthUserNameFromSession(req: Request): Promise<string | null> {
   const { authenticatedUser } = req.session;
@@ -134,7 +135,10 @@ async function updateUserEmail(req: Request, res: Response): Promise<void> {
 // for other functions
 async function getUserWithUsername(req: Request, res: Response): Promise<void> {
   const { userName } = req.params as UsernameParam;
+  const ownerId = req.session.authenticatedUser.userId;
+
   const tempUser = await getUserByUsername(userName);
+  const sets = await getAllSetsByOwner(ownerId)
 
   if (!tempUser) {
     const errorMes = "User Doesn't exist";
@@ -142,7 +146,13 @@ async function getUserWithUsername(req: Request, res: Response): Promise<void> {
     return;
   }
 
-  res.render('userPage.ejs', { tempUser });
+  if (!sets) {
+    const errorMes = "No sets available";
+    res.render('error', { errorMes });
+    return;
+  }
+
+  res.render('userPage.ejs', { tempUser, sets });
 }
 
 async function loadFindPage(req: Request, res: Response): Promise<void> {

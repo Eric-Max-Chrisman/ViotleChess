@@ -5,7 +5,7 @@ import { Point2D } from '../entities/Point2D';
 
 const pieceRepository = AppDataSource.getRepository(CustomPiece);
 async function addPiece(pieceName: string, replaces: string, userId: string): Promise<CustomPiece> {
-  // Create the new user object
+  // Create the new piece object
   let newPiece = new CustomPiece();
   newPiece.pieceName = pieceName;
   newPiece.replaces = replaces;
@@ -24,6 +24,16 @@ async function getPieceByID(pieceId: string): Promise<CustomPiece | null> {
     .createQueryBuilder('piece')
     .leftJoinAndSelect('piece.moves', 'moves')
     .where('piece.pieceId = :pieceId', { pieceId })
+    .getOne();
+  return piece;
+}
+
+async function getPieceByName(pieceName: string, ownerId: string): Promise<CustomPiece | null> {
+  const piece = await pieceRepository
+    .createQueryBuilder('piece')
+    .leftJoinAndSelect('piece.moves', 'moves')
+    .where('piece.pieceName = :pieceName', { pieceName })
+    .andWhere('piece.ownerId = ownerId', { ownerId })
     .getOne();
   return piece;
 }
@@ -99,6 +109,13 @@ async function interperateMoves(
   // add X to current.X and repeat for Y.
   // add new Point2D to array
 
+  if(piece.pieceColor === 1){ // If piece is on black side
+    for (let i: number = 0; i < validPoints.length; i++){
+      validPoints[i].x = validPoints[i].x * -1;
+      validPoints[i].y = validPoints[i].y * -1;
+    }
+  }
+
   piece.validPoints = validPoints;
   // for (const point of piece.validPoints) {
   //   console.log(`DEBUG: (${point.x}, ${point.y})`);
@@ -131,4 +148,4 @@ async function addMove(
   return await pieceRepository.save(piece);
 }
 
-export { addPiece, getPieceByID, interperateMoves, addMove };
+export { addPiece, getPieceByID, interperateMoves, addMove, getPieceByName};
