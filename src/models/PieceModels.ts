@@ -38,11 +38,12 @@ async function getPieceByName(pieceName: string, owner: string): Promise<CustomP
   return piece;
 }
 
-async function getAllPiecesByOwner(owner: string): Promise<CustomPiece[]>{
-  return await pieceRepository.createQueryBuilder('piece')
-  .leftJoinAndSelect('piece.moves', 'moves')
-  .where('piece.owner = owner', {owner})
-  .getMany()
+async function getAllPiecesByOwner(owner: string): Promise<CustomPiece[]> {
+  return await pieceRepository
+    .createQueryBuilder('piece')
+    .leftJoinAndSelect('piece.moves', 'moves')
+    .where('piece.owner = owner', { owner })
+    .getMany();
 }
 
 async function interperateMoves(
@@ -116,8 +117,9 @@ async function interperateMoves(
   // add X to current.X and repeat for Y.
   // add new Point2D to array
 
-  if(piece.pieceColor === 1){ // If piece is on black side
-    for (let i: number = 0; i < validPoints.length; i++){
+  if (piece.pieceColor === 1) {
+    // If piece is on black side
+    for (let i: number = 0; i < validPoints.length; i++) {
       validPoints[i].x = validPoints[i].x * -1;
       validPoints[i].y = validPoints[i].y * -1;
     }
@@ -142,8 +144,8 @@ async function addMove(
   const newMove = new Move();
   newMove.moveX = x;
   newMove.moveY = y;
-  newMove.repeating = (!!repeating);
-  if(special === null){
+  newMove.repeating = !!repeating;
+  if (special === null) {
     special = 'none';
   }
   newMove.special = special;
@@ -158,4 +160,4 @@ async function addMove(
   return await pieceRepository.save(piece);
 }
 
-export { addPiece, getPieceByID, interperateMoves, addMove, getPieceByName, getAllPiecesByOwner};
+export { addPiece, getPieceByID, interperateMoves, addMove, getPieceByName, getAllPiecesByOwner };

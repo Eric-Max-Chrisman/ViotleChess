@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { addPiece, getPieceByID, interperateMoves, addMove } from '../models/PieceModels';
 import { parseDatabaseError } from '../utils/db-utils';
+import { CustomPiece } from '../entities/CustomPiece';
 // import { Point2D } from '../entities/Point2D';
 
 async function createPiece(req: Request, res: Response): Promise<void> {
@@ -28,6 +29,13 @@ async function getPieceData(req: Request, res: Response): Promise<void> {
   }
   console.log(piece);
   res.json(piece);
+}
+
+async function getPieceDataSockets(pieceId: string): Promise<CustomPiece | null> {
+  const piece: CustomPiece = await getPieceByID(pieceId);
+
+  console.log(piece);
+  return piece;
 }
 
 async function generateMoves(req: Request, res: Response): Promise<void> {
@@ -60,27 +68,35 @@ async function addNewMove(req: Request, res: Response): Promise<void> {
   console.log(piece);
 
   // replace with redirect to Custom Piece viewing page
-  res.render('addMoves.ejs', {piece});
+  res.render('addMoves.ejs', { piece });
 }
 
-async function redirectMovePage(req: Request, res: Response): Promise<void>{
-  const {pieceId} = req.params as PieceId;
+async function redirectMovePage(req: Request, res: Response): Promise<void> {
+  const { pieceId } = req.params as PieceId;
   const piece = await getPieceByID(pieceId);
 
-  if(!piece){
+  if (!piece) {
     console.log('NoPieceFound');
     return;
   }
   console.log(piece);
 
-  res.render(`addMoves.ejs`, {piece});
+  res.render(`addMoves.ejs`, { piece });
 }
 
-async function displayPiece(req: Request, res: Response): Promise<void>{
+async function displayPiece(req: Request, res: Response): Promise<void> {
   const { pieceId } = req.params as PieceId;
   const piece = await getPieceByID(pieceId);
 
-  res.render('viewPiece.ejs', {piece});
+  res.render('viewPiece.ejs', { piece });
 }
 
-export { createPiece, getPieceData, generateMoves, addNewMove, redirectMovePage, displayPiece};
+export {
+  createPiece,
+  getPieceData,
+  generateMoves,
+  addNewMove,
+  redirectMovePage,
+  displayPiece,
+  getPieceDataSockets,
+};
