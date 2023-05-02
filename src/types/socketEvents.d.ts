@@ -1,7 +1,7 @@
 // This is used to send messages from the server
 // to a specific client or broadcast to multiple clients
 interface ServerToClientEvents {
-  enteredChat: (msg: string) => void;
+  enteredChat: (msg: string, playerOne: string, playerTwo: string) => void;
   exitedChat: (msg: string) => void;
   chatMessage: (name: string, msg: string) => void;
   receiveCoins: (from: string, amount: number, newBalance: number) => void;

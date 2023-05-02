@@ -230,3 +230,11 @@ div.messages{
   margin-right:15% auto;
 }
 
+table.playerDisplay{
+  text-align: center;
+  border: none;
+}
+
+.playerDisplay td.player{
+  width: 400px;
+}

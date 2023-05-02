@@ -11,22 +11,15 @@
 </head>
 <body>
   <%
-  if(!!isDeafultSet){ %>
-    <p id = "test">is deafulat</p> <%
-  } else {%>
-    <p><%=setName%></p> <%
-  } %>
-
-  <%
   const sizeX = 8;
   const sizeY = 8;
   let isWhite = true;
   const gamePieces = []; // 2d array of pieces
   %>
 
-  <table>
+  <table class = "playerDisplay">
   <tr>
-    <td>player one : eric</td>
+    <td class = "player">Player One<br><span id = "playerOneName">---</span></td>
     <td>
 
 
@@ -80,7 +73,7 @@
     %>
   </table>
       </td>
-      <td>player two: hayden</td>
+      <td class = "player">Player Two<br><span id = "playerTwoName">---</span></td>
     </tr>
   </table>
 

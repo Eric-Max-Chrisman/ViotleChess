@@ -6,7 +6,12 @@ import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { Server, Socket } from 'socket.io';
-import { createNewSet, getSetWithName, getSetWithId, addNewPieceToSet  } from './controllers/setController';
+import {
+  createNewSet,
+  getSetWithName,
+  getSetWithId,
+  addNewPieceToSet,
+} from './controllers/setController';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -80,7 +85,7 @@ app.post('/piece/:pieceId/generate', generateMoves);
 app.post('/set/createSet', createNewSet);
 app.get('/set/name/:setName', getSetWithName);
 app.get('/set/id/:setId', getSetWithId);
-app.post('/set/:setId/addPiece', addNewPieceToSet)
+app.post('/set/:setId/addPiece', addNewPieceToSet);
 // test
 app.get('/test', (req, res) => {
   res.render('test.ejs', {});
@@ -166,6 +171,7 @@ socketServer.on('connection', (socket) => {
   console.log(playerOne);
   console.log('playerTwo is');
   console.log(playerTwo);
+
   connectedClients[userName] = socket;
 
   socket.on('disconnect', () => {
@@ -180,8 +186,8 @@ socketServer.on('connection', (socket) => {
     }
     socketServer.emit('exitedChat', `${userName} has left the chat.`);
   });
-
-  socketServer.emit('enteredChat', `${userName} has entered the chat`);
+  //
+  socketServer.emit('enteredChat', `${userName} has entered the chat`, playerOne, playerTwo);
 
   socket.on('chatMessage', (msg: string) => {
     console.log(`received a chatMessage event from the client: ${userName}`);
