@@ -47,7 +47,7 @@ function printTable() {
     }
   }
 }
-printTable();
+
 // CHAT ROOM AND PLAYER MANAGMENT
 const messages = document.getElementById('messages');
 const chatForm = document.getElementById('chatForm');
@@ -75,6 +75,12 @@ function changeNames(playerOne, playerTwo) {
 }
 
 const socket = io();
+
+socket.emit('setName', setName);
+
+// update values
+
+printTable();
 
 socket.on('enteredChat', (msg, playerOne, playerTwo) => {
   // enter

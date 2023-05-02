@@ -197,4 +197,8 @@ socketServer.on('connection', (socket) => {
     console.log(`received a chatMessage event from the client: ${userName}`);
     socketServer.emit('chatMessage', userName, msg);
   });
+
+  socket.on('setName', (setName: string) => {
+    console.log(`setName: ${setName}`);
+  });
 });
