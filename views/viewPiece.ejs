@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View <%= piece.ieceName %></title>
+  <link rel="stylesheet" href="/style/stylesheet.css">
+</head>
+<body>
+  <h1>Viewing <%= piece.pieceName %></h1>
+  <p>Replaces: <%= piece.replaces %></p>
+  <h2>Moves: </h2>
+  <% for( const move of piece.moves) {%>
+    <fieldset>
+      <p>X: <%= move.moveX %></p>
+      <p>Y: <%= move.moveY %></p>
+      <p>special: <%= move.special %></p>
+      <p>repeating: <%= move.repeating %></p>
+    </fieldset>
+      <% } %>
+    </fieldset>
+
+
+  <div class = "navbar">
+    <a href = "/">Volatile Chess</a>
+    <a href = "/createUser">Register Account</a>
+    <a href = "/login">Login</a>
+    <a href = "/users">Find User</a>
+  </div>
+</body>
+</html>

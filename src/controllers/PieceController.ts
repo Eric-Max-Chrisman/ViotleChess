@@ -60,7 +60,27 @@ async function addNewMove(req: Request, res: Response): Promise<void> {
   console.log(piece);
 
   // replace with redirect to Custom Piece viewing page
-  res.sendStatus(201);
+  res.render('addMoves.ejs', {piece});
 }
 
-export { createPiece, getPieceData, generateMoves, addNewMove };
+async function redirectMovePage(req: Request, res: Response): Promise<void>{
+  const {pieceId} = req.params as PieceId;
+  const piece = await getPieceByID(pieceId);
+
+  if(!piece){
+    console.log('NoPieceFound');
+    return;
+  }
+  console.log(piece);
+
+  res.render(`addMoves.ejs`, {piece});
+}
+
+async function displayPiece(req: Request, res: Response): Promise<void>{
+  const { pieceId } = req.params as PieceId;
+  const piece = await getPieceByID(pieceId);
+
+  res.render('viewPiece.ejs', {piece});
+}
+
+export { createPiece, getPieceData, generateMoves, addNewMove, redirectMovePage, displayPiece};

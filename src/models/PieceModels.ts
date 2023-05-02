@@ -28,14 +28,21 @@ async function getPieceByID(pieceId: string): Promise<CustomPiece | null> {
   return piece;
 }
 
-async function getPieceByName(pieceName: string, ownerId: string): Promise<CustomPiece | null> {
+async function getPieceByName(pieceName: string, owner: string): Promise<CustomPiece | null> {
   const piece = await pieceRepository
     .createQueryBuilder('piece')
     .leftJoinAndSelect('piece.moves', 'moves')
     .where('piece.pieceName = :pieceName', { pieceName })
-    .andWhere('piece.ownerId = ownerId', { ownerId })
+    .andWhere('piece.owner = owner', { owner })
     .getOne();
   return piece;
+}
+
+async function getAllPiecesByOwner(owner: string): Promise<CustomPiece[]>{
+  return await pieceRepository.createQueryBuilder('piece')
+  .leftJoinAndSelect('piece.moves', 'moves')
+  .where('piece.owner = owner', {owner})
+  .getMany()
 }
 
 async function interperateMoves(
@@ -135,7 +142,10 @@ async function addMove(
   const newMove = new Move();
   newMove.moveX = x;
   newMove.moveY = y;
-  newMove.repeating = repeating;
+  newMove.repeating = (!!repeating);
+  if(special === null){
+    special = 'none';
+  }
   newMove.special = special;
   newMove.customPiece = piece;
 
@@ -148,4 +158,4 @@ async function addMove(
   return await pieceRepository.save(piece);
 }
 
-export { addPiece, getPieceByID, interperateMoves, addMove, getPieceByName};
+export { addPiece, getPieceByID, interperateMoves, addMove, getPieceByName, getAllPiecesByOwner};

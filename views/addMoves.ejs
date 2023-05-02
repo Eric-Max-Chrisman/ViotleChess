@@ -5,10 +5,63 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Moves</title>
-  <link rel="stylesheet" href="./style/stylesheet.css">
+  <link rel="stylesheet" href="/style/stylesheet.css">
 </head>
 <body>
-  <h1>Add Moves to A Piece</h1>
+  <h1>Add Moves to <%= piece.pieceName %></h1>
+  <form action="/<%= piece.pieceId %>/move" method="post">
+  <div>
+    <input type="number" max="8" min="-8" id="x" name="x">
+    <label for="x">X Distance</label>
+  </div>
+
+  <div>
+    <input type="number" max="8" min="-8" id="y" name="y">
+    <label for="y">Y Distance</label>
+  </div>
+
+  <div>
+    <input type="checkbox" name="repeating" id="repeating">
+    <label for="repeating">Repeating</label>
+  </div>
+
+  <fieldset>
+    <legend>Select A Special Move</legend>
+
+  <div>
+
+  <input type="radio" id="special" name="special" value="None" checked>
+  <label for="special">None</label>
+
+    </div>
+  <div>
+
+  <input type="radio" id="special" name="special" value="Pawn Diagonal" >
+  <label for="special">Pawn Diagonal</label>
+
+    </div>
+    </fieldset>
+
+  <div><button>Add</button></div>
+  </form>
+
+  <a href="/piece/view/<%= piece.pieceId %>" >View <%= piece.pieceName %></a>
+
+  <p>Notes:</p>
+    <p>Positive X: Right.</p>
+    <p>Negative X: Left.</p>
+    <p>Positive Y: Up.</p>
+    <p>Negative Y: down.</p>
+
+    <p>Bounds: [8, -8]</p>
+  </p>
+
+  <div class = "navbar">
+    <a href = "/">Volatile Chess</a>
+    <a href = "/createUser">Register Account</a>
+    <a href = "/login">Login</a>
+    <a href = "/users">Find User</a>
+  </div>
 
 </body>
 </html>

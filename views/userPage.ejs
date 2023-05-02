@@ -20,6 +20,17 @@
         <% } %>
   </div>
 
+  <div class = "textBox">
+    <p><%=tempUser.userName%>'s Pieces:</p>
+      <!-- Hadyen, this is where you should add code for set stuff -->
+      <!-- follow index endpoint for /users/username -->
+      <% for( const piece of pieces ) { %>
+        <div class="piece">
+          <a href='/<%= piece.pieceId %>/move'><%= piece.pieceName %></a>
+        </div>
+        <% } %>
+  </div>
+
   <a href = "/chess";>chess board</a>
   <a href = "/createPiece";>Create A New Piece</a>
 

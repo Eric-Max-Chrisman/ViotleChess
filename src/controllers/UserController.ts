@@ -8,7 +8,8 @@ import {
   getUserByUsername,
 } from '../models/UserModel';
 import { parseDatabaseError } from '../utils/db-utils';
-import { getAllSetsByOwner } from '../models/SetModel'
+import { getAllSetsByOwner } from '../models/SetModel';
+import { getAllPiecesByOwner } from '../models/PieceModels';
 
 async function getAuthUserNameFromSession(req: Request): Promise<string | null> {
   const { authenticatedUser } = req.session;
@@ -138,7 +139,8 @@ async function getUserWithUsername(req: Request, res: Response): Promise<void> {
   const ownerId = req.session.authenticatedUser.userId;
 
   const tempUser = await getUserByUsername(userName);
-  const sets = await getAllSetsByOwner(ownerId)
+  const sets = await getAllSetsByOwner(ownerId);
+  const pieces = await getAllPiecesByOwner(ownerId);
 
   if (!tempUser) {
     const errorMes = "User Doesn't exist";
@@ -152,7 +154,7 @@ async function getUserWithUsername(req: Request, res: Response): Promise<void> {
     return;
   }
 
-  res.render('userPage.ejs', { tempUser, sets });
+  res.render('userPage.ejs', { tempUser, sets, pieces });
 }
 
 async function loadFindPage(req: Request, res: Response): Promise<void> {
