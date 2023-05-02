@@ -7,7 +7,7 @@ import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { Server, Socket } from 'socket.io';
 import { createNewSet, getSetWithName, getSetWithId, addNewPieceToSet  } from './controllers/setController';
-import { redirectMovePage, displayPiece } from './controllers/PieceController';
+import { redirectMovePage, displayPiece, deleteUserPiece} from './controllers/PieceController';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -75,6 +75,7 @@ app.get('/piece');
 app.get('/piece/:pieceId', getPieceData);
 app.post('/:pieceId/move', addNewMove); // You need to add a controller function for this inorder to pass a parameter into addMove
 app.get('/:pieceId/move', redirectMovePage);
+app.post('/piece/:pieceId', deleteUserPiece);
 
 app.post('/piece/:pieceId/generate', generateMoves);
 app.get('/piece/view/:pieceId', displayPiece);

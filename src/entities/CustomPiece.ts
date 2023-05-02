@@ -43,7 +43,7 @@ export class CustomPiece {
 
   // This will probably need to be One to Many on this side.
   @OneToMany(() => Point2D, (validPoints) => validPoints.customPiece2, {
-    cascade: ['insert', 'update'],
+    cascade: ['insert', 'update', 'remove'],
   })
   validPoints: Relation<Point2D>[];
 
@@ -66,7 +66,7 @@ export class CustomPiece {
     cascade: ['insert', 'update'],
   })
   @JoinTable()
-  users: Relation<CustomPiece>[];
+  users: Relation<User>[];
 
   // will be just sending userId for this relations original use. Keeping comment in case I need it again
   // @ManyToOne(() => User, (owner) => owner.ownedPieces, {
@@ -77,6 +77,6 @@ export class CustomPiece {
   // @ManyToOne(() => Set, (set) => set.customPieces, { cascade: ['insert', 'update'] })
   // set: Relation<Set>;
 
-  @OneToMany(() => Move, (moves) => moves.customPiece, { cascade: ['insert', 'update'] })
+  @OneToMany(() => Move, (moves) => moves.customPiece, { cascade: ['insert', 'update', 'remove'] })
   moves: Relation<Move>[];
 }

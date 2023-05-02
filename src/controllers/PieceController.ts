@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
-import { addPiece, getPieceByID, interperateMoves, addMove } from '../models/PieceModels';
+import { addPiece, getPieceByID, interperateMoves, addMove, pieceBelongsToUser, deletePieceById, getAllPiecesByOwner } from '../models/PieceModels';
 import { parseDatabaseError } from '../utils/db-utils';
+import { getUserById } from '../models/UserModel'
+import { getAllSetsByOwner } from '../models/SetModel'
 // import { Point2D } from '../entities/Point2D';
 
 async function createPiece(req: Request, res: Response): Promise<void> {
@@ -10,7 +12,7 @@ async function createPiece(req: Request, res: Response): Promise<void> {
   try {
     const newPiece = await addPiece(pieceName, replaces, userId);
     console.log(newPiece);
-    res.sendStatus(201);
+    res.redirect(`/piece/view/${newPiece.pieceId}`);
   } catch (err) {
     console.error(err);
     const databaseErrorMessage = parseDatabaseError(err);
@@ -83,4 +85,31 @@ async function displayPiece(req: Request, res: Response): Promise<void>{
   res.render('viewPiece.ejs', {piece});
 }
 
-export { createPiece, getPieceData, generateMoves, addNewMove, redirectMovePage, displayPiece};
+async function deleteUserPiece(req: Request, res: Response): Promise<void> {
+  const isLoggedIn = req.session.isLoggedIn;
+  const ownerId = req.session.authenticatedUser.userId;
+  const { pieceId } = req.params as PieceId;
+  const piece = await getPieceByID(pieceId);
+  const user = await getUserById(ownerId);
+  const sets = await getAllSetsByOwner(ownerId);
+  const pieces = await getAllPiecesByOwner(ownerId);
+  console.log(ownerId);
+
+  if(!isLoggedIn){
+    res.redirect('/login');
+    return;
+  }
+
+  if (user.userId !== piece.owner){
+    res.sendStatus(403);
+    return;
+  }
+
+  await deletePieceById(pieceId);
+
+
+  res.render('userPage.ejs', {user, sets, pieces});
+
+}
+
+export { createPiece, getPieceData, generateMoves, addNewMove, redirectMovePage, displayPiece, deleteUserPiece};

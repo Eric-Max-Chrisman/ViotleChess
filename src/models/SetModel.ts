@@ -70,4 +70,20 @@ async function addPieceToSet(pieceName: string, setId: string, pieceOwner: strin
   return await SetRepository.save(set);
 }
 
-export { getSetByName, createSet, getSetById, addPieceToSet, getAllSetsByOwner};
+async function getAllIdsInSet(setName: string): Promise<string[]>{
+  const set = await getSetByName(setName);
+  let allIds = [];
+  allIds.push(set.replacesPawn);
+  allIds.push(set.replacesRook);
+  allIds.push(set.replacesKnight);
+  allIds.push(set.replacesBishop);
+  allIds.push(set.replacesKing);
+  allIds.push(set.replacesQueen);
+
+  console.log(allIds);
+
+  return allIds;
+
+}
+
+export { getSetByName, createSet, getSetById, addPieceToSet, getAllSetsByOwner, getAllIdsInSet};
