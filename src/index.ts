@@ -6,8 +6,20 @@ import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { Server, Socket } from 'socket.io';
-import { createNewSet, getSetWithName, getSetWithId, addNewPieceToSet  } from './controllers/setController';
-import { redirectMovePage, displayPiece } from './controllers/PieceController';
+import {
+  createNewSet,
+  getSetWithName,
+  getSetWithId,
+  addNewPieceToSet,
+} from './controllers/setController';
+import {
+  redirectMovePage,
+  displayPiece,
+  createPiece,
+  getPieceData,
+  generateMoves,
+  addNewMove,
+} from './controllers/PieceController';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -18,12 +30,6 @@ import {
   loadFindPage,
   redirectUserPage,
 } from './controllers/UserController';
-import {
-  createPiece,
-  getPieceData,
-  generateMoves,
-  addNewMove,
-} from './controllers/PieceController';
 import { loadChessPage, loadDeafulatChessPage } from './controllers/chessController';
 //
 dotenv.config();
@@ -160,15 +166,15 @@ socketServer.on('connection', (socket) => {
   } else if (!playerTwo) {
     playerTwo = userName;
   } else if (userName !== playerOne || userName !== playerTwo) {
-    console.log(userName);
-    console.log('GET OUT');
+    // console.log(userName);
+    // console.log('GET OUT');
     return;
   }
 
-  console.log('player one is');
-  console.log(playerOne);
-  console.log('playerTwo is');
-  console.log(playerTwo);
+  // console.log('player one is');
+  // console.log(playerOne);
+  // console.log('playerTwo is');
+  // console.log(playerTwo);
 
   connectedClients[userName] = socket;
 
