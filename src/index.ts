@@ -6,8 +6,21 @@ import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { Server, Socket } from 'socket.io';
-import { createNewSet, getSetWithName, getSetWithId, addNewPieceToSet  } from './controllers/setController';
-import { generateMoves, getPieceData, createPiece, addNewMove, redirectMovePage, displayPiece, deleteUserPiece} from './controllers/PieceController';
+import {
+  createNewSet,
+  getSetWithName,
+  getSetWithId,
+  addNewPieceToSet,
+} from './controllers/setController';
+import {
+  generateMoves,
+  getPieceData,
+  createPiece,
+  addNewMove,
+  redirectMovePage,
+  displayPiece,
+  deleteUserPiece,
+} from './controllers/PieceController';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
