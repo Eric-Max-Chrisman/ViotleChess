@@ -33,7 +33,7 @@ import {
   loadFindPage,
   redirectUserPage,
 } from './controllers/UserController';
-import { loadChessPage, loadDeafulatChessPage } from './controllers/chessController';
+import { loadChessPage, boardElementsToPrint } from './controllers/chessController';
 //
 dotenv.config();
 const app: Express = express();
@@ -104,7 +104,7 @@ app.get('/test', (req, res) => {
 app.get('/users', loadFindPage);
 app.post('/userRedirect', redirectUserPage);
 
-app.get('/chess', loadDeafulatChessPage);
+// app.get('/chess', loadDeafulatChessPage);
 
 const server = app.listen(PORT, () => {
   console.log(`listsening at http://localhost:${PORT}`);
@@ -127,6 +127,7 @@ let playerOne: string;
 let playerTwo: string;
 const playerTurn: boolean = true; // playerOne = true, playerTwo = false
 let firstPlayerJoined: boolean = false;
+const myVolatileBoard = new VolatileBoard();
 
 const socketServer = new Server<ClientToServerEvents, ServerToClientEvents, null, null>(server);
 
@@ -168,9 +169,9 @@ socketServer.on('connection', (socket) => {
   console.log(`${userName} has connected`);
 
   // olny two people allowed
-  if (playerOne === undefined) {
+  if (playerOne === undefined && userName !== playerTwo) {
     playerOne = userName;
-  } else if (playerTwo === undefined) {
+  } else if (playerTwo === undefined && userName !== playerOne) {
     playerTwo = userName;
   } else if (userName !== playerOne || userName !== playerTwo) {
     // console.log(userName);
@@ -207,17 +208,18 @@ socketServer.on('connection', (socket) => {
 
   async function startGame(setName: string): Promise<void> {
     firstPlayerJoined = true;
-    const myVolatileBoard = new VolatileBoard(setName);
-    // await myVolatileBoard.asyncConstructor();
+    await myVolatileBoard.asyncConstructor(setName);
   }
 
   socket.on('setName', (setName: string) => {
-    console.log(setName);
     console.log(`setName: ${setName.toString()}`);
 
     // start game
     if (!firstPlayerJoined) {
       startGame(setName);
     }
+    socket.emit('print', myVolatileBoard.boardElementsToPrint());
   });
 });
+//
+//

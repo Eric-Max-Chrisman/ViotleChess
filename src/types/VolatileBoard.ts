@@ -9,11 +9,11 @@ type Piece = {
 };
 
 export class VolatileBoard {
-  constructor(setName: string, sizeX: number = 8, sizeY: number = 8) {
+  constructor(sizeX: number = 8, sizeY: number = 8) {
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     this.gamePieces = [];
-    this.setName = setName;
+    this.setName = '';
 
     // loop to generate space for pieces
     for (let i: number = 0; i < this.sizeY; i += 1) {
@@ -28,7 +28,8 @@ export class VolatileBoard {
     }
   }
 
-  async asyncConstructor(): Promise<void> {
+  async asyncConstructor(setName: string): Promise<void> {
+    this.setName = setName;
     // get list of customPieces IDs from set name
     const pieceIDs: string[] = await getAllIdsInSet(this.setName);
 
@@ -43,16 +44,18 @@ export class VolatileBoard {
 
       switch (currentPiece.replaces.toLowerCase()) {
         case 'pawn':
+          pieceToAdd.picture = '♟';
           for (let j: number = 0; j < 8; j += 1) {
-            this.gamePieces[j][6] = { ...pieceToAdd };
+            this.gamePieces[6][j] = { ...pieceToAdd };
           }
 
           pieceToAdd.team = 1;
           for (let j: number = 0; j < 8; j += 1) {
-            this.gamePieces[j][1] = { ...pieceToAdd };
+            this.gamePieces[1][j] = { ...pieceToAdd };
           }
           break;
         case 'knight':
+          pieceToAdd.picture = '♞';
           this.gamePieces[7][1] = { ...pieceToAdd };
           this.gamePieces[7][6] = { ...pieceToAdd };
 
@@ -62,6 +65,7 @@ export class VolatileBoard {
           // knight
           break;
         case 'rook':
+          pieceToAdd.picture = '♜';
           this.gamePieces[7][0] = { ...pieceToAdd };
           this.gamePieces[7][7] = { ...pieceToAdd };
 
@@ -70,6 +74,7 @@ export class VolatileBoard {
           this.gamePieces[0][7] = { ...pieceToAdd };
           break;
         case 'bishop':
+          pieceToAdd.picture = '♝';
           this.gamePieces[7][2] = { ...pieceToAdd };
           this.gamePieces[7][5] = { ...pieceToAdd };
 
@@ -78,11 +83,15 @@ export class VolatileBoard {
           this.gamePieces[0][5] = { ...pieceToAdd };
           break;
         case 'queen':
+          pieceToAdd.picture = '♛';
           this.gamePieces[7][4] = { ...pieceToAdd };
+          pieceToAdd.team = 1;
           this.gamePieces[0][4] = { ...pieceToAdd };
           break;
         case 'king':
+          pieceToAdd.picture = '♚';
           this.gamePieces[7][3] = { ...pieceToAdd };
+          pieceToAdd.team = 1;
           this.gamePieces[0][3] = { ...pieceToAdd };
           // kingFound = true;
           break;
@@ -92,6 +101,22 @@ export class VolatileBoard {
     }
   }
 
+  // create array to be displaied in clinet code
+  // [x][y] -> [x] = picture / [y] = color
+  boardElementsToPrint(): string[][] {
+    const elements: string[][] = [];
+    for (let i = 0; i < this.sizeX; i += 1) {
+      for (let j = 0; j < this.sizeY; j += 1) {
+        const element: string[] = [];
+        element.push(this.gamePieces[i][j].picture);
+        element.push(this.gamePieces[i][j].team.toString());
+        elements.push(element);
+      }
+    }
+    return elements;
+  }
+
+  //
   getGamePiece(x: number, y: number): Piece {
     return this.gamePieces[x][y];
   }

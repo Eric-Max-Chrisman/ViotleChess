@@ -16,6 +16,7 @@
       <% for( const set of sets ) { %>
         <div class="set">
           <a href='/set/id/<%= set.setId %>'><%= set.setName %></a>
+          <a href='/chess/<%=set.setName%>'>Play This Set</a>
         </div>
         <% } %>
   </div>

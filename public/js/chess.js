@@ -14,7 +14,7 @@ squares.forEach((square) => {
     x,
     y,
     name: '-',
-    team: 0, // 0 = space, 1 = white, 2 = black
+    team: 0, //  0 = white, 1 = black
   };
 
   pieces.push(piece);
@@ -115,4 +115,21 @@ socket.on('chatMessage', (name, msg) => {
   item.classList.add('chatMessage');
   item.textContent = `${name}: ${msg}`;
   messages.appendChild(item);
+});
+
+socket.on('print', (elements) => {
+  for (let i = 0; i < elements.length; i += 1) {
+    const tempValue = elements[i][0];
+    squares[i].innerHTML = tempValue;
+    pieces[i].name = tempValue;
+
+    const tempNumber = Number(elements[i][1]);
+    if (tempNumber === 0) {
+      squares[i].style.color = 'Crimson';
+      pieces[i].team = tempNumber;
+    } else {
+      squares[i].style.color = 'Gold';
+      pieces[i].team = tempNumber;
+    }
+  }
 });
