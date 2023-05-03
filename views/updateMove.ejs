@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Moves</title>
+  <link rel="stylesheet" href="/style/stylesheet.css">
+</head>
+<body>
+  <h1>Update A Move</h1>
+  <div class="textBox">
+    <form action='/piece/updateMove/<%= move.moveId %>' method="post">
+      <div>
+        <label for="newX">New X:</label>
+        <input type="number" name="newX" id="newX" max="8" min="-8" required>
+
+      </div>
+      <div>
+        <label for="newY">New Y:</label>
+        <input type="number" name="newY" id="newY" max="8" min="-8" required>
+
+      </div>
+
+      <div>
+        <label for="repeating">New Repeating:</label>
+        <input type="checkbox" name="repeating" id="repeating" >
+
+      </div>
+      <div>
+        <button>Update</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
