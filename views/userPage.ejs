@@ -15,7 +15,7 @@
       <!-- follow index endpoint for /users/username -->
       <% for( const set of sets ) { %>
         <div class="set">
-          <a href='/set/id/<%= set.setId %>'><%= set.setName %></a>
+          <a href='/set/id/<%= set.setId %>' class="login"><%= set.setName %></a>
           <a href='/chess/<%=set.setName%>'>Play This Set</a>
         </div>
         <% } %>
@@ -27,14 +27,14 @@
       <!-- follow index endpoint for /users/username -->
       <% for( const piece of pieces ) { %>
         <div class="piece">
-          <a href='/<%= piece.pieceId %>/move'><%= piece.pieceName %></a>
+          <a href='/<%= piece.pieceId %>/move' class="login"><%= piece.pieceName %></a>
         </div>
         <% } %>
   </div>
 
-  <a href = "/chess/help";>chess board</a>
-  <a href = "/createPiece";>Create A New Piece</a>
-  <a href="/set/createSet";>Create A new Set</a>
+  <a href = "/chess/help" class="login">chess board</a>
+  <a href = "/createPiece" class="login">Create A New Piece</a>
+  <a href="/set/createSet" class="login">Create A new Set</a>
 
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>

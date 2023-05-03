@@ -11,12 +11,12 @@
   <h1>Add Moves to <%= piece.pieceName %></h1>
   <form action="/<%= piece.pieceId %>/move" method="post">
   <div>
-    <input type="number" max="8" min="-8" id="x" name="x">
+    <input type="number" max="8" min="-8" id="x" name="x" required>
     <label for="x">X Distance</label>
   </div>
 
   <div>
-    <input type="number" max="8" min="-8" id="y" name="y">
+    <input type="number" max="8" min="-8" id="y" name="y" required>
     <label for="y">Y Distance</label>
   </div>
 
@@ -25,27 +25,12 @@
     <label for="repeating">Repeating</label>
   </div>
 
-  <fieldset>
-    <legend>Select A Special Move</legend>
-
-  <div>
-
-  <input type="radio" id="special" name="special" value="None" checked>
-  <label for="special">None</label>
-
-    </div>
-  <div>
-
-  <input type="radio" id="special" name="special" value="Pawn Diagonal" >
-  <label for="special">Pawn Diagonal</label>
-
-    </div>
-    </fieldset>
+  <input type="hidden" name="special" id="special" value="">
 
   <div><button>Add</button></div>
   </form>
 
-  <a href="/piece/view/<%= piece.pieceId %>" >View <%= piece.pieceName %></a>
+  <a href="/piece/view/<%= piece.pieceId %>" class="login">View <%= piece.pieceName %></a>
 
   <p>Notes:</p>
     <p>Positive X: Right.</p>

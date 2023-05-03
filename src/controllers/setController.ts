@@ -63,7 +63,6 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
   const ownerId = req.session.authenticatedUser.userId;
   const { userName } = req.params as UsernameParam;
 
-
   const tempUser = await getUserByUsername(userName);
   const sets = await getAllSetsByOwner(ownerId);
   const pieces = await getAllPiecesByOwner(ownerId);
@@ -74,8 +73,9 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
   }
   try {
     const newSet = await createSet(ownerId, setName);
+    sets.push(newSet);
     console.log(newSet);
-    res.render('userPage.ejs', { tempUser, sets, pieces});
+    res.redirect(`/users/${tempUser.userName}`));
   } catch (err) {
     console.error(err);
     const databaseErrorMessage = parseDatabaseError(err);
