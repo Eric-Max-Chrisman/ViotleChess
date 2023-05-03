@@ -12,6 +12,7 @@ import { parseDatabaseError } from '../utils/db-utils';
 import { getUserById } from '../models/UserModel';
 import { getAllSetsByOwner } from '../models/SetModel';
 import { CustomPiece } from '../entities/CustomPiece';
+import { updateMove, getMoveById } from '../models/MoveModel'
 // import { Point2D } from '../entities/Point2D';
 
 async function createPiece(req: Request, res: Response): Promise<void> {
@@ -126,6 +127,22 @@ async function deleteUserPiece(req: Request, res: Response): Promise<void> {
   res.render('userPage.ejs', { user, sets, pieces });
 }
 
+async function updateMoveData(req: Request, res: Response): Promise<void>{
+  const user = req.session.authenticatedUser;
+  const {moveId} = req.params as MoveIdRequest;
+  const { newX, newY, repeating } = req.body as NewMoveRequest;
+  const move = await getMoveById(moveId);
+  await updateMove(move, newX, newY, !!repeating);
+
+  res.redirect(`/users/${user.userName}`);
+}
+
+async function displayMoveEditor(req: Request, res: Response): Promise<void>{
+  const { moveId } = req.params as MoveIdRequest;
+  const move = await getMoveById(moveId);
+  res.render('updateMove.ejs', { move });
+}
+
 export {
   createPiece,
   getPieceData,
@@ -135,4 +152,6 @@ export {
   displayPiece,
   deleteUserPiece,
   getPieceDataSockets,
+  updateMoveData,
+  displayMoveEditor
 };

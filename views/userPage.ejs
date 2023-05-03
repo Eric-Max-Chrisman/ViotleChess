@@ -15,8 +15,10 @@
       <!-- follow index endpoint for /users/username -->
       <% for( const set of sets ) { %>
         <div class="set">
-          <a href='/set/id/<%= set.setId %>' class="login"><%= set.setName %></a>
-          <a href='/chess/<%=set.setName%>'>Play This Set</a>
+          <p>
+          <span><a href='/set/id/<%= set.setId %>' class="login"><%= set.setName %></a></span>
+          <span> | <a href='/chess/<%=set.setName%>' class="login">Play This Set</a></span>
+        </p>
         </div>
         <% } %>
   </div>

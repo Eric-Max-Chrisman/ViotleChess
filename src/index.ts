@@ -21,8 +21,11 @@ import {
   redirectMovePage,
   displayPiece,
   deleteUserPiece,
+  updateMoveData,
+  displayMoveEditor
 } from './controllers/PieceController';
 import { VolatileBoard } from './types/VolatileBoard';
+
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -89,6 +92,8 @@ app.delete('/piece/remove/:pieceId', deleteUserPiece);
 
 app.post('/piece/:pieceId/generate', generateMoves);
 app.get('/piece/view/:pieceId', displayPiece);
+app.get('/piece/updateMove/:moveId', displayMoveEditor);
+app.post('/piece/updateMove/:moveId', updateMoveData);
 
 // sets
 app.post('/set/createSet', createNewSet);

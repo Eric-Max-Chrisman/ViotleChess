@@ -41,3 +41,13 @@ type SetIdParam = {
 type NewSetRequest = {
   setName: string;
 };
+
+type MoveIdRequest = {
+  moveId: string;
+};
+
+type NewMoveRequest = {
+  newX: number;
+  newY: number;
+  repeating: boolean;
+}

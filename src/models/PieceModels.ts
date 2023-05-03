@@ -97,64 +97,6 @@ async function interperateMoves(
         newY += newMove.moveY;
       }
     }
-    if (move.special === 'diagonalPawn') {
-      const curr = new Point2D();
-      curr.x = currentX;
-      curr.y = currentY;
-
-      curr.x += 1;
-      curr.y += 1;
-
-      validPoints.push(curr);
-      curr.x -= 1;
-      curr.y += 1;
-
-      validPoints.push(curr);
-    }
-    if (move.special === 'square') {
-      const curr = new Point2D();
-      curr.x = currentX;
-      curr.y = currentY;
-
-      curr.x += 1; //(1, 1)
-      curr.y += 1;
-
-      validPoints.push(curr);
-      curr.x -= 1; //(-1,1)
-      curr.y += 1;
-
-      validPoints.push(curr);
-
-      curr.x -= 0; //(0, 1)
-      curr.y += 1;
-
-      validPoints.push(curr);
-
-      curr.x += 1; //(1, 0)
-      curr.y += 0;
-
-      validPoints.push(curr);
-
-      curr.x += 1; //(1, -1)
-      curr.y -= 1;
-
-      validPoints.push(curr);
-
-      curr.x -= 0; //(0, -1)
-      curr.y -= 1;
-
-      validPoints.push(curr);
-
-      curr.x -= 1; //(-1, -1)
-      curr.y -= 1;
-
-      validPoints.push(curr);
-
-      curr.x -= 1; //(-1, 0)
-      curr.y += 0;
-
-      validPoints.push(curr);
-    }
   }
   // read moveX and moveY from a Move
   // check repeating bool
@@ -203,6 +145,12 @@ async function addMove(
 
   return await pieceRepository.save(piece);
 }
+
+
+
+
+
+
 
 async function pieceBelongsToUser(pieceId: string, owner: string): Promise<boolean> {
   return await pieceRepository
