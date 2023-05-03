@@ -208,7 +208,7 @@ socketServer.on('connection', (socket) => {
   async function startGame(setName: string): Promise<void> {
     firstPlayerJoined = true;
     const myVolatileBoard = new VolatileBoard(setName);
-    await myVolatileBoard.asyncConstructor();
+    // await myVolatileBoard.asyncConstructor();
   }
 
   socket.on('setName', (setName: string) => {
