@@ -6,14 +6,14 @@ import {
   Relation,
   JoinTable,
   OneToMany,
-  ManyToOne,
+  /* ManyToOne, */
   OneToOne,
   JoinColumn,
 } from 'typeorm';
 
 import { Point2D } from './Point2D';
 import { User } from './User';
-import { Set } from './Set';
+// import { Set } from './Set';
 import { Move } from './Moves';
 
 @Entity()

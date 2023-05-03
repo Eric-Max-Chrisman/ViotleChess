@@ -1,9 +1,14 @@
 import { Request, Response } from 'express';
 import { parseDatabaseError } from '../utils/db-utils';
-import { getSetByName, getSetById, addPieceToSet, createSet, getAllSetsByOwner } from '../models/SetModel';
-import { getPieceByID } from '../models/PieceModels'
-import {getUserByUsername} from '../models/UserModel'
-import { getAllPiecesByOwner } from '../models/PieceModels'
+import {
+  getSetByName,
+  getSetById,
+  addPieceToSet,
+  createSet,
+  getAllSetsByOwner,
+} from '../models/SetModel';
+import { getPieceByID /* getAllPiecesByOwner */ } from '../models/PieceModels';
+import { getUserByUsername } from '../models/UserModel';
 // import { Set } from '../entities/Set';
 
 async function getSetWithName(req: Request, res: Response): Promise<void> {
@@ -38,7 +43,15 @@ async function getSetWithId(req: Request, res: Response): Promise<void> {
   const replacesBishop = await getPieceByID(set.replacesBishop);
   const replacesKing = await getPieceByID(set.replacesKing);
   const replacesQueen = await getPieceByID(set.replacesQueen);
-  res.render('editSet.ejs', { set, replacesPawn, replacesRook, replacesKnight, replacesBishop, replacesKing, replacesQueen });
+  res.render('editSet.ejs', {
+    set,
+    replacesPawn,
+    replacesRook,
+    replacesKnight,
+    replacesBishop,
+    replacesKing,
+    replacesQueen,
+  });
 }
 
 async function getAllWithOwner(req: Request, res: Response): Promise<void> {
@@ -56,8 +69,6 @@ async function getAllWithOwner(req: Request, res: Response): Promise<void> {
   res.sendStatus(200);
 }
 
-
-
 async function createNewSet(req: Request, res: Response): Promise<void> {
   const { setName } = req.body as NewSetRequest;
   const ownerId = req.session.authenticatedUser.userId;
@@ -65,7 +76,7 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
 
   const tempUser = await getUserByUsername(userName);
   const sets = await getAllSetsByOwner(ownerId);
-  const pieces = await getAllPiecesByOwner(ownerId);
+  // const pieces = await getAllPiecesByOwner(ownerId);
 
   if (!req.session.isLoggedIn) {
     res.redirect('/login');
@@ -75,7 +86,7 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
     const newSet = await createSet(ownerId, setName);
     sets.push(newSet);
     console.log(newSet);
-    res.redirect(`/users/${tempUser.userName}`));
+    res.redirect(`/users/${tempUser.userName}`);
   } catch (err) {
     console.error(err);
     const databaseErrorMessage = parseDatabaseError(err);
@@ -83,7 +94,7 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
   }
 }
 
-async function addNewPieceToSet (req: Request, res: Response): Promise<void>{
+async function addNewPieceToSet(req: Request, res: Response): Promise<void> {
   const { setId } = req.params as SetIdParam;
   const { pieceName } = req.body as PieceNameRequest;
   const pieceOwner = req.session.authenticatedUser.userId;
@@ -97,11 +108,26 @@ async function addNewPieceToSet (req: Request, res: Response): Promise<void>{
   const replacesBishop = await getPieceByID(set.replacesBishop);
   const replacesKing = await getPieceByID(set.replacesKing);
   const replacesQueen = await getPieceByID(set.replacesQueen);
-  res.render('editSet.ejs', { set, replacesPawn, replacesRook, replacesKnight, replacesBishop, replacesKing, replacesQueen });
+  res.render('editSet.ejs', {
+    set,
+    replacesPawn,
+    replacesRook,
+    replacesKnight,
+    replacesBishop,
+    replacesKing,
+    replacesQueen,
+  });
 }
 
-async function redirectToSet(req: Request, res: Response): Promise<void>{
+async function redirectToSet(req: Request, res: Response): Promise<void> {
   res.render('addSet.ejs');
 }
 
-export { getSetWithName, getSetWithId, createNewSet, getAllWithOwner, addNewPieceToSet, redirectToSet };
+export {
+  getSetWithName,
+  getSetWithId,
+  createNewSet,
+  getAllWithOwner,
+  addNewPieceToSet,
+  redirectToSet,
+};
