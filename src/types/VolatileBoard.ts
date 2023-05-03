@@ -33,19 +33,24 @@ export class VolatileBoard {
     const pieceIDs: string[] = await getAllIdsInSet(this.setName);
 
     // we need a king to play this game
-    const kingFound: boolean = false;
+    // let kingFound: boolean = false;
 
     // set the pieces
     for (let i: number = 0; i < pieceIDs.length; i += 1) {
       const currentPiece = await getPieceDataSockets(pieceIDs[i]);
       const pieceToAdd: Piece = { name: '', picture: '', team: 0 };
+      pieceToAdd.name = currentPiece.pieceColor;
 
       switch (currentPiece.replaces.toLowerCase()) {
         case 'pawn':
-          this.gamePieces[0][1] = { ...pieceToAdd };
+          for (let j: number = 0; j < 8; j += 1) {
+            this.gamePieces[j][1] = { ...pieceToAdd };
+          }
 
           pieceToAdd.team = 1;
-          this.gamePieces[0][6] = { ...pieceToAdd };
+          for (let j: number = 0; j < 8; j += 1) {
+            this.gamePieces[j][6] = { ...pieceToAdd };
+          }
           break;
         case 'knight':
           // knight
@@ -57,7 +62,7 @@ export class VolatileBoard {
         case 'queen':
           break;
         case 'king':
-          // king found
+          // kingFound = true;
           break;
         default:
         // oh no
