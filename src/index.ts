@@ -6,21 +6,8 @@ import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { Server, Socket } from 'socket.io';
-import {
-  createNewSet,
-  getSetWithName,
-  getSetWithId,
-  addNewPieceToSet,
-} from './controllers/setController';
-import {
-  generateMoves,
-  getPieceData,
-  createPiece,
-  addNewMove,
-  redirectMovePage,
-  displayPiece,
-  deleteUserPiece,
-} from './controllers/PieceController';
+import { createNewSet, getSetWithName, getSetWithId, addNewPieceToSet, redirectToSet  } from './controllers/setController';
+import { generateMoves, getPieceData, createPiece, addNewMove, redirectMovePage, displayPiece, deleteUserPiece} from './controllers/PieceController';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -82,13 +69,15 @@ app.get('/piece');
 app.get('/piece/:pieceId', getPieceData);
 app.post('/:pieceId/move', addNewMove); // You need to add a controller function for this inorder to pass a parameter into addMove
 app.get('/:pieceId/move', redirectMovePage);
-app.post('/piece/:pieceId', deleteUserPiece);
+app.get('/piece/remove/:pieceId', deleteUserPiece);
+app.delete('/piece/remove/:pieceId', deleteUserPiece);
 
 app.post('/piece/:pieceId/generate', generateMoves);
 app.get('/piece/view/:pieceId', displayPiece);
 
 // sets
 app.post('/set/createSet', createNewSet);
+app.get('/set/createSet', redirectToSet);
 app.get('/set/name/:setName', getSetWithName);
 app.get('/set/id/:setId', getSetWithId);
 app.post('/set/:setId/addPiece', addNewPieceToSet);

@@ -172,7 +172,7 @@ async function deletePieceById(pieceId: string): Promise<void> {
   await pieceRepository
     .createQueryBuilder('piece')
     .delete()
-    .where('piece.pieceId = :pieceId', { pieceId })
+    .where('pieceId = :pieceId', { pieceId })
     .execute();
 }
 

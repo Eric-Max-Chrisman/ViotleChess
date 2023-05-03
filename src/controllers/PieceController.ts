@@ -109,7 +109,7 @@ async function deleteUserPiece(req: Request, res: Response): Promise<void> {
   const user = await getUserById(ownerId);
   const sets = await getAllSetsByOwner(ownerId);
   const pieces = await getAllPiecesByOwner(ownerId);
-  console.log(ownerId);
+  console.log(pieceId);
 
   if (!isLoggedIn) {
     res.redirect('/login');
