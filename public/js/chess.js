@@ -3,10 +3,15 @@ const chessBoard = document.getElementById('chessboard');
 const squares = Array.from(chessBoard.getElementsByTagName('td'));
 
 const pieces = [];
+let playerTurn;
+let chosenAlly;
+let chosenAllyColor;
+let chosenEnemey;
+let chosenEnemeyColor;
 
 squares.forEach((square) => {
-  const str = square.id;
-  const arr = str.split(' ');
+  const coord = square.id;
+  const arr = coord.split(' ');
   const x = arr[0];
   const y = arr[1];
 
@@ -14,18 +19,21 @@ squares.forEach((square) => {
     x,
     y,
     name: '-',
-    team: 0, //  0 = white, 1 = black
+    team: 2, //  0 = white, 1 = black, 2 - empty
   };
 
-  pieces.push(piece);
+  pieces.push({ ...piece });
 
   // make all squares clickable
   square.addEventListener('click', () => {
     console.log(`${x} ${y}`);
+
+    clickEvent(x, y, square);
   });
 });
 
 // Print function
+/*
 function printTable() {
   for (let i = 0; i < pieces.length; i += 1) {
     if (i < 16) {
@@ -47,7 +55,7 @@ function printTable() {
     }
   }
 }
-
+*/
 // CHAT ROOM AND PLAYER MANAGMENT
 const messages = document.getElementById('messages');
 const chatForm = document.getElementById('chatForm');
@@ -81,7 +89,7 @@ socket.emit('setName', setName);
 
 // update values
 
-printTable();
+// printTable();
 
 socket.on('enteredChat', (msg, playerOne, playerTwo) => {
   // enter
@@ -118,6 +126,9 @@ socket.on('chatMessage', (name, msg) => {
 });
 
 socket.on('print', (elements) => {
+  for (let i = 0; i < pieces.length; i += 1) {
+    pieces[i].team = 2;
+  }
   for (let i = 0; i < elements.length; i += 1) {
     const tempValue = elements[i][0];
     squares[i].innerHTML = tempValue;
@@ -126,10 +137,12 @@ socket.on('print', (elements) => {
     const tempNumber = Number(elements[i][1]);
     if (tempNumber === 0) {
       squares[i].style.color = 'Crimson';
-      pieces[i].team = tempNumber;
-    } else {
+      pieces[i].team = 0;
+    } else if (tempNumber === 1) {
       squares[i].style.color = 'Gold';
-      pieces[i].team = tempNumber;
+      pieces[i].team = 1;
+    } else {
+      pieces[i].team = 2;
     }
   }
 });
