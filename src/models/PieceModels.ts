@@ -165,11 +165,12 @@ async function pieceBelongsToUser(pieceId: string, owner: string): Promise<boole
   .getExists();
 }
 
-async function deletePieceById(pieceId: string): Promise<void>{
-  await pieceRepository.createQueryBuilder('piece')
-  .delete()
-  .where('piece.pieceId = :pieceId', { pieceId })
-  .execute();
+async function deletePieceById(pieceId: string): Promise<void> {
+  await pieceRepository
+    .createQueryBuilder('piece')
+    .delete()
+    .where('pieceId = :pieceId', { pieceId })
+    .execute();
 }
 
 

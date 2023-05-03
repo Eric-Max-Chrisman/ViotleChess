@@ -83,7 +83,6 @@ async function getAllIdsInSet(setName: string): Promise<string[]>{
   console.log(allIds);
 
   return allIds;
-
 }
 
 export { getSetByName, createSet, getSetById, addPieceToSet, getAllSetsByOwner, getAllIdsInSet};

@@ -93,7 +93,7 @@ async function deleteUserPiece(req: Request, res: Response): Promise<void> {
   const user = await getUserById(ownerId);
   const sets = await getAllSetsByOwner(ownerId);
   const pieces = await getAllPiecesByOwner(ownerId);
-  console.log(ownerId);
+  console.log(pieceId);
 
   if(!isLoggedIn){
     res.redirect('/login');
@@ -106,10 +106,7 @@ async function deleteUserPiece(req: Request, res: Response): Promise<void> {
   }
 
   await deletePieceById(pieceId);
-
-
   res.render('userPage.ejs', {user, sets, pieces});
-
 }
 
 export { createPiece, getPieceData, generateMoves, addNewMove, redirectMovePage, displayPiece, deleteUserPiece};
