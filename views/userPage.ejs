@@ -27,11 +27,6 @@
       <% for( const piece of pieces ) { %>
         <div class="piece">
           <a href='/<%= piece.pieceId %>/move'><%= piece.pieceName %></a>
-          <span>
-            <form action='/piece/remove/<%= piece.pieceId %>', method='get'>
-            <button>Remove</button>
-            </form>
-          </span>
         </div>
         <% } %>
   </div>
