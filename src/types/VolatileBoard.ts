@@ -37,7 +37,7 @@ export class VolatileBoard {
 
     // set the pieces
     for (let i: number = 0; i < pieceIDs.length; i += 1) {
-      const currentPiece = await getPieceDataSockets(pieceIDs[i]);
+      if (pieces[i]) const currentPiece = await getPieceDataSockets(pieceIDs[i]);
       const pieceToAdd: Piece = { name: '', picture: '', team: 0 };
       pieceToAdd.name = currentPiece.pieceName;
 
