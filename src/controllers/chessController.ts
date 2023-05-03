@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { getSetByName } from '../models/SetModel';
 
 async function loadChessPage(req: Request, res: Response): Promise<void> {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
   // get set name
   const { setName } = req.params as SetNameTestParam;
 
@@ -14,14 +15,15 @@ async function loadChessPage(req: Request, res: Response): Promise<void> {
     res.render('error', { errorMes });
     return;
   }
-
-  res.render('chessBoard.ejs', { tempSet, setName });
+  const isDeafultSet: boolean = false;
+  res.render('chessBoard.ejs', { setName, isDeafultSet });
   // send over set struc that has pieces and size inside
 }
 
 async function loadDeafulatChessPage(req: Request, res: Response): Promise<void> {
   const isDeafultSet: boolean = true;
-  res.render('chessBoard.ejs', { isDeafultSet });
+  const setName = 'TEST';
+  res.render('chessBoard.ejs', { setName, isDeafultSet });
 }
 
 export { loadChessPage, loadDeafulatChessPage };

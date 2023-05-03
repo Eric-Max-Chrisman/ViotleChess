@@ -6,8 +6,23 @@ import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { Server, Socket } from 'socket.io';
-import { createNewSet, getSetWithName, getSetWithId, addNewPieceToSet, redirectToSet  } from './controllers/setController';
-import { generateMoves, getPieceData, createPiece, addNewMove, redirectMovePage, displayPiece, deleteUserPiece} from './controllers/PieceController';
+import {
+  createNewSet,
+  getSetWithName,
+  getSetWithId,
+  addNewPieceToSet,
+  redirectToSet,
+} from './controllers/setController';
+import {
+  generateMoves,
+  getPieceData,
+  createPiece,
+  addNewMove,
+  redirectMovePage,
+  displayPiece,
+  deleteUserPiece,
+} from './controllers/PieceController';
+import { VolatileBoard } from './types/VolatileBoard';
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -111,6 +126,7 @@ const connectedClients: Record<string, CustomWebSocket> = {};
 let playerOne: string;
 let playerTwo: string;
 const playerTurn: boolean = true; // playerOne = true, playerTwo = false
+let firstPlayerJoined: boolean = false;
 
 const socketServer = new Server<ClientToServerEvents, ServerToClientEvents, null, null>(server);
 
@@ -119,10 +135,10 @@ socketServer.use((socket, next) => {
   sessionMiddleware(socket.request as Request, res, next as NextFunction);
 });
 
-// test sever
+// game sever
 socketServer.on('connection', (socket) => {
   const req = socket.request;
-  const res = {} as Response;
+  // const res = {} as Response;
 
   // We need this chunk of code so that socket.io
   // will automatically reload the session data
@@ -152,9 +168,9 @@ socketServer.on('connection', (socket) => {
   console.log(`${userName} has connected`);
 
   // olny two people allowed
-  if (!playerOne) {
+  if (playerOne === undefined) {
     playerOne = userName;
-  } else if (!playerTwo) {
+  } else if (playerTwo === undefined) {
     playerTwo = userName;
   } else if (userName !== playerOne || userName !== playerTwo) {
     // console.log(userName);
@@ -189,7 +205,19 @@ socketServer.on('connection', (socket) => {
     socketServer.emit('chatMessage', userName, msg);
   });
 
+  async function startGame(setName: string): Promise<void> {
+    firstPlayerJoined = true;
+    const myVolatileBoard = new VolatileBoard(setName);
+    await myVolatileBoard.asyncConstructor();
+  }
+
   socket.on('setName', (setName: string) => {
-    console.log(`setName: ${setName}`);
+    console.log(setName);
+    console.log(`setName: ${setName.toString()}`);
+
+    // start game
+    if (!firstPlayerJoined) {
+      startGame(setName);
+    }
   });
 });

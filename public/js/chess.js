@@ -76,6 +76,7 @@ function changeNames(playerOne, playerTwo) {
 
 const socket = io();
 
+const setName = document.getElementById('setName').innerHTML;
 socket.emit('setName', setName);
 
 // update values
