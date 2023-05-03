@@ -4,12 +4,12 @@ import {
   Column,
   ManyToOne,
   Relation,
-  OneToMany,
+  /* OneToMany, */
   OneToOne,
 } from 'typeorm';
 import { User } from './User';
 import { LeaderBoard } from './LeaderBoard';
-import { CustomPiece } from './CustomPiece';
+// import { CustomPiece } from './CustomPiece';
 
 @Entity()
 export class Set {

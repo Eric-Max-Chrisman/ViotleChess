@@ -1,4 +1,4 @@
-import Joi from 'joi';
+/* import Joi from 'joi';
 import { makeValidator } from '../utils/makeValidator';
 
 const newUserSchema = Joi.object({
@@ -17,3 +17,4 @@ const loginSchema = Joi.object({
 const validateLoginBody = makeValidator(loginSchema, 'body');
 
 export { validateNewUserBody, validateLoginBody };
+*/

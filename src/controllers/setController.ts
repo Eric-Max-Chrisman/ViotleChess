@@ -7,7 +7,7 @@ import {
   createSet,
   getAllSetsByOwner,
 } from '../models/SetModel';
-import { getPieceByID, getAllPiecesByOwner } from '../models/PieceModels';
+import { getPieceByID /* getAllPiecesByOwner */ } from '../models/PieceModels';
 import { getUserByUsername } from '../models/UserModel';
 // import { Set } from '../entities/Set';
 
@@ -76,7 +76,7 @@ async function createNewSet(req: Request, res: Response): Promise<void> {
 
   const tempUser = await getUserByUsername(userName);
   const sets = await getAllSetsByOwner(ownerId);
-  const pieces = await getAllPiecesByOwner(ownerId);
+  // const pieces = await getAllPiecesByOwner(ownerId);
 
   if (!req.session.isLoggedIn) {
     res.redirect('/login');

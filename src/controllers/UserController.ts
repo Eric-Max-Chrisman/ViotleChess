@@ -7,7 +7,7 @@ import {
   updateEmailAdress,
   getUserByUsername,
 } from '../models/UserModel';
-import { parseDatabaseError } from '../utils/db-utils';
+// import { parseDatabaseError } from '../utils/db-utils';
 import { getAllSetsByOwner } from '../models/SetModel';
 import { getAllPiecesByOwner } from '../models/PieceModels';
 

@@ -5,7 +5,7 @@ import './config';
 import 'express-async-errors';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
-import { Server, Socket } from 'socket.io';
+import { Server /* Socket */ } from 'socket.io';
 import {
   createNewSet,
   getSetWithName,
@@ -22,10 +22,9 @@ import {
   displayPiece,
   deleteUserPiece,
   updateMoveData,
-  displayMoveEditor
+  displayMoveEditor,
 } from './controllers/PieceController';
 import { VolatileBoard } from './types/VolatileBoard';
-
 
 // import { ChessTemplate } from './types/ChessTemplate';
 import {
@@ -36,7 +35,7 @@ import {
   loadFindPage,
   redirectUserPage,
 } from './controllers/UserController';
-import { loadChessPage, boardElementsToPrint } from './controllers/chessController';
+import { loadChessPage } from './controllers/chessController';
 //
 dotenv.config();
 const app: Express = express();
@@ -129,7 +128,7 @@ const server = app.listen(PORT, () => {
 const connectedClients: Record<string, CustomWebSocket> = {};
 let playerOne: string;
 let playerTwo: string;
-const playerTurn: boolean = true; // playerOne = true, playerTwo = false
+// const playerTurn: boolean = true; // playerOne = true, playerTwo = false
 let firstPlayerJoined: boolean = false;
 const myVolatileBoard = new VolatileBoard();
 
