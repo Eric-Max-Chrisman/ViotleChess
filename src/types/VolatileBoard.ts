@@ -39,7 +39,7 @@ export class VolatileBoard {
     for (let i: number = 0; i < pieceIDs.length; i += 1) {
       const currentPiece = await getPieceDataSockets(pieceIDs[i]);
       const pieceToAdd: Piece = { name: '', picture: '', team: 0 };
-      pieceToAdd.name = currentPiece.pieceColor;
+      pieceToAdd.name = currentPiece.pieceName;
 
       switch (currentPiece.replaces.toLowerCase()) {
         case 'pawn':
