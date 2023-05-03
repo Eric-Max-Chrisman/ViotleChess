@@ -25,10 +25,10 @@ async function getSetById(setId: string): Promise<Set | null> {
     .getOne();
 }
 
-async function getAllSetsByOwner(ownerId: string): Promise<Set[] | null>{
+async function getAllSetsByOwner(ownerId: string): Promise<Set[] | null> {
   return await SetRepository.createQueryBuilder('set')
-  .where('set.ownerId = ownerId', {ownerId})
-  .getMany();
+    .where('set.ownerId = ownerId', { ownerId })
+    .getMany();
 }
 
 async function createSet(ownerId: string, setName: string): Promise<Set> {
@@ -39,40 +39,33 @@ async function createSet(ownerId: string, setName: string): Promise<Set> {
   return await SetRepository.save(newSet);
 }
 
-
-
 async function addPieceToSet(pieceName: string, setId: string, pieceOwner: string): Promise<Set> {
   console.log(setId);
   const set = await getSetById(setId);
   const piece = await getPieceByName(pieceName, pieceOwner);
   console.log(piece);
   console.log(set);
-  const pieceId = piece.pieceId;
+  const { pieceId } = piece;
 
-  if(piece.replaces === 'pawn' || piece.replaces === 'Pawn'){
+  if (piece.replaces === 'pawn' || piece.replaces === 'Pawn') {
     set.replacesPawn = pieceId;
-  }
-  else if(piece.replaces === 'rook' || piece.replaces === 'Rook'){
+  } else if (piece.replaces === 'rook' || piece.replaces === 'Rook') {
     set.replacesRook = pieceId;
-  }
-  else if(piece.replaces === 'knight' || piece.replaces === 'Knight'){
+  } else if (piece.replaces === 'knight' || piece.replaces === 'Knight') {
     set.replacesKnight = pieceId;
-  }
-  else if(piece.replaces === 'bishop' || piece.replaces === 'Bishop'){
+  } else if (piece.replaces === 'bishop' || piece.replaces === 'Bishop') {
     set.replacesBishop = pieceId;
-  }
-  else if(piece.replaces === 'king' || piece.replaces === 'King'){
+  } else if (piece.replaces === 'king' || piece.replaces === 'King') {
     set.replacesKing = pieceId;
-  }
-  else if(piece.replaces === 'queen' || piece.replaces === 'Queen'){
+  } else if (piece.replaces === 'queen' || piece.replaces === 'Queen') {
     set.replacesQueen = pieceId;
   }
   return await SetRepository.save(set);
 }
 
-async function getAllIdsInSet(setName: string): Promise<string[]>{
+async function getAllIdsInSet(setName: string): Promise<string[]> {
   const set = await getSetByName(setName);
-  let allIds = [];
+  const allIds = [];
   allIds.push(set.replacesPawn);
   allIds.push(set.replacesRook);
   allIds.push(set.replacesKnight);
@@ -85,4 +78,4 @@ async function getAllIdsInSet(setName: string): Promise<string[]>{
   return allIds;
 }
 
-export { getSetByName, createSet, getSetById, addPieceToSet, getAllSetsByOwner, getAllIdsInSet};
+export { getSetByName, createSet, getSetById, addPieceToSet, getAllSetsByOwner, getAllIdsInSet };
