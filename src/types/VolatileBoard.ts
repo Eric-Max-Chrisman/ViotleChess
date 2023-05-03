@@ -21,7 +21,7 @@ export class VolatileBoard {
       const tempArray: Piece[] = [];
       for (let j: number = 0; j < this.sizeX; j += 1) {
         // x axis
-        const tempPiece: Piece = { name: 'empty', picture: ' ', team: 0 };
+        const tempPiece: Piece = { name: 'empty', picture: ' ', team: 2 };
         tempArray.push(tempPiece);
       }
       this.gamePieces.push(tempArray);
@@ -119,6 +119,10 @@ export class VolatileBoard {
   //
   getGamePiece(x: number, y: number): Piece {
     return this.gamePieces[x][y];
+  }
+
+  getPlayerMove(): number {
+    return this.playerMove;
   }
 
   // left and right board size

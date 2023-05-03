@@ -86,7 +86,6 @@ app.post('/:pieceId/move', addNewMove); // You need to add a controller function
 app.get('/:pieceId/move', redirectMovePage);
 app.get('/piece/remove/:pieceId', deleteUserPiece);
 app.delete('/piece/remove/:pieceId', deleteUserPiece);
-
 app.post('/piece/:pieceId/generate', generateMoves);
 app.get('/piece/view/:pieceId', displayPiece);
 
@@ -153,9 +152,9 @@ socketServer.on('connection', (socket) => {
       }
     });
   });
-
+  //
   // This is just to make sure only logged in users
-  // are able to connect to a game
+  // are able to connect to a game //
   if (!req.session.isLoggedIn) {
     console.log('An unauthenticated user attempted to connect.');
     socket.emit('redirectLogin', '/login');
