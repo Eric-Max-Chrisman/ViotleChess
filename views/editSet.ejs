@@ -19,13 +19,15 @@
     </div>
   </form>
   <!-- All redirect to homepage for now. Ill be changing this when editPiece.ejs is done -->
-  <p>Pawn Replacer: <a href='/' class="piece"> <% if(replacesPawn === null){ %> No Piece <% } else {%> <%= replacesPawn.pieceName %> <% } %></a></p>
-  <p>Rook Replacer: <a href='/' class="piece"> <% if(replacesRook === null){ %> No Piece <% } else {%> <%= replacesRook.pieceName %> <% } %></a></p>
-  <p>Knight Replacer: <a href='/' class="piece"> <% if(replacesKnight === null){ %> No Piece <% } else {%> <%= replacesKnight.pieceName %> <% } %></a></p>
-  <p>Bishop Replacer: <a href='/' class="piece"> <% if(replacesBishop === null){ %> No Piece <% } else {%> <%= replacesBishop.pieceName %> <% } %></a></p>
-  <p>King Replacer: <a href='/' class="piece"> <% if(replacesKing === null){ %> No Piece <% } else {%> <%= replacesKing.pieceName %> <% } %></a></p>
-  <p>Queen Replacer: <a href='/' class="piece"> <% if(replacesQueen === null){ %> No Piece <% } else {%> <%= replacesQueen.pieceName %> <% } %></a></p>
-
+  <br>
+  <div class="textBox">
+  <p>Pawn Replacer: <a href="/piece/view/<%= set.replacesPawn %>" class="login"> <% if(replacesPawn === null){ %> No Piece <% } else {%> <%= replacesPawn.pieceName %> <% } %></a></p>
+  <p>Rook Replacer: <a href="/piece/view/<%= set.replacesRook %>" class="login"> <% if(replacesRook === null){ %> No Piece <% } else {%> <%= replacesRook.pieceName %> <% } %></a></p>
+  <p>Knight Replacer: <a href="/piece/view/<%= set.replacesKnight %>" class="login"> <% if(replacesKnight === null){ %> No Piece <% } else {%> <%= replacesKnight.pieceName %> <% } %></a></p>
+  <p>Bishop Replacer: <a href="/piece/view/<%= set.replacesBishop %>" class="login"> <% if(replacesBishop === null){ %> No Piece <% } else {%> <%= replacesBishop.pieceName %> <% } %></a></p>
+  <p>King Replacer: <a href="/piece/view/<%= set.replacesKing %>" class="login"> <% if(replacesKing === null){ %> No Piece <% } else {%> <%= replacesKing.pieceName %> <% } %></a></p>
+  <p>Queen Replacer: <a href="/piece/view/<%= set.replacesQueen %>" class="login"> <% if(replacesQueen === null){ %> No Piece <% } else {%> <%= replacesQueen.pieceName %> <% } %></a></p>
+</div>
   <div class = "navbar">
     <a href = "/">Volatile Chess</a>
     <a href = "/createUser">Register Account</a>

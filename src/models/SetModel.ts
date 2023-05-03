@@ -27,7 +27,7 @@ async function getSetById(setId: string): Promise<Set | null> {
 
 async function getAllSetsByOwner(ownerId: string): Promise<Set[] | null> {
   return await SetRepository.createQueryBuilder('set')
-    .where('set.ownerId = ownerId', { ownerId })
+    .where('set.ownerId = :ownerId', { ownerId })
     .getMany();
 }
 
