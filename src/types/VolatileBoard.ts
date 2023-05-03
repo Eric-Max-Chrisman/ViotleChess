@@ -44,24 +44,46 @@ export class VolatileBoard {
       switch (currentPiece.replaces.toLowerCase()) {
         case 'pawn':
           for (let j: number = 0; j < 8; j += 1) {
-            this.gamePieces[j][1] = { ...pieceToAdd };
+            this.gamePieces[j][6] = { ...pieceToAdd };
           }
 
           pieceToAdd.team = 1;
           for (let j: number = 0; j < 8; j += 1) {
-            this.gamePieces[j][6] = { ...pieceToAdd };
+            this.gamePieces[j][1] = { ...pieceToAdd };
           }
           break;
         case 'knight':
+          this.gamePieces[7][1] = { ...pieceToAdd };
+          this.gamePieces[7][6] = { ...pieceToAdd };
+
+          pieceToAdd.team = 1;
+          this.gamePieces[0][1] = { ...pieceToAdd };
+          this.gamePieces[0][6] = { ...pieceToAdd };
           // knight
           break;
         case 'rook':
+          this.gamePieces[7][0] = { ...pieceToAdd };
+          this.gamePieces[7][7] = { ...pieceToAdd };
+
+          pieceToAdd.team = 1;
+          this.gamePieces[0][0] = { ...pieceToAdd };
+          this.gamePieces[0][7] = { ...pieceToAdd };
           break;
         case 'bishop':
+          this.gamePieces[7][2] = { ...pieceToAdd };
+          this.gamePieces[7][5] = { ...pieceToAdd };
+
+          pieceToAdd.team = 1;
+          this.gamePieces[0][2] = { ...pieceToAdd };
+          this.gamePieces[0][5] = { ...pieceToAdd };
           break;
         case 'queen':
+          this.gamePieces[7][4] = { ...pieceToAdd };
+          this.gamePieces[0][4] = { ...pieceToAdd };
           break;
         case 'king':
+          this.gamePieces[7][3] = { ...pieceToAdd };
+          this.gamePieces[0][3] = { ...pieceToAdd };
           // kingFound = true;
           break;
         default:
