@@ -38,10 +38,14 @@ export class VolatileBoard {
     // set the pieces
     for (let i: number = 0; i < pieceIDs.length; i += 1) {
       const currentPiece = await getPieceDataSockets(pieceIDs[i]);
+      const pieceToAdd: Piece = { name: '', picture: '', team: 0 };
 
       switch (currentPiece.replaces.toLowerCase()) {
         case 'pawn':
-          // pawn stuff
+          this.gamePieces[0][1] = { ...pieceToAdd };
+
+          pieceToAdd.team = 1;
+          this.gamePieces[0][6] = { ...pieceToAdd };
           break;
         case 'knight':
           // knight
